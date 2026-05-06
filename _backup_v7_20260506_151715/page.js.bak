@@ -161,7 +161,7 @@ export default function LandingPage() {
           >
             <span className="text-lg">🎓</span>
             <span className="text-sm sm:text-base font-bold text-[#D85A0A]">
-              Imparte: Dr. Juan Carlos
+              Imparte: Dr. Juan Carlos Pequeño
             </span>
           </motion.div>
 
