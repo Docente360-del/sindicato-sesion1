@@ -19,8 +19,7 @@
         "lo_que_lo_hace_unico": "La característica UNIVERSAL implica que la educación es un DERECHO HUMANO QUE CORRESPONDE A TODAS LAS PERSONAS POR IGUAL, EXTENDERÁ SUS BENEFICIOS SIN DISCRIMINACIÓN ALGUNA y TENDRÁ ESPECIAL ÉNFASIS EN EL ESTUDIO DE LA REALIDAD Y LAS CULTURAS NACIONALES.",
         "palabras_del_documento": "Art. 7° fracc. I LGE (DOF 30-09-2019).",
         "regla_rapida": "Universal = derecho de TODAS las personas + sin discriminación + culturas nacionales."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     },
     {
       "id": "S1-A2",
@@ -35,8 +34,7 @@
         "lo_que_lo_hace_unico": "La característica INCLUSIVA considera las DIVERSAS CARACTERÍSTICAS, NECESIDADES, HABILIDADES, ESTILOS Y RITMOS DE APRENDIZAJE de los educandos, ELIMINANDO LAS BARRERAS AL APRENDIZAJE Y LA PARTICIPACIÓN, mediante la PROVISIÓN DE RECURSOS TÉCNICOS Y PEDAGÓGICOS necesarios.",
         "palabras_del_documento": "Art. 7° fracc. II LGE (DOF 30-09-2019).",
         "regla_rapida": "Inclusiva = características + necesidades + estilos + ritmos + RECURSOS TÉCNICOS Y PEDAGÓGICOS."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     },
     {
       "id": "S1-A3",
@@ -51,8 +49,7 @@
         "lo_que_lo_hace_unico": "La característica PÚBLICA implica que la educación sea IMPARTIDA Y ADMINISTRADA POR EL ESTADO y que el proceso educativo RESPONDA AL INTERÉS SOCIAL Y A LAS FINALIDADES DE ORDEN PÚBLICO PARA EL BENEFICIO DE LA NACIÓN.",
         "palabras_del_documento": "Art. 7° fracc. III LGE (DOF 30-09-2019).",
         "regla_rapida": "Pública = Estado + interés social + orden público + beneficio de la Nación."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     },
     {
       "id": "S1-A4",
@@ -67,8 +64,7 @@
         "lo_que_lo_hace_unico": "El INTERÉS SUPERIOR DE LA NIÑEZ obliga a PROMOVER LA PARTICIPACIÓN, TOMAR EN CUENTA LA OPINIÓN Y CONSIDERAR LOS ASPECTOS CULTURALES, ÉTICOS, AFECTIVOS, EDUCATIVOS Y DE SALUD de niñas, niños y adolescentes EN TODOS AQUELLOS ASUNTOS DE SU INCUMBENCIA, DE ACUERDO CON SU EDAD, DESARROLLO EVOLUTIVO, COGNOSCITIVO Y MADUREZ.",
         "palabras_del_documento": "LGDNNA Art. 2° y Art. 71 / LGE Art. 14.",
         "regla_rapida": "Interés superior = participación + opinión + asuntos de su incumbencia."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     }
   ],
   "ronda_2_casos": [
@@ -84,8 +80,7 @@
         "se_confunde_con": "PÚBLICA: implica que la educación sea impartida y administrada por el Estado, asegurando el interés social y finalidades de orden público (caballo de troya: confunde 'todas las personas' con 'administración estatal'). GRATUITA: implica que se prohíba el pago de cualquier contraprestación que impida la prestación del servicio (caballo de troya: confunde el acceso universal con la ausencia de pago).",
         "palabras_del_documento": "Art. 7° fracc. I LGE.",
         "regla_rapida": "Sin discriminación + culturas nacionales = UNIVERSAL."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     },
     {
       "id": "S1-C2",
@@ -99,8 +94,7 @@
         "se_confunde_con": "UNIVERSAL: se refiere al derecho humano que corresponde a todas las personas por igual sin discriminación, no a la disposición de recursos específicos (caballo de troya: confunde 'diversidad de personas' con 'diversidad cognitiva interna del aula'). EQUITATIVA: combate las desigualdades socioeconómicas, regionales, de capacidades y de género para garantizar acceso, tránsito, permanencia y egreso oportunos (caballo de troya: confunde 'eliminar barreras al aprendizaje' con 'eliminar desigualdades sociales').",
         "palabras_del_documento": "Art. 7° fracc. II LGE.",
         "regla_rapida": "Recursos técnicos y pedagógicos + eliminar barreras = INCLUSIVA."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     },
     {
       "id": "S1-C3",
@@ -114,8 +108,7 @@
         "se_confunde_con": "GRATUITA: implica que se prohíba el pago de cualquier contraprestación que impida o condicione la prestación del servicio (caballo de troya: confunde 'orden público' con 'sin costo'). UNIVERSAL: se refiere a que toda persona tenga derecho a recibirla sin discriminación, no a la administración estatal del servicio (caballo de troya: confunde 'beneficio de la Nación' con 'todas las personas').",
         "palabras_del_documento": "Art. 7° fracc. III LGE.",
         "regla_rapida": "Estado + interés social + orden público = PÚBLICA."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     },
     {
       "id": "S1-C4",
@@ -129,8 +122,7 @@
         "se_confunde_con": "DESARROLLO HUMANO INTEGRAL: impulsa el despliegue armónico de capacidades cognitivas, físicas, socioemocionales y éticas, no específicamente la consulta al alumnado (caballo de troya: confunde 'considerar al estudiante' con 'desarrollarlo integralmente'). IGUALDAD SUSTANTIVA: se refiere al acceso al mismo trato y oportunidades sin discriminación (caballo de troya: confunde 'tomar en cuenta opinión' con 'igualdad de trato').",
         "palabras_del_documento": "LGDNNA Art. 2° y Art. 71 / LGE Art. 14.",
         "regla_rapida": "Tomar en cuenta opinión + asuntos de su incumbencia = INTERÉS SUPERIOR."
-      },
-      "imagen": "/imagenes/articulo-7.jpg"
+      }
     }
   ]
 }

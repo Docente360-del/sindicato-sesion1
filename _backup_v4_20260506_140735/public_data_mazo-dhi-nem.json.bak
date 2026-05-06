@@ -19,8 +19,7 @@
         "lo_que_lo_hace_unico": "El DESARROLLO HUMANO INTEGRAL busca CONTRIBUIR A LA FORMACIÓN DEL PENSAMIENTO CRÍTICO, A LA TRANSFORMACIÓN Y AL CRECIMIENTO SOLIDARIO DE LA SOCIEDAD, ENFATIZANDO EL TRABAJO EN EQUIPO Y EL APRENDIZAJE COLABORATIVO.",
         "palabras_del_documento": "Art. 12 fracc. I LGE (DOF 30-09-2019).",
         "regla_rapida": "Pensamiento crítico + crecimiento solidario + trabajo colaborativo = DHI fracc. I."
-      },
-      "imagen": "/imagenes/articulo-12.jpg"
+      }
     },
     {
       "id": "S2-A2",
@@ -35,8 +34,7 @@
         "lo_que_lo_hace_unico": "El DESARROLLO HUMANO INTEGRAL propicia el DIÁLOGO ENTRE LAS HUMANIDADES, LAS ARTES, LA CIENCIA, LA TECNOLOGÍA Y LA INNOVACIÓN como FACTORES DEL BIENESTAR Y LA TRANSFORMACIÓN SOCIAL.",
         "palabras_del_documento": "Art. 12 fracc. II LGE (DOF 30-09-2019).",
         "regla_rapida": "Diálogo entre humanidades + artes + ciencia + tecnología = DHI fracc. II."
-      },
-      "imagen": "/imagenes/articulo-12.jpg"
+      }
     },
     {
       "id": "S2-A3",
@@ -51,8 +49,7 @@
         "lo_que_lo_hace_unico": "El DESARROLLO HUMANO INTEGRAL incluye ATACAR LAS CAUSAS DE SEGREGACIÓN, RELEGACIÓN Y VIOLENCIA A NIVEL NACIONAL, ESPECIALMENTE LA QUE SE VIVE EN CONTRA DEL SEXO FEMENINO, DE LA NIÑEZ Y DE INMIGRANTES.",
         "palabras_del_documento": "Art. 12 LGE (DOF 30-09-2019).",
         "regla_rapida": "Segregación + relegación + violencia contra mujeres/niñez/inmigrantes = DHI."
-      },
-      "imagen": "/imagenes/articulo-12.jpg"
+      }
     },
     {
       "id": "S2-A4",
@@ -67,8 +64,7 @@
         "lo_que_lo_hace_unico": "Uno de los OBJETIVOS articuladores de la NEM consiste en REORIENTAR EL SISTEMA EDUCATIVO NACIONAL para garantizar el DESARROLLO HUMANO INTEGRAL DEL EDUCANDO.",
         "palabras_del_documento": "Art. 11 LGE (DOF 30-09-2019).",
         "regla_rapida": "Reorientar el SEN + DHI del educando = Objetivo NEM."
-      },
-      "imagen": "/imagenes/objetivos.jpg"
+      }
     },
     {
       "id": "S2-A5",
@@ -83,8 +79,7 @@
         "lo_que_lo_hace_unico": "El Estado, a través de la NEM, COLOCARÁ AL CENTRO DE LA ACCIÓN PÚBLICA EL MÁXIMO LOGRO DE APRENDIZAJE DE LAS NIÑAS, NIÑOS, ADOLESCENTES Y JÓVENES.",
         "palabras_del_documento": "Art. 11 LGE (DOF 30-09-2019).",
         "regla_rapida": "Máximo logro de aprendizaje al centro de la acción pública = Objetivo NEM."
-      },
-      "imagen": "/imagenes/objetivos.jpg"
+      }
     }
   ],
   "ronda_2_casos": [
@@ -100,8 +95,7 @@
         "se_confunde_con": "DIÁLOGO ENTRE HUMANIDADES, ARTES, CIENCIA Y TECNOLOGÍA: corresponde a la fracc. II del Art. 12 (caballo de troya: confunde 'crecimiento solidario' con 'integración de saberes'). ATACAR SEGREGACIÓN Y VIOLENCIA: corresponde a otra fracción orientada a combatir discriminación (caballo de troya: confunde 'transformación social' con 'combate a la discriminación').",
         "palabras_del_documento": "Art. 12 fracc. I LGE.",
         "regla_rapida": "Juicio razonado + crecimiento solidario + cooperación = DHI fracc. I."
-      },
-      "imagen": "/imagenes/articulo-12.jpg"
+      }
     },
     {
       "id": "S2-C2",
@@ -115,8 +109,7 @@
         "se_confunde_con": "PENSAMIENTO CRÍTICO Y APRENDIZAJE COLABORATIVO: corresponde a la fracc. I del Art. 12 (caballo de troya: confunde 'articular saberes' con 'aprendizaje colaborativo'). FORTALECER TEJIDO SOCIAL Y CAPACIDADES PRODUCTIVAS: corresponde a otra fracción orientada a la transformación social y económica (caballo de troya: confunde 'transformación social' con 'desarrollo económico').",
         "palabras_del_documento": "Art. 12 fracc. II LGE.",
         "regla_rapida": "Información científica + textos literarios + maquetas + tecnología = DHI fracc. II."
-      },
-      "imagen": "/imagenes/articulo-12.jpg"
+      }
     },
     {
       "id": "S2-C3",
@@ -130,8 +123,7 @@
         "se_confunde_con": "PENSAMIENTO CRÍTICO Y APRENDIZAJE COLABORATIVO: corresponde a la fracc. I del Art. 12 (caballo de troya: confunde 'analizar situaciones' con 'pensamiento crítico'). REFORZAR TEJIDO SOCIAL Y ELIMINAR CORRUPCIÓN: corresponde a otra fracción del Art. 12 (caballo de troya: confunde 'combate a violencia' con 'eliminar corrupción').",
         "palabras_del_documento": "Art. 12 LGE.",
         "regla_rapida": "Mujeres + niñez + migrantes + violencia = DHI atacar segregación."
-      },
-      "imagen": "/imagenes/articulo-12.jpg"
+      }
     },
     {
       "id": "S2-C4",
@@ -145,8 +137,7 @@
         "se_confunde_con": "COORDINAR ACTUALIZACIÓN DEL MARCO CURRICULAR: es una facultad operativa de la SEP, no un objetivo articulador del Art. 11 (caballo de troya: confunde objetivo articulador con facultad operativa). PROFESIONALIZACIÓN DEL MAGISTERIO: es una estrategia operativa, no un objetivo articulador de la NEM (caballo de troya: confunde estrategia con objetivo articulador).",
         "palabras_del_documento": "Art. 11 LGE.",
         "regla_rapida": "Reorientar el SEN + DHI del educando = Objetivo NEM."
-      },
-      "imagen": "/imagenes/objetivos.jpg"
+      }
     },
     {
       "id": "S2-C5",
@@ -160,8 +151,7 @@
         "se_confunde_con": "GARANTIZAR LA RECTORÍA DEL ESTADO: es una facultad estructural del Estado, no específicamente un objetivo articulador de la NEM (caballo de troya: confunde rectoría con objetivo central). PROMOVER LA CORRESPONSABILIDAD: es una orientación general del sistema, no el objetivo articulador centrado en el aprendizaje (caballo de troya: confunde corresponsabilidad con máximo logro).",
         "palabras_del_documento": "Art. 11 LGE.",
         "regla_rapida": "Máximo logro de aprendizaje al centro = Objetivo NEM."
-      },
-      "imagen": "/imagenes/objetivos.jpg"
+      }
     }
   ]
 }

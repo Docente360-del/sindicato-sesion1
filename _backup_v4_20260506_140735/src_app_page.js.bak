@@ -72,16 +72,10 @@ const IMAGENES = [
     src: "/imagenes/articulo-12.jpg",
   },
   {
-    id: "fines",
-    titulo: "Fines de la Educación",
-    subtitulo: "Art. 15 LGE — Paz · Dignidad · Naciones",
-    src: "/imagenes/fines.jpeg",
-  },
-  {
-    id: "criterios",
-    titulo: "Criterios de la Educación",
-    subtitulo: "Art. 16 LGE — Nacional · Integral · Excelencia · Intercultural",
-    src: "/imagenes/criterios.jpeg",
+    id: "elementos",
+    titulo: "Elementos Curriculares",
+    subtitulo: "Marco curricular NEM",
+    src: "/imagenes/elementos-curriculares.jpg",
   },
 ];
 
