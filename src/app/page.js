@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
-  BookOpen, ArrowRight, Layers, GraduationCap, Sparkles
+  ArrowRight, Layers, GraduationCap, BookOpen
 } from "lucide-react";
 
 const MAZOS = [
@@ -57,70 +57,86 @@ export default function LandingPage() {
   const [tab, setTab] = useState("flashcards");
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-6 py-12 relative overflow-hidden bg-[#0a1628]">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#122847] to-[#1e3a5f]" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#5BB8E5] rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#F5B935] rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse" />
+    <main className="min-h-screen bg-white">
+      {/* Header con franja naranja SNTE */}
+      <div className="bg-gradient-to-r from-[#F47216] to-[#D85A0A] text-white">
+        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between text-xs font-medium tracking-wider">
+          <span className="hidden sm:inline">"POR LA EDUCACIÓN AL SERVICIO DEL PUEBLO"</span>
+          <span className="font-bold">SNTE · SECCIÓN 21 · NUEVO LEÓN</span>
+        </div>
+      </div>
 
-      <div className="relative z-10 max-w-4xl w-full">
+      <div className="max-w-5xl mx-auto px-6 py-10">
+        {/* Logo + Título */}
         <div className="text-center mb-10">
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.8 }}
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
             className="flex justify-center mb-6"
           >
-            <div className="bg-gradient-to-br from-[#5BB8E5] to-[#F5B935] rounded-2xl p-5 shadow-2xl shadow-[#5BB8E5]/30">
-              <Sparkles className="w-12 h-12 text-white" />
+            <div className="bg-white rounded-2xl p-4 shadow-lg shadow-[#F47216]/15 border-2 border-[#FDD9B5]">
+              <img
+                src="/logo-snte21.png"
+                alt="SNTE Sección 21"
+                className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                  e.currentTarget.nextElementSibling.style.display = "flex";
+                }}
+              />
+              <div
+                style={{ display: "none" }}
+                className="w-28 h-28 sm:w-32 sm:h-32 items-center justify-center text-[#F47216] font-black text-3xl"
+              >
+                SNTE 21
+              </div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <p className="text-xs font-bold tracking-widest uppercase text-[#5BB8E5] mb-2">
-              Curso del Sindicato — Sesión 1
+            <p className="text-xs font-bold tracking-widest uppercase text-[#F47216] mb-3">
+              Curso · Sesión 1
             </p>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4"
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4 text-slate-900"
           >
-            <span className="bg-gradient-to-r from-[#5BB8E5] via-[#8DD0EE] to-[#F5B935] bg-clip-text text-transparent">
-              Promoción Horizontal
-            </span>
-            <br />
-            <span className="text-white text-3xl sm:text-4xl">y Vertical</span>
+            Promoción <span className="text-[#F47216]">Horizontal</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-lg text-slate-300 max-w-xl mx-auto leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
           >
-            Flashcards y exámenes para dominar la Ley General de Educación.
-            Estudia, voltea y comprueba lo que aprendiste.
+            Material de estudio para el examen USICAMM. Flashcards y exámenes
+            con vocabulario LITERAL de la Ley General de Educación.
           </motion.p>
         </div>
 
+        {/* Tabs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex gap-2 mb-6 justify-center flex-wrap"
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="flex gap-2 mb-8 justify-center flex-wrap"
         >
           <button
             onClick={() => setTab("flashcards")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
               tab === "flashcards"
-                ? "bg-[#5BB8E5] text-[#0a1628]"
-                : "bg-[#1e3a5f] text-slate-300 hover:text-white"
+                ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
+                : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
             }`}
           >
             <span className="flex items-center gap-2">
@@ -129,10 +145,10 @@ export default function LandingPage() {
           </button>
           <button
             onClick={() => setTab("examen")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
               tab === "examen"
-                ? "bg-[#F5B935] text-[#0a1628]"
-                : "bg-[#1e3a5f] text-slate-300 hover:text-white"
+                ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
+                : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
             }`}
           >
             <span className="flex items-center gap-2">
@@ -141,41 +157,42 @@ export default function LandingPage() {
           </button>
         </motion.div>
 
+        {/* Contenido */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           className="space-y-4"
         >
           {tab === "flashcards" && (
             <>
-              <h2 className="text-sm font-semibold tracking-widest uppercase text-[#5BB8E5] mb-4 text-center">
+              <h2 className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-4 text-center">
                 Elige un mazo
               </h2>
               {MAZOS.map((mazo) => (
                 <button
                   key={mazo.id}
                   onClick={() => router.push(`/estudio/${mazo.id}`)}
-                  className="w-full group bg-[#122847]/80 border border-[#1e3a5f] hover:border-[#5BB8E5]/50 rounded-2xl p-6 text-left transition-all hover:bg-[#122847]"
+                  className="w-full group bg-white border-2 border-slate-200 hover:border-[#F47216] rounded-2xl p-6 text-left transition-all hover:shadow-lg hover:shadow-[#F47216]/10"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-[#5BB8E5]/20 rounded-xl">
-                        <Layers className="w-6 h-6 text-[#5BB8E5]" />
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="p-3 bg-[#FFF4EB] rounded-xl flex-shrink-0">
+                        <Layers className="w-6 h-6 text-[#F47216]" />
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-1">
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
                           {mazo.titulo}
                         </h3>
-                        <p className="text-sm text-[#5BB8E5] font-medium">
+                        <p className="text-sm text-[#D85A0A] font-medium">
                           {mazo.subtitulo}
                         </p>
-                        <p className="text-xs text-slate-400 mt-1">
+                        <p className="text-xs text-slate-500 mt-1">
                           {mazo.tarjetas} tarjetas — {mazo.formatos}
                         </p>
                       </div>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-[#5BB8E5] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-[#F47216] group-hover:translate-x-1 transition-all flex-shrink-0" />
                   </div>
                 </button>
               ))}
@@ -184,33 +201,33 @@ export default function LandingPage() {
 
           {tab === "examen" && (
             <>
-              <h2 className="text-sm font-semibold tracking-widest uppercase text-[#F5B935] mb-4 text-center">
+              <h2 className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-4 text-center">
                 Elige un examen
               </h2>
               {EXAMENES.map((examen) => (
                 <button
                   key={examen.id}
                   onClick={() => router.push(`/examen/${examen.id}`)}
-                  className="w-full group bg-[#122847]/80 border border-[#1e3a5f] hover:border-[#F5B935]/50 rounded-2xl p-6 text-left transition-all hover:bg-[#122847]"
+                  className="w-full group bg-white border-2 border-slate-200 hover:border-[#F47216] rounded-2xl p-6 text-left transition-all hover:shadow-lg hover:shadow-[#F47216]/10"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-[#F5B935]/20 rounded-xl">
-                        <GraduationCap className="w-6 h-6 text-[#F5B935]" />
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="p-3 bg-[#FFF4EB] rounded-xl flex-shrink-0">
+                        <GraduationCap className="w-6 h-6 text-[#F47216]" />
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white mb-1">
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
                           {examen.titulo}
                         </h3>
-                        <p className="text-sm text-[#F5B935] font-medium">
+                        <p className="text-sm text-[#D85A0A] font-medium">
                           {examen.subtitulo}
                         </p>
-                        <p className="text-xs text-slate-400 mt-1">
+                        <p className="text-xs text-slate-500 mt-1">
                           {examen.reactivos} reactivos — Tipo USICAMM
                         </p>
                       </div>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-[#F5B935] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-[#F47216] group-hover:translate-x-1 transition-all flex-shrink-0" />
                   </div>
                 </button>
               ))}
@@ -218,10 +235,22 @@ export default function LandingPage() {
           )}
         </motion.div>
 
-        <p className="text-center text-xs text-slate-500 mt-12">
-          Material de estudio basado en la Ley General de Educación (DOF 30-09-2019)
+        <p className="text-center text-xs text-slate-400 mt-12">
+          Material basado en la Ley General de Educación (DOF 30-09-2019)
         </p>
       </div>
+
+      {/* Footer SNTE */}
+      <footer className="bg-slate-50 border-t border-slate-200 mt-12 py-6">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-xs text-slate-500">
+            <span className="font-bold text-[#F47216]">SNTE · Sección 21</span> · Nuevo León
+          </p>
+          <p className="text-xs text-slate-400 mt-1">
+            "Por la educación al servicio del pueblo"
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

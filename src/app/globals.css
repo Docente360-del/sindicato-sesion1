@@ -3,18 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --brand-navy: #1e3a5f;
-  --brand-navy-dark: #122847;
-  --brand-sky: #5BB8E5;
-  --brand-gold: #F5B935;
-  --brand-lime: #A8C947;
-  --brand-orange: #F39237;
-  --background: #0a1628;
+  /* Identidad SNTE Seccion 21 */
+  --snte-naranja: #F47216;
+  --snte-naranja-dark: #D85A0A;
+  --snte-naranja-soft: #FDD9B5;
+  --snte-naranja-bg: #FFF4EB;
+
+  /* Texto y neutros */
+  --texto-principal: #1E293B;
+  --texto-secundario: #475569;
+  --texto-suave: #64748B;
+  --borde: #E2E8F0;
+  --borde-suave: #F1F5F9;
+
+  /* Acentos de feedback */
+  --verde-acierto: #16A34A;
+  --rojo-error: #DC2626;
+  --gris-fondo: #F8FAFC;
+
+  --background: #FFFFFF;
 }
 
 body {
   background: var(--background);
-  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--texto-principal);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

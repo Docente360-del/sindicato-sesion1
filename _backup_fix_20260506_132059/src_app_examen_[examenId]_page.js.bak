@@ -62,14 +62,14 @@ export default function ExamenPage() {
   }, [examenInfo]);
 
   if (!examenInfo) return (
-    <main className="min-h-screen flex items-center justify-center bg-white">
-      <p className="text-slate-700">Examen no encontrado.</p>
+    <main className="min-h-screen flex items-center justify-center bg-[#0a1628]">
+      <p className="text-white">Examen no encontrado.</p>
     </main>
   );
 
   if (cargando) return (
-    <main className="min-h-screen flex items-center justify-center bg-white">
-      <p className="text-slate-700">Cargando reactivos...</p>
+    <main className="min-h-screen flex items-center justify-center bg-[#0a1628]">
+      <p className="text-white">Cargando reactivos...</p>
     </main>
   );
 
@@ -99,27 +99,27 @@ export default function ExamenPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white px-4 py-8">
+    <main className="min-h-screen bg-[#0a1628] px-4 py-8">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <button onClick={() => router.push("/")}
-              className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors text-sm font-medium">
+              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
               <ArrowLeft className="w-4 h-4" /> Volver
             </button>
           </div>
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#F47216] mb-1">
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#F5B935] mb-1">
             {examenInfo.titulo}
           </p>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm text-slate-600">
-              Pregunta <span className="text-slate-900 font-bold">{indice + 1}</span> de {reactivos.length}
+            <span className="text-sm text-slate-400">
+              Pregunta <span className="text-white font-bold">{indice + 1}</span> de {reactivos.length}
             </span>
-            <span className="text-sm text-slate-400">{Math.round(progreso)}%</span>
+            <span className="text-sm text-slate-500">{Math.round(progreso)}%</span>
           </div>
-          <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-[#1e3a5f] rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-[#F47216] to-[#D85A0A]"
+              className="h-full bg-gradient-to-r from-[#F5B935] to-[#5BB8E5]"
               animate={{ width: `${progreso}%` }}
               transition={{ duration: 0.5 }}
             />
@@ -133,9 +133,9 @@ export default function ExamenPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.3 }}
-            className="bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm"
+            className="bg-[#122847] border border-[#1e3a5f] rounded-3xl p-6 sm:p-8"
           >
-            <p className="text-slate-800 text-base sm:text-lg leading-[1.8] mb-6">
+            <p className="text-slate-200 text-base sm:text-lg leading-[1.8] mb-6">
               {reactivoActual.pregunta}
             </p>
             <div className="space-y-3">
@@ -148,15 +148,15 @@ export default function ExamenPage() {
                     onClick={() => setSeleccion(opcion)}
                     className={`w-full text-left p-5 rounded-xl border-2 transition-all ${
                       seleccionada
-                        ? "bg-[#FFF4EB] border-[#F47216] text-slate-900 shadow-md shadow-[#F47216]/10"
-                        : "bg-white border-slate-200 text-slate-700 hover:border-[#FDD9B5]"
+                        ? "bg-[#F5B935]/15 border-[#F5B935] text-white"
+                        : "bg-[#0a1628]/50 border-[#1e3a5f] text-slate-300 hover:border-[#F5B935]/30"
                     }`}
                   >
                     <div className="flex gap-4">
                       <span className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center font-bold ${
                         seleccionada
-                          ? "bg-[#F47216] text-white"
-                          : "bg-slate-100 text-slate-500"
+                          ? "bg-[#F5B935] text-[#0a1628]"
+                          : "bg-[#1e3a5f] text-slate-400"
                       }`}>{letra}</span>
                       <span className="text-base leading-[1.7] pt-1">{opcion}</span>
                     </div>
@@ -170,8 +170,8 @@ export default function ExamenPage() {
                 disabled={!seleccion}
                 className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
                   seleccion
-                    ? "bg-[#F47216] hover:bg-[#D85A0A] text-white shadow-md shadow-[#F47216]/30"
-                    : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                    ? "bg-[#F5B935] hover:bg-[#e5a925] text-[#0a1628]"
+                    : "bg-[#1e3a5f] text-slate-600 cursor-not-allowed"
                 }`}
               >
                 {esUltima ? "Ver resultados" : "Siguiente"} <ArrowRight className="w-4 h-4" />
@@ -188,56 +188,56 @@ function Resultados({ reactivos, respuestas, examenInfo, onReiniciar, onVolver }
   const aciertos = respuestas.filter((r, i) => r.seleccion === reactivos[i].respuestaCorrecta).length;
   const total = reactivos.length;
   const pct = Math.round((aciertos / total) * 100);
-  let msg = "Sigue practicando"; let color = "text-[#F47216]";
-  if (pct >= 90) { msg = "¡Excelente! Nivel élite"; color = "text-[#16A34A]"; }
-  else if (pct >= 70) { msg = "Muy bien, vas en buen camino"; color = "text-[#16A34A]"; }
-  else if (pct >= 50) { msg = "Necesitas reforzar conceptos"; color = "text-[#F47216]"; }
-  else { msg = "Es momento de prepararte a fondo"; color = "text-[#DC2626]"; }
+  let msg = "Sigue practicando"; let color = "text-[#F5B935]";
+  if (pct >= 90) { msg = "¡Excelente! Nivel élite"; color = "text-[#A8C947]"; }
+  else if (pct >= 70) { msg = "Muy bien, vas en buen camino"; color = "text-[#5BB8E5]"; }
+  else if (pct >= 50) { msg = "Necesitas reforzar conceptos"; color = "text-[#F5B935]"; }
+  else { msg = "Es momento de prepararte a fondo"; color = "text-[#F39237]"; }
 
   return (
-    <main className="min-h-screen bg-white px-4 py-8">
+    <main className="min-h-screen bg-[#0a1628] px-4 py-8">
       <div className="max-w-3xl mx-auto">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-          className="bg-white border-2 border-[#FDD9B5] rounded-3xl p-8 text-center mb-6 shadow-lg shadow-[#F47216]/10">
-          <div className="inline-flex p-4 bg-gradient-to-br from-[#F47216] to-[#D85A0A] rounded-2xl mb-4">
+          className="bg-[#122847] border border-[#1e3a5f] rounded-3xl p-8 text-center mb-6">
+          <div className="inline-flex p-4 bg-gradient-to-br from-[#5BB8E5] to-[#F5B935] rounded-2xl mb-4">
             <Trophy className="w-10 h-10 text-white" />
           </div>
-          <p className="text-xs font-semibold tracking-widest uppercase text-[#F47216] mb-2">{examenInfo.titulo}</p>
-          <h1 className="text-4xl sm:text-5xl font-black text-slate-900 mb-2">
-            {aciertos}<span className="text-slate-300">/{total}</span>
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#F5B935] mb-2">{examenInfo.titulo}</p>
+          <h1 className="text-4xl sm:text-5xl font-black text-white mb-2">
+            {aciertos}<span className="text-slate-600">/{total}</span>
           </h1>
-          <p className="text-2xl font-bold text-slate-900 mb-2">{pct}% de aciertos</p>
+          <p className="text-2xl font-bold text-white mb-2">{pct}% de aciertos</p>
           <p className={`text-lg font-medium ${color}`}>{msg}</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-          <h2 className="text-xl font-bold text-slate-900 mb-4">Revisión por reactivo</h2>
+          <h2 className="text-xl font-bold text-white mb-4">Revisión por reactivo</h2>
           <div className="space-y-4">
             {reactivos.map((reactivo, i) => {
               const resp = respuestas[i];
               const correcta = resp?.seleccion === reactivo.respuestaCorrecta;
               return (
-                <div key={i} className={`bg-white border-2 rounded-2xl p-5 ${correcta ? "border-[#16A34A]/40" : "border-[#DC2626]/40"}`}>
+                <div key={i} className={`bg-[#122847] border rounded-2xl p-5 ${correcta ? "border-[#A8C947]/40" : "border-[#F39237]/40"}`}>
                   <div className="flex items-start gap-3 mb-3">
                     {correcta
-                      ? <CheckCircle2 className="w-5 h-5 text-[#16A34A] flex-shrink-0 mt-1" />
-                      : <XCircle className="w-5 h-5 text-[#DC2626] flex-shrink-0 mt-1" />
+                      ? <CheckCircle2 className="w-5 h-5 text-[#A8C947] flex-shrink-0 mt-1" />
+                      : <XCircle className="w-5 h-5 text-[#F39237] flex-shrink-0 mt-1" />
                     }
-                    <p className="text-slate-700 text-sm leading-[1.7]">{reactivo.pregunta}</p>
+                    <p className="text-slate-300 text-sm leading-[1.7]">{reactivo.pregunta}</p>
                   </div>
                   {!correcta && (
-                    <div className="ml-8 mb-2 p-3 bg-[#DC2626]/10 border border-[#DC2626]/20 rounded-lg">
-                      <p className="text-xs text-[#DC2626] font-medium mb-1">Tu respuesta:</p>
-                      <p className="text-sm text-slate-700">{resp?.seleccion || "Sin respuesta"}</p>
+                    <div className="ml-8 mb-2 p-3 bg-[#F39237]/10 border border-[#F39237]/20 rounded-lg">
+                      <p className="text-xs text-[#F39237] font-medium mb-1">Tu respuesta:</p>
+                      <p className="text-sm text-slate-400">{resp?.seleccion || "Sin respuesta"}</p>
                     </div>
                   )}
-                  <div className="ml-8 mb-3 p-3 bg-[#16A34A]/10 border border-[#16A34A]/20 rounded-lg">
-                    <p className="text-xs text-[#16A34A] font-medium mb-1">Respuesta correcta:</p>
-                    <p className="text-sm text-slate-800">{reactivo.respuestaCorrecta}</p>
+                  <div className="ml-8 mb-3 p-3 bg-[#A8C947]/10 border border-[#A8C947]/20 rounded-lg">
+                    <p className="text-xs text-[#A8C947] font-medium mb-1">Respuesta correcta:</p>
+                    <p className="text-sm text-slate-300">{reactivo.respuestaCorrecta}</p>
                   </div>
-                  <div className="ml-8 p-3 bg-[#FFF4EB] border border-[#FDD9B5] rounded-lg">
-                    <p className="text-xs text-[#D85A0A] font-medium mb-1">Justificación:</p>
-                    <p className="text-sm text-slate-700 leading-[1.7] whitespace-pre-wrap">{reactivo.justificacion}</p>
+                  <div className="ml-8 p-3 bg-[#5BB8E5]/10 border border-[#5BB8E5]/20 rounded-lg">
+                    <p className="text-xs text-[#5BB8E5] font-medium mb-1">Justificación:</p>
+                    <p className="text-sm text-slate-400 leading-[1.7] whitespace-pre-wrap">{reactivo.justificacion}</p>
                   </div>
                 </div>
               );
@@ -247,11 +247,11 @@ function Resultados({ reactivos, respuestas, examenInfo, onReiniciar, onVolver }
 
         <div className="flex flex-col sm:flex-row gap-3 mt-8">
           <button onClick={onReiniciar}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#FFF4EB] hover:bg-[#FDD9B5] text-[#D85A0A] rounded-xl font-semibold border border-[#FDD9B5]">
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1e3a5f] hover:bg-[#122847] text-white rounded-xl font-semibold border border-[#2a4a6f]">
             <RotateCcw className="w-4 h-4" /> Reintentar
           </button>
           <button onClick={onVolver}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F47216] hover:bg-[#D85A0A] text-white rounded-xl font-semibold shadow-md shadow-[#F47216]/30">
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F5B935] hover:bg-[#e5a925] text-[#0a1628] rounded-xl font-semibold">
             Elegir otro examen
           </button>
         </div>

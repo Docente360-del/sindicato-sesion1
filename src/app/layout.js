@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Sindicato — Sesión 1 | Curso USICAMM',
-  description: 'Flashcards y exámenes para preparar el examen USICAMM — Sesión 1: LGE',
+  title: 'SNTE Sección 21 — Sesión 1 | Promoción Horizontal',
+  description: 'Curso de Promoción Horizontal — SNTE Sección 21 Nuevo León. Flashcards y exámenes para preparar el examen USICAMM.',
 }
 
 export default function RootLayout({ children }) {
