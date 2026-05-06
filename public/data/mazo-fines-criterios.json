@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "titulo": "Fines Art. 15 + Criterios Art. 16 LGE",
+    "subtitulo": "Fines y criterios de la educación",
+    "total_tarjetas": 12,
+    "rondas": 2
+  },
+  "ronda_1_anclas": [
+    {
+      "id": "S3-A1",
+      "ronda": 1,
+      "frente": {
+        "fin": "ART. 15 LGE — Fin",
+        "titulo": "Actitudes solidarias + respeto entre las naciones"
+      },
+      "reverso": {
+        "ancla": "ART-15-FIN-ACTITUDES-SOLIDARIAS-FORTALECIMIENTO-DERECHO-TODAS-PERSONAS-CUMPLIMIENTO-OBLIGACIONES-RESPETO-NACIONES",
+        "en_palabras_simples": "Fomentar actitudes solidarias, derechos y obligaciones, y respeto entre las naciones.",
+        "lo_que_lo_hace_unico": "Uno de los FINES DE LA EDUCACIÓN consiste en FOMENTAR LAS ACTITUDES SOLIDARIAS, EL FORTALECIMIENTO DEL DERECHO DE TODAS LAS PERSONAS, EL CUMPLIMIENTO DE SUS OBLIGACIONES Y EL RESPETO ENTRE LAS NACIONES.",
+        "palabras_del_documento": "Art. 15 LGE (DOF 30-09-2019).",
+        "regla_rapida": "Actitudes solidarias + derechos + respeto entre naciones = Fin Art. 15."
+      }
+    },
+    {
+      "id": "S3-A2",
+      "ronda": 1,
+      "frente": {
+        "fin": "ART. 15 LGE — Fin",
+        "titulo": "Cultura de la paz + diálogo constructivo"
+      },
+      "reverso": {
+        "ancla": "ART-15-FIN-CULTURA-PAZ-RESPETO-TOLERANCIA-VALORES-DEMOCRATICOS-DIALOGO-CONSTRUCTIVO-SOLIDARIDAD-BUSQUEDA-ACUERDOS",
+        "en_palabras_simples": "Formar en cultura de paz, diálogo constructivo y solución no violenta de conflictos.",
+        "lo_que_lo_hace_unico": "Uno de los FINES DE LA EDUCACIÓN consiste en FORMAR EN LA CULTURA DE LA PAZ, EL RESPETO, LA TOLERANCIA Y LOS VALORES DEMOCRÁTICOS QUE FAVOREZCAN EL DIÁLOGO CONSTRUCTIVO, LA SOLIDARIDAD Y LA BÚSQUEDA DE ACUERDOS.",
+        "palabras_del_documento": "Art. 15 LGE (DOF 30-09-2019).",
+        "regla_rapida": "Cultura de paz + diálogo + solución no violenta = Fin Art. 15."
+      }
+    },
+    {
+      "id": "S3-A3",
+      "ronda": 1,
+      "frente": {
+        "fin": "ART. 16 fracc. II LGE — Criterio",
+        "titulo": "NACIONAL: recursos naturales + cultura"
+      },
+      "reverso": {
+        "ancla": "ART-16-FRAC-II-NACIONAL-PROBLEMAS-APROVECHAMIENTO-SUSTENTABLE-RECURSOS-NATURALES-SOBERANIA-INDEPENDENCIA-CULTURA",
+        "en_palabras_simples": "El criterio NACIONAL aprovecha recursos naturales y acrecenta la cultura propia.",
+        "lo_que_lo_hace_unico": "El criterio NACIONAL atiende a la COMPRENSIÓN Y SOLUCIÓN DE NUESTROS PROBLEMAS, al APROVECHAMIENTO SUSTENTABLE DE NUESTROS RECURSOS NATURALES, a la DEFENSA DE NUESTRA SOBERANÍA E INDEPENDENCIA POLÍTICA, al ASEGURAMIENTO DE NUESTRA INDEPENDENCIA ECONÓMICA y a la CONTINUIDAD Y ACRECENTAMIENTO DE NUESTRA CULTURA.",
+        "palabras_del_documento": "Art. 16 fracc. II LGE.",
+        "regla_rapida": "Recursos naturales + soberanía + cultura nacional = NACIONAL."
+      }
+    },
+    {
+      "id": "S3-A4",
+      "ronda": 1,
+      "frente": {
+        "fin": "ART. 16 fracc. IX LGE — Criterio",
+        "titulo": "INTEGRAL: cognitivas + socioemocionales + físicas"
+      },
+      "reverso": {
+        "ancla": "ART-16-FRAC-IX-INTEGRAL-VIDA-CAPACIDADES-COGNITIVAS-SOCIOEMOCIONALES-FISICAS-EDUCANDO-BIENESTAR",
+        "en_palabras_simples": "El criterio INTEGRAL desarrolla todas las capacidades del educando para su bienestar.",
+        "lo_que_lo_hace_unico": "El criterio INTEGRAL educa para la vida con el objeto de DESARROLLAR las CAPACIDADES COGNITIVAS, SOCIOEMOCIONALES Y FÍSICAS del educando para que ALCANCE SU BIENESTAR.",
+        "palabras_del_documento": "Art. 16 fracc. IX LGE.",
+        "regla_rapida": "Cognitivas + socioemocionales + físicas + bienestar = INTEGRAL."
+      }
+    },
+    {
+      "id": "S3-A5",
+      "ronda": 1,
+      "frente": {
+        "fin": "ART. 16 fracc. X LGE — Criterio",
+        "titulo": "DE EXCELENCIA: máximos resultados"
+      },
+      "reverso": {
+        "ancla": "ART-16-FRAC-X-EXCELENCIA-MEJORAMIENTO-PERMANENTE-PROCESO-ENSENANZA-APRENDIZAJE-MAXIMOS-RESULTADOS-EDUCANDO",
+        "en_palabras_simples": "El criterio DE EXCELENCIA mejora permanentemente la enseñanza para máximos resultados.",
+        "lo_que_lo_hace_unico": "El criterio DE EXCELENCIA está orientado al MEJORAMIENTO PERMANENTE DEL PROCESO DE ENSEÑANZA Y APRENDIZAJE para el LOGRO DE LOS MÁXIMOS RESULTADOS posibles del educando.",
+        "palabras_del_documento": "Art. 16 fracc. X LGE.",
+        "regla_rapida": "Mejoramiento permanente + máximos resultados = DE EXCELENCIA."
+      }
+    },
+    {
+      "id": "S3-A6",
+      "ronda": 1,
+      "frente": {
+        "fin": "ART. 16 fracc. VIII LGE — Criterio",
+        "titulo": "INTERCULTURAL: convivencia armónica entre tradiciones"
+      },
+      "reverso": {
+        "ancla": "ART-16-FRAC-VIII-INTERCULTURAL-CONVIVENCIA-ARMONICA-PERSONAS-COMUNIDADES-RESPETO-CONCEPCIONES-OPINIONES-TRADICIONES",
+        "en_palabras_simples": "El criterio INTERCULTURAL promueve la convivencia entre comunidades respetando sus tradiciones.",
+        "lo_que_lo_hace_unico": "El criterio INTERCULTURAL promueve la CONVIVENCIA ARMÓNICA ENTRE PERSONAS Y COMUNIDADES sobre la base del RESPETO A SUS DIFERENTES CONCEPCIONES, OPINIONES Y TRADICIONES.",
+        "palabras_del_documento": "Art. 16 fracc. VIII LGE.",
+        "regla_rapida": "Convivencia armónica + concepciones + opiniones + tradiciones = INTERCULTURAL."
+      }
+    }
+  ],
+  "ronda_2_casos": [
+    {
+      "id": "S3-C1",
+      "ronda": 2,
+      "frente": {
+        "escenario": "Una maestra de cuarto grado recibe en su grupo a un alumno extranjero que solo permanecerá unos meses en el país. Durante una sesión del Consejo Técnico Escolar al inicio del trimestre, propone al colectivo sensibilizar al plantel para favorecer la integración del alumno, fortaleciendo las actitudes solidarias, el ejercicio de los derechos de todas las personas y el respeto entre las naciones."
+      },
+      "reverso": {
+        "fin": "Fin Art. 15 — Respeto entre las naciones",
+        "por_que": "Uno de los FINES DE LA EDUCACIÓN consiste en FOMENTAR LAS ACTITUDES SOLIDARIAS, EL FORTALECIMIENTO DEL DERECHO DE TODAS LAS PERSONAS, EL CUMPLIMIENTO DE SUS OBLIGACIONES Y EL RESPETO ENTRE LAS NACIONES.",
+        "se_confunde_con": "CULTURA DE LA PAZ: orientado a la convivencia y solución no violenta de conflictos (caballo de troya: confunde 'integrar al alumno extranjero' con 'evitar conflictos'). RESPETO A LA DIGNIDAD HUMANA: orientado a la convivencia social y aprecio por la diversidad (caballo de troya: confunde 'respeto entre naciones' con 'dignidad humana general').",
+        "palabras_del_documento": "Art. 15 LGE.",
+        "regla_rapida": "Alumno extranjero + actitudes solidarias = Fin respeto entre naciones."
+      }
+    },
+    {
+      "id": "S3-C2",
+      "ronda": 2,
+      "frente": {
+        "escenario": "Una maestra de quinto grado coordina con su colectivo un proyecto trimestral debido a que en el plantel se han presentado agresiones verbales y físicas entre el alumnado. Durante el proyecto, las y los estudiantes participan en actividades para favorecer el diálogo constructivo, la solidaridad y la búsqueda de acuerdos que permitan resolver los conflictos sin violencia, en un marco de respeto a las diferencias."
+      },
+      "reverso": {
+        "fin": "Fin Art. 15 — Cultura de paz",
+        "por_que": "Uno de los FINES DE LA EDUCACIÓN consiste en FORMAR EN LA CULTURA DE LA PAZ, EL RESPETO, LA TOLERANCIA Y LOS VALORES DEMOCRÁTICOS QUE FAVOREZCAN EL DIÁLOGO CONSTRUCTIVO, LA SOLIDARIDAD Y LA BÚSQUEDA DE ACUERDOS que permitan la solución no violenta de conflictos.",
+        "se_confunde_con": "RESPETO A LA DIGNIDAD HUMANA: se centra en la convivencia social y aprecio por la diversidad (caballo de troya: confunde 'resolver conflictos' con 'dignidad humana'). ACTITUDES SOLIDARIAS Y RESPETO ENTRE LAS NACIONES: orientado al fortalecimiento del derecho entre las naciones (caballo de troya: confunde 'solidaridad' con 'respeto entre naciones').",
+        "palabras_del_documento": "Art. 15 LGE.",
+        "regla_rapida": "Agresiones + diálogo constructivo + sin violencia = Fin cultura de paz."
+      }
+    },
+    {
+      "id": "S3-C3",
+      "ronda": 2,
+      "frente": {
+        "escenario": "Una maestra de quinto grado coordina con su grupo un proyecto trimestral. Las y los estudiantes investigan cómo se aprovechan los recursos forestales de la región sin agotarlos, dialogan con artesanos locales sobre las técnicas heredadas de generación en generación y elaboran una propuesta para que la comunidad conserve esas prácticas como parte de su herencia."
+      },
+      "reverso": {
+        "fin": "Criterio NACIONAL — Art. 16 fracc. II",
+        "por_que": "El criterio NACIONAL atiende a la COMPRENSIÓN Y SOLUCIÓN DE NUESTROS PROBLEMAS, al APROVECHAMIENTO SUSTENTABLE DE NUESTROS RECURSOS NATURALES, a la DEFENSA DE NUESTRA SOBERANÍA E INDEPENDENCIA POLÍTICA, al ASEGURAMIENTO DE NUESTRA INDEPENDENCIA ECONÓMICA y a la CONTINUIDAD Y ACRECENTAMIENTO DE NUESTRA CULTURA.",
+        "se_confunde_con": "INTERCULTURAL: promueve la convivencia armónica entre comunidades sobre el respeto a sus tradiciones, sin enfocarse en el aprovechamiento sustentable (caballo de troya: confunde 'técnicas heredadas' con 'diálogo entre tradiciones'). HUMANISTA: fomenta el aprecio y respeto por la dignidad de las personas (caballo de troya: confunde 'herencia cultural' con 'dignidad humana').",
+        "palabras_del_documento": "Art. 16 fracc. II LGE.",
+        "regla_rapida": "Recursos forestales + técnicas heredadas + cultura propia = NACIONAL."
+      }
+    },
+    {
+      "id": "S3-C4",
+      "ronda": 2,
+      "frente": {
+        "escenario": "Una maestra de tercer grado articula durante un proyecto trimestral interdisciplinario actividades que combinan la resolución de problemas matemáticos, ejercicios de expresión corporal, espacios de regulación emocional y debates sobre valores cívicos, con el fin de que el estudiantado alcance su bienestar como persona."
+      },
+      "reverso": {
+        "fin": "Criterio INTEGRAL — Art. 16 fracc. IX",
+        "por_que": "El criterio INTEGRAL educa para la vida con el objeto de DESARROLLAR las CAPACIDADES COGNITIVAS, SOCIOEMOCIONALES Y FÍSICAS del educando para que ALCANCE SU BIENESTAR.",
+        "se_confunde_con": "HUMANISTA: fomenta el aprecio y respeto por la dignidad de las personas, sustentado en ideales de fraternidad e igualdad (caballo de troya: confunde 'bienestar como persona' con 'dignidad humana'). INCLUSIVO: toma en cuenta diversas características y estilos de aprendizaje mediante recursos técnicos y pedagógicos (caballo de troya: confunde 'capacidades del educando' con 'recursos técnicos').",
+        "palabras_del_documento": "Art. 16 fracc. IX LGE.",
+        "regla_rapida": "Matemáticas + expresión corporal + regulación emocional = INTEGRAL."
+      }
+    },
+    {
+      "id": "S3-C5",
+      "ronda": 2,
+      "frente": {
+        "escenario": "Una maestra de cuarto grado, durante una sesión de Consejo Técnico Escolar al cierre del primer trimestre, propone al colectivo revisar de manera sistemática los avances del estudiantado, identificar las dificultades detectadas en los procesos de enseñanza y aprendizaje, y actualizar las estrategias didácticas con miras a alcanzar resultados cada vez más altos en el siguiente periodo."
+      },
+      "reverso": {
+        "fin": "Criterio DE EXCELENCIA — Art. 16 fracc. X",
+        "por_que": "El criterio DE EXCELENCIA está orientado al MEJORAMIENTO PERMANENTE DEL PROCESO DE ENSEÑANZA Y APRENDIZAJE para el LOGRO DE LOS MÁXIMOS RESULTADOS posibles del educando.",
+        "se_confunde_con": "INTEGRAL: desarrolla capacidades cognitivas, socioemocionales y físicas para el bienestar (caballo de troya: confunde 'mejoramiento del proceso' con 'desarrollo armónico de capacidades'). EQUITATIVO: combate desigualdades socioeconómicas, regionales, de capacidades y género (caballo de troya: confunde 'máximos resultados' con 'igualdad de oportunidades').",
+        "palabras_del_documento": "Art. 16 fracc. X LGE.",
+        "regla_rapida": "Mejoramiento permanente + máximos resultados = DE EXCELENCIA."
+      }
+    },
+    {
+      "id": "S3-C6",
+      "ronda": 2,
+      "frente": {
+        "escenario": "Una maestra de sexto grado organiza al cierre del trimestre un encuentro en el que las y los estudiantes invitan a sus familias a compartir las costumbres, opiniones y formas de vida que las identifican; durante la jornada, el grupo dialoga sobre las diferencias que observa entre los hogares y construye acuerdos de convivencia basados en el reconocimiento de la diversidad."
+      },
+      "reverso": {
+        "fin": "Criterio INTERCULTURAL — Art. 16 fracc. VIII",
+        "por_que": "El criterio INTERCULTURAL promueve la CONVIVENCIA ARMÓNICA ENTRE PERSONAS Y COMUNIDADES sobre la base del RESPETO A SUS DIFERENTES CONCEPCIONES, OPINIONES Y TRADICIONES.",
+        "se_confunde_con": "NACIONAL: atiende al aprovechamiento sustentable de recursos del país y continuidad de cultura nacional (caballo de troya: confunde 'diversidad de hogares' con 'cultura nacional'). HUMANISTA: fomenta aprecio y respeto por dignidad de las personas, sustentado en ideales de fraternidad e igualdad (caballo de troya: confunde 'reconocimiento de diversidad' con 'dignidad humana').",
+        "palabras_del_documento": "Art. 16 fracc. VIII LGE.",
+        "regla_rapida": "Familias + costumbres + diferencias + convivencia armónica = INTERCULTURAL."
+      }
+    }
+  ]
+}
