@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
-  ArrowRight, Layers, GraduationCap, ImageIcon, ZoomIn, X
+  ArrowRight, Layers, GraduationCap, BookOpen
 } from "lucide-react";
 
 const MAZOS = [
@@ -52,37 +52,9 @@ const EXAMENES = [
   },
 ];
 
-const IMAGENES = [
-  {
-    id: "articulo-7",
-    titulo: "Art. 7° — Características",
-    subtitulo: "Naturaleza de la educación",
-    src: "/imagenes/articulo-7.jpg",
-  },
-  {
-    id: "objetivos",
-    titulo: "Objetivos NEM",
-    subtitulo: "Art. 11 LGE",
-    src: "/imagenes/objetivos.jpg",
-  },
-  {
-    id: "articulo-12",
-    titulo: "Art. 12 — DHI",
-    subtitulo: "Desarrollo Humano Integral",
-    src: "/imagenes/articulo-12.jpg",
-  },
-  {
-    id: "elementos",
-    titulo: "Elementos Curriculares",
-    subtitulo: "Marco curricular NEM",
-    src: "/imagenes/elementos-curriculares.jpg",
-  },
-];
-
 export default function LandingPage() {
   const router = useRouter();
   const [tab, setTab] = useState("flashcards");
-  const [imagenAmpliada, setImagenAmpliada] = useState(null);
 
   return (
     <main className="min-h-screen bg-white">
@@ -147,8 +119,8 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
           >
-            Material de estudio para el examen USICAMM. Flashcards, exámenes
-            e imágenes con vocabulario LITERAL de la Ley General de Educación.
+            Material de estudio para el examen USICAMM. Flashcards y exámenes
+            con vocabulario LITERAL de la Ley General de Educación.
           </motion.p>
         </div>
 
@@ -161,7 +133,7 @@ export default function LandingPage() {
         >
           <button
             onClick={() => setTab("flashcards")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
               tab === "flashcards"
                 ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
                 : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
@@ -173,7 +145,7 @@ export default function LandingPage() {
           </button>
           <button
             onClick={() => setTab("examen")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
               tab === "examen"
                 ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
                 : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
@@ -181,18 +153,6 @@ export default function LandingPage() {
           >
             <span className="flex items-center gap-2">
               <GraduationCap className="w-4 h-4" /> Exámenes
-            </span>
-          </button>
-          <button
-            onClick={() => setTab("imagenes")}
-            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
-              tab === "imagenes"
-                ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
-                : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
-            }`}
-          >
-            <span className="flex items-center gap-2">
-              <ImageIcon className="w-4 h-4" /> Aprende con Imágenes
             </span>
           </button>
         </motion.div>
@@ -273,43 +233,6 @@ export default function LandingPage() {
               ))}
             </>
           )}
-
-          {tab === "imagenes" && (
-            <>
-              <h2 className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-2 text-center">
-                Aprende con Imágenes
-              </h2>
-              <p className="text-center text-sm text-slate-500 mb-6">
-                Toca cualquier imagen para ampliarla y estudiarla a detalle
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {IMAGENES.map((img) => (
-                  <button
-                    key={img.id}
-                    onClick={() => setImagenAmpliada(img)}
-                    className="group bg-white border-2 border-slate-200 hover:border-[#F47216] rounded-2xl overflow-hidden transition-all hover:shadow-lg hover:shadow-[#F47216]/10 text-left"
-                  >
-                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-50">
-                      <img
-                        src={img.src}
-                        alt={img.titulo}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute bottom-3 right-3 bg-[#F47216] text-white p-2 rounded-lg shadow-lg">
-                        <ZoomIn className="w-4 h-4" />
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="text-slate-900 font-bold mb-0.5">
-                        {img.titulo}
-                      </h3>
-                      <p className="text-xs text-[#D85A0A] font-medium">{img.subtitulo}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
         </motion.div>
 
         <p className="text-center text-xs text-slate-400 mt-12">
@@ -328,37 +251,6 @@ export default function LandingPage() {
           </p>
         </div>
       </footer>
-
-      {/* Modal imagen ampliada */}
-      {imagenAmpliada && (
-        <div
-          className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4"
-          onClick={() => setImagenAmpliada(null)}
-        >
-          <div
-            className="relative w-full max-w-5xl max-h-[90vh] flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setImagenAmpliada(null)}
-              className="absolute -top-12 right-0 text-white hover:text-[#F47216] transition-colors flex items-center gap-2 text-sm font-medium"
-            >
-              <X className="w-5 h-5" /> Cerrar
-            </button>
-            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl flex-1 min-h-0">
-              <img
-                src={imagenAmpliada.src}
-                alt={imagenAmpliada.titulo}
-                className="w-full h-full object-contain max-h-[80vh]"
-              />
-            </div>
-            <div className="text-center mt-4">
-              <p className="text-white font-bold">{imagenAmpliada.titulo}</p>
-              <p className="text-[#FDD9B5] text-sm">{imagenAmpliada.subtitulo}</p>
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
