@@ -153,18 +153,6 @@ export default function LandingPage() {
             Promoción <span className="text-[#F47216]">Horizontal</span>
           </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex items-center gap-2 bg-[#FFF4EB] border-2 border-[#FDD9B5] px-5 py-2.5 rounded-xl mb-5"
-          >
-            <span className="text-lg">🎓</span>
-            <span className="text-sm sm:text-base font-bold text-[#D85A0A]">
-              Imparte: Dr. Juan Carlos Pequeño
-            </span>
-          </motion.div>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
