@@ -60,12 +60,6 @@ const IMAGENES = [
     src: "/imagenes/articulo-7.jpg",
   },
   {
-    id: "interes",
-    titulo: "Interés Superior de la Niñez",
-    subtitulo: "LGDNNA Art. 2° y 71 / LGE Art. 14",
-    src: "/imagenes/interes.png",
-  },
-  {
     id: "objetivos",
     titulo: "Objetivos NEM",
     subtitulo: "Art. 11 LGE",
