@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "titulo": "Los 9 Fines de la Educación",
+    "subtitulo": "Artículo 15 · Ley General de Educación",
+    "fuente": "Sesión formativa · Dr. Juan Carlos · Supervisor Escolar · CTE Zona No. 8 Educación Secundaria Nuevo León",
+    "tagline": "Lo que escribimos hoy en nuestros alumnos, no se borra jamás."
+  },
+  "fines": [
+    {
+      "numero": "I",
+      "titulo": "Desarrollo integral y permanente",
+      "imagen": "/imagenes/fines/fin-1-marcador.jpeg",
+      "imagen_concepto": "El marcador permanente Esterbrook que escribe en el alumno",
+      "ley": "Contribuir al desarrollo integral y permanente de los educandos, para que ejerzan de manera plena sus capacidades, a través de la mejora continua del Sistema Educativo Nacional.",
+      "pregunta_disparadora": "Si enseñamos algo el lunes... ¿hasta cuándo le sirve al alumno?",
+      "analogia": "Imaginen que ustedes son un marcador permanente Esterbrook (de esos que se usan para firmar oficios). Y los alumnos son la pared blanca. Cada palabra que dicen, cada gesto, cada ejemplo... queda escrito ahí. Y no se borra ni en 30 años. La 'integral' matemática significa que SUMA y ACUMULA todas las capacidades. Crecen juntas, no por separado. INTEGRAL = todo el alumno (mente + corazón + cuerpo + comunidad). PERMANENTE = para toda la vida.",
+      "ancla": "Somos marcadores permanentes. Lo que escribimos hoy en nuestros alumnos, no se borra jamás."
+    },
+    {
+      "numero": "II",
+      "titulo": "Dignidad humana",
+      "imagen": "/imagenes/fines/fin-2-espejo.jpeg",
+      "imagen_concepto": "El espejo mágico del valor humano: VALOR ∞ para todos",
+      "ley": "Promover el respeto irrestricto de la dignidad humana, como valor fundamental e inalterable de la persona y de la sociedad, a partir de una formación humanista que contribuya a la mejor convivencia social en un marco de respeto por los derechos de todas las personas y la integridad de las familias, el aprecio por la diversidad y la corresponsabilidad con el interés general.",
+      "pregunta_disparadora": "¿Cuánto vale un niño humilde? ¿Cuánto vale un niño rico?",
+      "analogia": "Imaginen un espejo mágico. Frente a él se paran tres personas distintas: un hombre en silla de ruedas, una abuelita indígena con su rebozo, y una niña pequeña con uniforme humilde. Los tres se ven reflejados. Pero el espejo no refleja lo que esperan: a TODOS les muestra el MISMO halo dorado sobre la cabeza y la MISMA etiqueta arriba: VALOR: ∞ (infinito). El paralítico pregunta sorprendido: '¿Mi valor es el mismo?'. La abuelita sonríe sabia: 'Yo siempre lo supe'. La niña humilde pregunta: '¿Yo también valgo lo mismo que ellos?'. Y el espejo les contesta: 'Aquí no se compara. Aquí se reconoce'.",
+      "ancla": "El valor de cada persona es infinito. Y el infinito no se compara con el infinito. Son iguales por ley."
+    },
+    {
+      "numero": "III",
+      "titulo": "Igualdad sustantiva",
+      "imagen": "/imagenes/fines/fin-3-bascula.jpeg",
+      "imagen_concepto": "La báscula de TRATO + OPORTUNIDADES",
+      "ley": "Inculcar el enfoque de derechos humanos y de igualdad sustantiva, y promover el conocimiento, respeto, disfrute y ejercicio de todos los derechos, con el mismo trato y oportunidades para las personas.",
+      "pregunta_disparadora": "¿Es justo dar a TODOS exactamente lo mismo?",
+      "analogia": "Imaginen una báscula con dos platillos. De un lado dice TRATO. Del otro dice OPORTUNIDADES. La balanza está perfectamente equilibrada. ¿Por qué? Porque la ley pide LAS DOS COSAS, no solo una. Si tratan bien a todos pero solo dan oportunidades al hijo del doctor, la balanza se cae. Y fíjense quién sostiene la balanza: NO es el presidente, NO es la SEP. Es el MAESTRO. Ustedes son el fiel de la balanza de México. Si la sueltan un momento, México se desequilibra.",
+      "ancla": "El maestro NO juega el partido. Arbitra la equidad."
+    },
+    {
+      "numero": "IV",
+      "titulo": "Amor a la Patria",
+      "imagen": "/imagenes/fines/fin-4-arbol.jpeg",
+      "imagen_concepto": "Los héroes de la patria son tus parientes",
+      "ley": "Fomentar el amor a la Patria, el aprecio por sus culturas, el conocimiento de su historia y el compromiso con los valores, símbolos patrios y las instituciones nacionales.",
+      "pregunta_disparadora": "¿Cuántos alumnos saben el himno... pero NO saben quién fue Morelos?",
+      "analogia": "Imaginen que la patria es una gran familia. Y los héroes de la historia son sus parientes lejanos. El bisabuelo Hidalgo. La bisabuela Josefa Ortiz. El tío Morelos. El tío Benito Juárez. Los primos Villa y Zapata. Los hermanos Niños Héroes. Cuando un alumno canta el himno SIN saber quiénes son ellos, está cantándole a desconocidos. Pero cuando los conoce, los SIENTE como familia. AHÍ nace el amor a la patria. NO se ama lo que no se conoce. Por eso la ley dice 'amor a la patria + conocimiento de la historia'. Las dos juntas o ninguna.",
+      "ancla": "Hay dos tipos de alumnos en la escolta: los que cantan y los que recuerdan. Solo los segundos aman la patria."
+    },
+    {
+      "numero": "V",
+      "titulo": "Cultura de paz",
+      "imagen": "/imagenes/fines/fin-5-palomas.jpeg",
+      "imagen_concepto": "Las palomas diplomáticas detienen a los gallos",
+      "ley": "Formar a los educandos en la cultura de la paz, el respeto, la tolerancia, los valores democráticos que favorezcan el diálogo constructivo, la solidaridad y la búsqueda de acuerdos que permitan la solución no violenta de conflictos y la convivencia en un marco de respeto a las diferencias.",
+      "pregunta_disparadora": "¿Cuántas peleas se evitan en su escuela cada semana... con DIÁLOGO?",
+      "analogia": "Imaginen dos gallos peleones en el patio de su escuela, con plumas erizadas, a punto de agarrarse a golpes. Y de pronto bajan TRES palomas blancas vestidas como diplomáticos de la ONU, con su sacote, su corbatita y su portafolio. La primera saca un cartel: DIÁLOGO. La segunda: TOLERANCIA. La tercera: ACUERDO. Los gallos las miran, se sienten ridículos, sueltan los puños y terminan compartiendo unas tortillas. Las palomas NO les pegaron. NO los castigaron. Solo les pusieron el procedimiento enfrente. La paz NO es ausencia de conflicto. ES presencia de diálogo.",
+      "ancla": "En su salón hay dos gallos peleando todos los días. Ustedes son las tres palomas con portafolios."
+    },
+    {
+      "numero": "VI",
+      "titulo": "Solidaridad internacional",
+      "imagen": "/imagenes/fines/fin-6-banderas.jpeg",
+      "imagen_concepto": "Las banderas que dialogan: México ayuda al mundo",
+      "ley": "Propiciar actitudes solidarias en el ámbito internacional, en la independencia y en la justicia para fortalecer el ejercicio de los derechos de todas las personas, el cumplimiento de sus obligaciones y el respeto entre las naciones.",
+      "pregunta_disparadora": "Si llega un alumno extranjero a su escuela... ¿lo reciben con burocracia o con tacos?",
+      "analogia": "Imaginen dos banderas vivas, con cara y manitas. La de Holanda le pregunta con cara preocupada: 'Ayúdame a inscribir a un alumno, por favor'. Y la bandera de México le contesta con una sonrisota: '¡Claro que sí! Para eso estamos, compadre'. Eso, maestros, es solidaridad internacional. NO es que México pida limosna al mundo. Es que México responda SÍ cuando el mundo necesita ayuda. México llega a la fiesta global NO con las manos vacías: llega con su charola de tacos.",
+      "ancla": "Solidaridad internacional no es pedir. Es responder SÍ cuando alguien necesita."
+    },
+    {
+      "numero": "VII",
+      "titulo": "Pluralidad étnica, cultural y lingüística",
+      "imagen": "/imagenes/fines/fin-7-molcajete.jpeg",
+      "imagen_concepto": "El molcajete que muele sin destruir",
+      "ley": "Promover la comprensión, el aprecio, el conocimiento y enseñanza de la pluralidad étnica, cultural y lingüística de la nación, el diálogo e intercambio intercultural sobre la base de equidad y respeto mutuo; así como la valoración de las tradiciones y particularidades culturales de las diversas regiones del país.",
+      "pregunta_disparadora": "En México se hablan 68 lenguas. ¿Cómo le hicimos para no ser 68 países?",
+      "analogia": "Imaginen un molcajete de piedra de hace 3,500 años (sí, así de viejo). Adentro: jitomate, chile, cebolla, ajo, cilantro, epazote. Cada uno con su SABOR, su COLOR, su LENGUA. El chile grita en náhuatl, el jitomate en zapoteco, la cebolla en maya. NADIE se entiende. Llega la mano del tejolote y los muele con paciencia. Y de pronto, del molcajete sale UNA SOLA voz: la SALSA. Los ingredientes NO se destruyeron. Cada uno conserva su sabor. Pero juntos crean algo nuevo. ESO es México. NO somos puré (uniformidad). Somos SALSA (pluralidad armónica).",
+      "ancla": "México lleva 3,500 años moliendo lenguas. El resultado no es uniformidad. Es salsa."
+    },
+    {
+      "numero": "VIII",
+      "titulo": "Respeto a la naturaleza",
+      "imagen": "/imagenes/fines/fin-8-bonsai.jpeg",
+      "imagen_concepto": "Daniel-san hace reverencia al bonsái antes de tocarlo",
+      "ley": "Inculcar el respeto por la naturaleza, a través de la generación de capacidades y habilidades que aseguren el manejo integral, la conservación y el aprovechamiento de los recursos naturales, el desarrollo sostenible y la resiliencia frente al cambio climático.",
+      "pregunta_disparadora": "¿Enseñamos a los alumnos a USAR la naturaleza... o a hacerle REVERENCIA primero?",
+      "analogia": "¿Recuerdan Karate Kid? Esa escena donde el Sr. Miyagi le enseña al joven Daniel-san a podar el bonsái. Pero antes de cortar UNA sola hoja, Daniel-san se arrodilla, cierra los ojos, y hace una reverencia profunda al árbol. SIN palabras. SIN apuro. Solo respeto. Esa escena, maestros, es el Fin VIII. NO se enseña a respetar la naturaleza con discursos. Se enseña haciendo reverencia primero. El maestro humanista NO talá el árbol y luego pide perdón. Hace reverencia ANTES de tocar.",
+      "ancla": "No se enseña a respetar la naturaleza con palabras. Se enseña haciendo reverencia primero."
+    },
+    {
+      "numero": "IX",
+      "titulo": "Honestidad y civismo",
+      "imagen": "/imagenes/fines/fin-9-pinocho.jpeg",
+      "imagen_concepto": "Pinocho en la escolta: la mentira tira la patria",
+      "ley": "Fomentar la honestidad, el civismo y los valores necesarios para transformar la vida pública del país.",
+      "pregunta_disparadora": "¿Cuántos pinochos con bandera formamos cada año... sin darnos cuenta?",
+      "analogia": "Lunes en el patio. Suena el tambor. Entra la escolta marchando solemne. Pero el escolta principal, el que carga la bandera... es PINOCHO. Y a cada paso, su nariz crece un poquito más. Paso uno: nariz normal. Paso tres: nariz como pluma. Paso cinco: la nariz le pega al asta y... la bandera de México se CAE. ¿Por qué? Porque dijo una mentira en el examen del viernes pasado. Maestros, cada año formamos millones de PINOCHOS con bandera. Niños que hacen escolta el lunes con la mano en el pecho... y copian el viernes. El civismo SIN honestidad es teatro. Uno NO funciona sin el otro.",
+      "ancla": "Si nuestros alumnos hacen escolta el lunes pero copian el viernes, estamos formando pinochos con bandera."
+    }
+  ]
+}

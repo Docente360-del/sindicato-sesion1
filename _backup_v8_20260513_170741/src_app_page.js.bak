@@ -79,11 +79,9 @@ const IMAGENES = [
   },
   {
     id: "fines",
-    titulo: "Los 9 Fines de la Educación",
-    subtitulo: "Art. 15 LGE — Toca para ver los 9 Fines",
-    src: "/imagenes/fines/fin-1-marcador.jpeg",
-    navega: "/fines",
-    destacado: true,
+    titulo: "Fines de la Educación",
+    subtitulo: "Art. 15 LGE — Paz · Dignidad · Naciones",
+    src: "/imagenes/fines.jpeg",
   },
   {
     id: "criterios",
@@ -312,18 +310,8 @@ export default function LandingPage() {
                 {IMAGENES.map((img) => (
                   <button
                     key={img.id}
-                    onClick={() => {
-                      if (img.navega) {
-                        router.push(img.navega);
-                      } else {
-                        setImagenAmpliada(img);
-                      }
-                    }}
-                    className={`group bg-white border-2 rounded-2xl overflow-hidden transition-all hover:shadow-lg hover:shadow-[#F47216]/10 text-left ${
-                      img.destacado
-                        ? "border-[#F47216] ring-2 ring-[#F47216]/20"
-                        : "border-slate-200 hover:border-[#F47216]"
-                    }`}
+                    onClick={() => setImagenAmpliada(img)}
+                    className="group bg-white border-2 border-slate-200 hover:border-[#F47216] rounded-2xl overflow-hidden transition-all hover:shadow-lg hover:shadow-[#F47216]/10 text-left"
                   >
                     <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-50">
                       <img
@@ -332,17 +320,8 @@ export default function LandingPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute bottom-3 right-3 bg-[#F47216] text-white p-2 rounded-lg shadow-lg">
-                        {img.navega ? (
-                          <ArrowRight className="w-4 h-4" />
-                        ) : (
-                          <ZoomIn className="w-4 h-4" />
-                        )}
+                        <ZoomIn className="w-4 h-4" />
                       </div>
-                      {img.destacado && (
-                        <div className="absolute top-3 left-3 bg-[#F47216] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                          ★ NUEVO
-                        </div>
-                      )}
                     </div>
                     <div className="p-4">
                       <h3 className="text-slate-900 font-bold mb-0.5">
