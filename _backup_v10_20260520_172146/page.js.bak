@@ -109,12 +109,6 @@ const IMAGENES = [
     subtitulo: "Art. 128 LGE - Personal - Evaluacion - Planes - Presupuesto - Hijo",
     src: "/imagenes/derechos/derechos-3-mano.png",
   },
-  {
-    id: "obligaciones-padres",
-    titulo: "Obligaciones Padres",
-    subtitulo: "Art. 129 LGE - Obligaciones de Madres, Padres y Tutores",
-    src: "/imagenes/derechos/obligaciones-padres.jpg",
-  },
 ];
 
 export default function LandingPage() {
