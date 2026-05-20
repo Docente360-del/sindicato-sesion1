@@ -91,24 +91,6 @@ const IMAGENES = [
     subtitulo: "Art. 16 LGE — Nacional · Integral · Excelencia · Intercultural",
     src: "/imagenes/criterios.jpeg",
   },
-  {
-    id: "derechos-caja",
-    titulo: "Derechos Padres I-IV",
-    subtitulo: "Art. 128 LGE - Inscripcion - Participar - Colaborar - Formar parte",
-    src: "/imagenes/derechos/derechos-1-caja.png",
-  },
-  {
-    id: "derechos-megafono",
-    titulo: "Derechos Padres V y XI",
-    subtitulo: "Art. 128 LGE - Opinar contraprestaciones - Manifestar inconformidad",
-    src: "/imagenes/derechos/derechos-2-megafono.png",
-  },
-  {
-    id: "derechos-mano",
-    titulo: "Derechos Padres VI-X",
-    subtitulo: "Art. 128 LGE - Personal - Evaluacion - Planes - Presupuesto - Hijo",
-    src: "/imagenes/derechos/derechos-3-mano.png",
-  },
 ];
 
 export default function LandingPage() {
