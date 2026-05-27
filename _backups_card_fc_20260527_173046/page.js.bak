@@ -59,12 +59,6 @@ const EXAMENES = [
     subtitulo: "Fines y criterios de la educación",
     reactivos: 6,
   },
-  {
-    id: "examen-fines-criterios-sesion-4",
-    titulo: "Examen Fines y Criterios",
-    subtitulo: "Sesion 4 · Fines y criterios LGE (clave 7777)",
-    reactivos: 10,
-  }
 ];
 
 const IMAGENES = [
