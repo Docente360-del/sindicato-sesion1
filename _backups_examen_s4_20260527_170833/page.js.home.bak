@@ -32,16 +32,7 @@ const MAZOS = [
 ];
 
 const EXAMENES = [
-  
-    {
-      id: "preguntas-sesion-4",
-      titulo: "Preguntas Sesion 4",
-      descripcion: "14 reactivos sobre Fines y Criterios LGE, Planos del Programa Analitico y Campo De lo Humano y lo Comunitario.",
-      ruta: "/examen/preguntas-sesion-4",
-      icono: "📝",
-      preguntas: 14,
-    },
-    {
+  {
     id: "art7-interes",
     titulo: "Examen: Art. 7° + Interés Superior",
     subtitulo: "Características + LGDNNA",
