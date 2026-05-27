@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Trophy, BookOpen, Search, RefreshCw, Check, X, AlertTriangle } from "lucide-react";
 import { ITEMS_LGE, TIPOS_INFO } from "../data/juego-fines-criterios";
-import { DISTRACTORES_BRUTALES } from "../data/distractores-brutales";
 
 const CONTRASENA = "1111";
 
@@ -21,36 +20,14 @@ function generarRondasExamen() {
   const rondas = [];
   const tipos = ["FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO"];
 
-  // Para Caza al Impostor BRUTAL: usar 3 items del tipo dominante + 1 impostora ESPECÍFICA
-  // La impostora se elige entre los distractores curados de los 3 items mostrados
   for (const tipo of shuffle(tipos)) {
-    const propios = shuffle(ITEMS_LGE.filter(i => i.tipo === tipo)).slice(0, 3);
+    const propios = ITEMS_LGE.filter(i => i.tipo === tipo);
+    const ajenos = ITEMS_LGE.filter(i => i.tipo !== tipo);
 
-    // Buscar entre los distractores de los 3 propios uno que sea del tipo OPUESTO
-    const candidatos_impostora = new Set();
-    for (const propio of propios) {
-      const ids_dist = DISTRACTORES_BRUTALES[propio.id] || [];
-      for (const id_dist of ids_dist) {
-        const item_dist = ITEMS_LGE.find(i => i.id === id_dist);
-        if (item_dist && item_dist.tipo !== tipo) {
-          candidatos_impostora.add(item_dist.id);
-        }
-      }
-    }
+    const tres_propios = shuffle(propios).slice(0, 3);
+    const una_impostora = shuffle(ajenos)[0];
 
-    // Elegir 1 impostora de los candidatos (los que más confunden con los 3 propios)
-    let una_impostora;
-    if (candidatos_impostora.size > 0) {
-      const ids_arr = [...candidatos_impostora];
-      const id_elegida = shuffle(ids_arr)[0];
-      una_impostora = ITEMS_LGE.find(i => i.id === id_elegida);
-    } else {
-      // Fallback: cualquier item del tipo opuesto
-      const ajenos = ITEMS_LGE.filter(i => i.tipo !== tipo);
-      una_impostora = shuffle(ajenos)[0];
-    }
-
-    const cuatro = shuffle([...propios, una_impostora]);
+    const cuatro = shuffle([...tres_propios, una_impostora]);
     const impostora_idx = cuatro.findIndex(item => item.id === una_impostora.id);
 
     rondas.push({ tipo, opciones: cuatro, impostora_idx });
@@ -64,25 +41,14 @@ export default function JuegoFinesCriterios() {
   const [contrasenaInput, setContrasenaInput] = useState("");
   const [errorCandado, setErrorCandado] = useState(false);
 
-  // ENTRENAMIENTO BRUTAL: 3 opciones (1 correcta + 2 distractores curados a mano)
+  // ENTRENAMIENTO
   const rondas_entrenamiento = useMemo(() =>
     shuffle(ITEMS_LGE).map(item => {
-      const ids_distractores = DISTRACTORES_BRUTALES[item.id] || [];
-      const distractores = ids_distractores
-        .map(id => ITEMS_LGE.find(i => i.id === id))
-        .filter(Boolean);
-
-      // Asegurar que siempre hay 2 distractores (fallback si falta alguno)
-      while (distractores.length < 2) {
-        const ajenos = ITEMS_LGE.filter(i =>
-          i.id !== item.id && !distractores.some(d => d.id === i.id)
-        );
-        distractores.push(shuffle(ajenos)[0]);
-      }
-
+      const ajenos = ITEMS_LGE.filter(i => i.id !== item.id);
+      const tres_ajenos = shuffle(ajenos).slice(0, 3);
       return {
         item,
-        opciones: shuffle([item, ...distractores.slice(0, 2)]),
+        opciones: shuffle([item, ...tres_ajenos]),
       };
     }), []);
 
