@@ -371,13 +371,24 @@ export default function JuegoFinesCriterios() {
                   disabled={mostrandoFeedback}
                   className={`w-full text-left border-2 rounded-xl p-4 transition ${clase}`}
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="font-bold text-slate-800 text-base">
-                      {opcion.nombre}
-                      <span className="ml-2 text-xs font-normal text-slate-500 italic">
-                        ({opcion.tipo === "FIN" ? "Fin" : "Criterio"})
-                      </span>
-                    </p>
+                  <div className="flex items-start gap-3">
+                    <span
+                      className="text-xs font-bold px-2 py-1 rounded flex-shrink-0"
+                      style={{
+                        backgroundColor: opcion.tipo === "FIN" ? "#F47216" : "#D85A0A",
+                        color: "white",
+                      }}
+                    >
+                      {opcion.tipo}
+                    </span>
+                    <div className="flex-1">
+                      <p className="font-bold text-slate-800 text-sm mb-1">
+                        {opcion.nombre}
+                      </p>
+                      <p className="text-xs text-slate-600 leading-snug">
+                        {opcion.definicion}
+                      </p>
+                    </div>
                     {mostrandoFeedback && esCorrecta && (
                       <Check className="text-green-700 w-6 h-6 flex-shrink-0" />
                     )}
