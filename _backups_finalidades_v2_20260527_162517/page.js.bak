@@ -1,0 +1,781 @@
+"use client";
+
+import { useState } from "react";
+
+// 23 FINALIDADES LITERALES DEL PLAN 2022 NEM
+// (Las mismas EXACTAS del juego de Docente 360 - solo branding SNTE)
+const FINALIDADES = [
+  {
+    "id": "L1",
+    "campo": "LENGUAJES",
+    "texto": "La expresión y la comunicación de sus formas de ser y estar en el mundo para conformar y manifestar su identidad personal y colectiva, al tiempo que conocen, reconocen y valoran la diversidad étnica, cultural, lingüística, sexual, de género, social, de capacidades, necesidades, condiciones, intereses y formas de pensar.",
+    "firma": "expresión y comunicación + identidad personal y colectiva",
+    "trampa_comun": "Suena a De lo Humano (identidad) pero la palabra clave es EXPRESIÓN Y COMUNICACIÓN"
+  },
+  {
+    "id": "L2",
+    "campo": "LENGUAJES",
+    "texto": "La apropiación progresiva de formas de expresión y comunicación mediante la oralidad, la escucha, lectura, escritura, sensorialidad, percepción y composición de diversas producciones orales, escritas, sonoras, visuales, corporales o hápticas para aprender a interpretarlas, elaborarlas, disfrutarlas y utilizarlas con intención.",
+    "firma": "oralidad + escucha + lectura + escritura + producciones múltiples",
+    "trampa_comun": "Es la finalidad más larga y específica de Lenguajes"
+  },
+  {
+    "id": "L3",
+    "campo": "LENGUAJES",
+    "texto": "La experimentación creativa y lúdica que provoque el disfrute de los elementos de las artes, a partir de la interacción con manifestaciones culturales y artísticas en las que predomine una función estética para apreciarlas, reaccionar de manera afectiva ante ellas e interpretar sus sentidos y significados.",
+    "firma": "experimentación creativa + disfrute de las artes + función estética",
+    "trampa_comun": "Suena al EJE Artes y Experiencias Estéticas pero es FINALIDAD del CAMPO Lenguajes"
+  },
+  {
+    "id": "L4",
+    "campo": "LENGUAJES",
+    "texto": "El establecimiento de vínculos afectivos y el despliegue de herramientas para diversificar las formas de aprendizaje por medio de experiencias artísticas y estéticas.",
+    "firma": "vínculos afectivos + diversificar formas de aprendizaje + experiencias artísticas",
+    "trampa_comun": "Suena a De lo Humano (vínculos afectivos) pero es de Lenguajes por las experiencias artísticas"
+  },
+  {
+    "id": "S1",
+    "campo": "SABERES",
+    "texto": "La comprensión para explicar procesos y fenómenos naturales en su relación con lo social, los cuales ocurren en el mundo con base en los saberes y el pensamiento científico por medio de indagación, interpretación, experimentación, sistematización, representación con modelos y argumentación de tales fenómenos.",
+    "firma": "explicar fenómenos naturales + indagación + experimentación + modelos",
+    "trampa_comun": "Es la finalidad más larga del campo Saberes"
+  },
+  {
+    "id": "S2",
+    "campo": "SABERES",
+    "texto": "El reconocimiento y uso de diversos métodos durante la construcción de conocimientos para contrarrestar la idea de un método único.",
+    "firma": "diversos métodos + contrarrestar la idea de un método único",
+    "trampa_comun": "Palabras clave únicas: 'método único'"
+  },
+  {
+    "id": "S3",
+    "campo": "SABERES",
+    "texto": "La toma de decisiones libres, responsables y conscientes orientadas al bienestar individual, familiar y comunitario para una vida saludable.",
+    "firma": "toma de decisiones libres + bienestar individual/familiar/comunitario + vida saludable",
+    "trampa_comun": "TRAMPA BRUTAL: suena MUCHO a De lo Humano (vida saludable). PERO ES SABERES"
+  },
+  {
+    "id": "S4",
+    "campo": "SABERES",
+    "texto": "La práctica de relaciones sociales igualitarias e interculturales, así como relaciones que coadyuven a cuidar el medio ambiente y transformar de manera sustentable su comunidad.",
+    "firma": "relaciones sociales igualitarias + interculturales + cuidar medio ambiente + transformar sustentablemente",
+    "trampa_comun": "TRAMPA: suena MUCHO a Ética/Naturaleza (cuidar medio ambiente) PERO ES SABERES"
+  },
+  {
+    "id": "S5",
+    "campo": "SABERES",
+    "texto": "El acercamiento a los conocimientos científicos y tecnológicos tomando en cuenta que son resultado de actividades humanas interdependientes desarrolladas en un contexto específico; están en permanente cambio, con alcances y limitaciones y se emplean según la cultura y las necesidades de la sociedad.",
+    "firma": "conocimientos científicos y tecnológicos + actividades humanas interdependientes + en permanente cambio",
+    "trampa_comun": "Palabras clave: 'actividades humanas interdependientes' + 'permanente cambio'"
+  },
+  {
+    "id": "S6",
+    "campo": "SABERES",
+    "texto": "La apropiación y el uso del lenguaje científico y técnico como medio de comunicación oral, escrita, gráfica y digital para establecer nuevas relaciones, construir conocimientos y explicar modelos.",
+    "firma": "lenguaje científico y técnico + oral, escrita, gráfica y digital",
+    "trampa_comun": "TRAMPA: 'lenguaje' apunta a Lenguajes PERO es Saberes (lenguaje CIENTÍFICO)"
+  },
+  {
+    "id": "E1",
+    "campo": "ETICA",
+    "texto": "Construcción de una postura ética que impulse el desarrollo de una ciudadanía participativa, comunitaria, responsable y democrática, mediante la comprensión crítica de los procesos sociales, políticos, naturales y culturales en diversas comunidades situadas histórica y geográficamente.",
+    "firma": "postura ética + ciudadanía participativa + procesos sociales/políticos/naturales/culturales",
+    "trampa_comun": "Es la finalidad central del campo Ética"
+  },
+  {
+    "id": "E2",
+    "campo": "ETICA",
+    "texto": "El respeto y la protección de los derechos humanos conforme avancen en su trayecto educativo y de vida, y el conocimiento de su importancia para la organización de la vida en sociedad, para que aprendan a diferenciarlos ante situaciones de desigualdad.",
+    "firma": "respeto y protección de DDHH + diferenciar ante situaciones de desigualdad",
+    "trampa_comun": "Palabras clave únicas: 'derechos humanos' + 'diferenciar ante desigualdad'"
+  },
+  {
+    "id": "E3",
+    "campo": "ETICA",
+    "texto": "Responsabilidad en el cuidado y conservación de la naturaleza a partir de la concepción de que todas las personas forman parte de ella, asumiendo compromisos de bajo impacto ambiental y de sustentabilidad para garantizar el derecho de todas las personas y seres vivos, a un ambiente sano en el presente y futuro.",
+    "firma": "responsabilidad cuidado naturaleza + bajo impacto ambiental + ambiente sano presente y futuro",
+    "trampa_comun": "TRAMPA: suena MUCHO a Saberes (medio ambiente) PERO es Ética porque enfoca CIUDADANÍA/RESPONSABILIDAD"
+  },
+  {
+    "id": "E4",
+    "campo": "ETICA",
+    "texto": "Desarrollo de las conciencias histórica y geográfica basadas en el análisis de las transformaciones sociales, naturales, culturales, económicas y políticas ocurridas en su localidad, el país y el mundo en tiempos y espacios determinados para que comprendan que el presente es el resultado de las decisiones y acciones de las sociedades del pasado, y asimismo que el futuro depende de las decisiones y acciones actuales.",
+    "firma": "conciencias histórica y geográfica + presente resultado del pasado",
+    "trampa_comun": "Palabras clave únicas: 'CONCIENCIA HISTÓRICA Y GEOGRÁFICA' + 'presente es resultado del pasado'"
+  },
+  {
+    "id": "H1",
+    "campo": "HUMANO",
+    "texto": "Construyan su identidad personal mediante la exploración de gustos, intereses, necesidades, posibilidades, formas de entender e interactuar en diversos contextos sociales y naturales.",
+    "firma": "construir identidad personal + exploración de gustos/intereses",
+    "trampa_comun": "TRAMPA: 'identidad personal' también está en Lenguajes (L1)"
+  },
+  {
+    "id": "H2",
+    "campo": "HUMANO",
+    "texto": "Conciban la sexualidad como resultado de una construcción cultural conformada por distintas maneras de pensar, representar y entender el cuerpo en su relación con la igualdad de género.",
+    "firma": "sexualidad + construcción cultural + igualdad de género",
+    "trampa_comun": "TRAMPA: 'igualdad de género' suena al EJE ARTICULADOR pero es FINALIDAD del campo De lo Humano"
+  },
+  {
+    "id": "H3",
+    "campo": "HUMANO",
+    "texto": "Desarrollen sus potencialidades (afectivas, motrices, creativas, de interacción y solución de problemas), reconociendo, valorando y respetando las de otras personas.",
+    "firma": "potencialidades afectivas/motrices/creativas + reconocer las de otras personas",
+    "trampa_comun": "Suena al Rasgo IV del Perfil de Egreso pero es FINALIDAD de campo"
+  },
+  {
+    "id": "H4",
+    "campo": "HUMANO",
+    "texto": "Fortalezcan capacidades perceptivo, socio y físico-motrices, y las que deriven en el desarrollo creativo de la motricidad en relación con el cuerpo como espacio de cuidado y afecto.",
+    "firma": "capacidades perceptivo, socio y físico-motrices + cuerpo como espacio de cuidado y afecto",
+    "trampa_comun": "Palabras clave únicas: 'físico-motrices' + 'cuerpo como espacio de cuidado y afecto'"
+  },
+  {
+    "id": "H5",
+    "campo": "HUMANO",
+    "texto": "Reflexionen y comprendan su vida emocional y afectiva, así como la de las demás personas, como elemento constitutivo de relaciones de convivencia y potencial bienestar.",
+    "firma": "vida emocional y afectiva + relaciones de convivencia y bienestar",
+    "trampa_comun": "Palabras clave únicas: 'vida emocional y afectiva' + 'convivencia y bienestar'"
+  },
+  {
+    "id": "H6",
+    "campo": "HUMANO",
+    "texto": "Promuevan ambientes de convivencia sana y pacífica entre quienes integran la comunidad educativa, identificando aquello que trastoque sus entornos.",
+    "firma": "ambientes de convivencia sana y pacífica + comunidad educativa",
+    "trampa_comun": "Suena a Ética (convivencia) PERO es De lo Humano (comunidad educativa)"
+  },
+  {
+    "id": "H7",
+    "campo": "HUMANO",
+    "texto": "Experimenten la importancia de cuidar, mejorar y preservar la salud, el entorno natural y social, como una responsabilidad individual y colectiva que se presenta ante una vida caracterizada por la incertidumbre.",
+    "firma": "cuidar/mejorar/preservar salud + entorno natural y social + responsabilidad individual y colectiva",
+    "trampa_comun": "TRAMPA: 'salud + entorno natural' suena a Saberes/Ética PERO es De lo Humano (responsabilidad individual)"
+  },
+  {
+    "id": "H8",
+    "campo": "HUMANO",
+    "texto": "Tomen decisiones orientadas a modificar comportamientos y situaciones que violenten su integridad físico-emocional y la de otras personas.",
+    "firma": "modificar comportamientos + integridad físico-emocional",
+    "trampa_comun": "Palabras clave únicas: 'modificar comportamientos' + 'integridad físico-emocional'"
+  },
+  {
+    "id": "H9",
+    "campo": "HUMANO",
+    "texto": "Actúen en la resolución de situaciones y problemas presentes en distintos contextos, recurriendo a saberes, capacidades y habilidades que se generan a partir del diálogo familias-escuela-comunidad.",
+    "firma": "resolución de situaciones y problemas + diálogo familias-escuela-comunidad",
+    "trampa_comun": "Palabras clave únicas: 'diálogo familias-escuela-comunidad'"
+  }
+];
+
+const CAMPOS_INFO = {
+  LENGUAJES: { nombre: "Lenguajes", emoji: "📚", letra: "L" },
+  SABERES:   { nombre: "Saberes y Pensamiento Científico", emoji: "🔬", letra: "S" },
+  ETICA:     { nombre: "Ética, Naturaleza y Sociedades", emoji: "⚖️", letra: "E" },
+  HUMANO:    { nombre: "De lo Humano y lo Comunitario", emoji: "❤️", letra: "H" },
+};
+
+const CONTRASENA = "1111";
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function generarRondasExamen() {
+  const rondas = [];
+  const campos = ["LENGUAJES", "SABERES", "ETICA", "HUMANO"];
+  const campos_mezclados = shuffle([...campos, ...campos, "SABERES", "HUMANO"]).slice(0, 10);
+  for (const campo of campos_mezclados) {
+    const propias = FINALIDADES.filter(f => f.campo === campo);
+    const ajenas = FINALIDADES.filter(f => f.campo !== campo);
+    const tres_propias = shuffle(propias).slice(0, 3);
+    const una_impostora = shuffle(ajenas)[0];
+    const cuatro = shuffle([...tres_propias, una_impostora]);
+    const impostora_idx = cuatro.findIndex(f => f.id === una_impostora.id);
+    rondas.push({ campo, opciones: cuatro, impostora_idx });
+  }
+  return rondas;
+}
+
+function generarRondasEntrenamiento(soloEstas) {
+  const base = soloEstas && soloEstas.length > 0 ? soloEstas : FINALIDADES;
+  return shuffle(base).map(f => ({
+    finalidad: f,
+    opciones: shuffle(["LENGUAJES", "SABERES", "ETICA", "HUMANO"]),
+  }));
+}
+
+export default function Page() {
+  const [fase, setFase] = useState("candado");
+  const [contrasenaInput, setContrasenaInput] = useState("");
+  const [errorCandado, setErrorCandado] = useState(false);
+
+  // ENTRENAMIENTO
+  const [rondasEntrenamiento, setRondasEntrenamiento] = useState(() => generarRondasEntrenamiento());
+  const [respuestasEntrenamiento, setRespuestasEntrenamiento] = useState({});
+  const [indiceEntrenamiento, setIndiceEntrenamiento] = useState(0);
+  const [mostrandoFeedback, setMostrandoFeedback] = useState(false);
+  const [modoRepaso, setModoRepaso] = useState(false);
+
+  // EXAMEN
+  const [rondasExamen, setRondasExamen] = useState([]);
+  const [respuestasExamen, setRespuestasExamen] = useState({});
+  const [indiceExamen, setIndiceExamen] = useState(0);
+  const [mostrandoFeedbackExamen, setMostrandoFeedbackExamen] = useState(false);
+
+  function verificarCandado() {
+    if (contrasenaInput === CONTRASENA) {
+      setFase("menu");
+      setErrorCandado(false);
+    } else {
+      setErrorCandado(true);
+    }
+  }
+
+  function iniciarEntrenamientoCompleto() {
+    setRondasEntrenamiento(generarRondasEntrenamiento());
+    setIndiceEntrenamiento(0);
+    setRespuestasEntrenamiento({});
+    setMostrandoFeedback(false);
+    setModoRepaso(false);
+    setFase("entrenamiento");
+  }
+
+  function iniciarEntrenamientoRepaso() {
+    // Filtrar solo las que fallaron en la ronda anterior
+    const errores = rondasEntrenamiento.filter(r => {
+      const resp = respuestasEntrenamiento[r.finalidad.id];
+      return resp && resp !== r.finalidad.campo;
+    }).map(r => r.finalidad);
+
+    if (errores.length === 0) return;
+
+    setRondasEntrenamiento(generarRondasEntrenamiento(errores));
+    setIndiceEntrenamiento(0);
+    setRespuestasEntrenamiento({});
+    setMostrandoFeedback(false);
+    setModoRepaso(true);
+    setFase("entrenamiento");
+  }
+
+  function iniciarExamen() {
+    setRondasExamen(generarRondasExamen());
+    setIndiceExamen(0);
+    setRespuestasExamen({});
+    setMostrandoFeedbackExamen(false);
+    setFase("examen");
+  }
+
+  function responderEntrenamiento(campoElegido) {
+    if (mostrandoFeedback) return;
+    const ronda = rondasEntrenamiento[indiceEntrenamiento];
+    setRespuestasEntrenamiento({ ...respuestasEntrenamiento, [ronda.finalidad.id]: campoElegido });
+    setMostrandoFeedback(true);
+  }
+
+  function siguienteEntrenamiento() {
+    setMostrandoFeedback(false);
+    if (indiceEntrenamiento < rondasEntrenamiento.length - 1) {
+      setIndiceEntrenamiento(indiceEntrenamiento + 1);
+    } else {
+      setFase("resultados_entrenamiento");
+    }
+  }
+
+  function responderExamen(idx) {
+    if (mostrandoFeedbackExamen) return;
+    setRespuestasExamen({ ...respuestasExamen, [indiceExamen]: idx });
+    setMostrandoFeedbackExamen(true);
+  }
+
+  function siguienteExamen() {
+    setMostrandoFeedbackExamen(false);
+    if (indiceExamen < rondasExamen.length - 1) {
+      setIndiceExamen(indiceExamen + 1);
+    } else {
+      setFase("resultados_examen");
+    }
+  }
+
+  // CANDADO
+  if (fase === "candado") {
+    return (
+      <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 50%, #FFEDD5 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}>
+        <div style={{ maxWidth: "440px", width: "100%", background: "white", borderRadius: "1rem", boxShadow: "0 20px 50px rgba(0,0,0,0.15)", padding: "2rem", border: "2px solid #FED7AA" }}>
+          <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+            <div style={{ fontSize: "3rem", marginBottom: "0.75rem" }}>🔒</div>
+            <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#C2410C", marginBottom: "0.5rem", margin: "0 0 0.5rem" }}>
+              Domina las Finalidades
+            </h1>
+            <p style={{ fontSize: "0.875rem", color: "#475569", margin: 0 }}>SNTE Sección 21 Nuevo León</p>
+            <p style={{ fontSize: "0.75rem", fontStyle: "italic", color: "#64748B", marginTop: "0.25rem", margin: "0.25rem 0 0" }}>
+              "Por la educación al servicio del pueblo"
+            </p>
+          </div>
+          <input
+            type="password"
+            value={contrasenaInput}
+            onChange={(e) => setContrasenaInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && verificarCandado()}
+            placeholder="Clave de acceso"
+            style={{ width: "100%", padding: "0.75rem 1rem", border: "2px solid #FED7AA", borderRadius: "0.5rem", fontSize: "1.125rem", textAlign: "center", marginBottom: "0.75rem", boxSizing: "border-box" }}
+            autoFocus
+          />
+          {errorCandado && (
+            <p style={{ color: "#DC2626", fontSize: "0.875rem", textAlign: "center", marginBottom: "0.75rem" }}>
+              ❌ Clave incorrecta
+            </p>
+          )}
+          <button
+            onClick={verificarCandado}
+            style={{ width: "100%", padding: "0.75rem", background: "#EA580C", color: "white", fontWeight: "bold", border: "none", borderRadius: "0.5rem", cursor: "pointer", fontSize: "1rem" }}
+          >
+            Entrar al juego
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // MENU
+  if (fase === "menu") {
+    return (
+      <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 50%, #FFEDD5 100%)" }}>
+        <header style={{ background: "linear-gradient(90deg, #F97316 0%, #EA580C 50%, #C2410C 100%)", color: "white", padding: "2rem 1rem", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}>
+          <div style={{ maxWidth: "768px", margin: "0 auto", textAlign: "center" }}>
+            <div style={{ fontSize: "3rem", marginBottom: "0.75rem" }}>🎯</div>
+            <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "0.5rem", margin: "0 0 0.5rem" }}>
+              Domina las Finalidades
+            </h1>
+            <p style={{ color: "#FED7AA", fontSize: "0.95rem", margin: 0 }}>
+              SNTE Sección 21 Nuevo León · 23 finalidades LITERALES del Plan 2022
+            </p>
+            <p style={{ color: "#FFEDD5", fontSize: "0.75rem", fontStyle: "italic", marginTop: "0.25rem", margin: "0.25rem 0 0" }}>
+              "Por la educación al servicio del pueblo"
+            </p>
+          </div>
+        </header>
+
+        <main style={{ maxWidth: "768px", margin: "0 auto", padding: "2rem 1rem" }}>
+          <button
+            onClick={iniciarEntrenamientoCompleto}
+            style={{ width: "100%", background: "white", border: "2px solid #FED7AA", borderRadius: "1rem", padding: "1.5rem", marginBottom: "1rem", cursor: "pointer", textAlign: "left", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+              <div style={{ fontSize: "2.5rem" }}>📚</div>
+              <div style={{ flex: 1 }}>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#9A3412", marginBottom: "0.5rem", margin: "0 0 0.5rem" }}>
+                  Modo Entrenamiento
+                </h2>
+                <p style={{ fontSize: "0.875rem", color: "#475569", lineHeight: "1.5", margin: 0 }}>
+                  Lee cada finalidad LITERAL y elige a qué campo formativo pertenece.
+                  Aprende las 23 finalidades con feedback inmediato y firma única.
+                </p>
+                <p style={{ fontSize: "0.75rem", color: "#EA580C", marginTop: "0.5rem", fontWeight: "500", margin: "0.5rem 0 0" }}>
+                  23 rondas · Sin tiempo límite
+                </p>
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={iniciarExamen}
+            style={{ width: "100%", background: "white", border: "2px solid #FED7AA", borderRadius: "1rem", padding: "1.5rem", cursor: "pointer", textAlign: "left", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+              <div style={{ fontSize: "2.5rem" }}>🕵️</div>
+              <div style={{ flex: 1 }}>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#9A3412", marginBottom: "0.5rem", margin: "0 0 0.5rem" }}>
+                  Caza al Impostor
+                </h2>
+                <p style={{ fontSize: "0.875rem", color: "#475569", lineHeight: "1.5", margin: 0 }}>
+                  Aparecen 4 finalidades supuestamente del mismo campo, pero UNA es impostora.
+                  ¡Encuéntrala!
+                </p>
+                <p style={{ fontSize: "0.75rem", color: "#EA580C", marginTop: "0.5rem", fontWeight: "500", margin: "0.5rem 0 0" }}>
+                  10 rondas · Evaluación BRUTAL
+                </p>
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={() => window.location.href = "/"}
+            style={{ width: "100%", padding: "0.75rem", background: "transparent", color: "#64748B", fontWeight: "500", border: "none", cursor: "pointer", fontSize: "0.875rem", marginTop: "1rem" }}
+          >
+            ← Volver al inicio
+          </button>
+
+          <div style={{ textAlign: "center", fontSize: "0.75rem", color: "#64748B", padding: "1.5rem 0" }}>
+            🎯 SNTE Sección 21 Nuevo León
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ENTRENAMIENTO
+  if (fase === "entrenamiento") {
+    const ronda = rondasEntrenamiento[indiceEntrenamiento];
+    const respuesta = respuestasEntrenamiento[ronda.finalidad.id];
+    const acerto = respuesta === ronda.finalidad.campo;
+
+    return (
+      <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 50%, #FFEDD5 100%)" }}>
+        <header style={{ background: "linear-gradient(90deg, #F97316 0%, #EA580C 100%)", color: "white", padding: "1rem", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+          <div style={{ maxWidth: "768px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <button onClick={() => setFase("menu")} style={{ background: "transparent", color: "white", border: "none", fontSize: "0.875rem", cursor: "pointer" }}>
+              ← Menú
+            </button>
+            <p style={{ fontSize: "0.875rem", fontWeight: "500", margin: 0 }}>
+              {modoRepaso ? "🔄 Repaso · " : "📚 Entrenamiento · "}{indiceEntrenamiento + 1} / {rondasEntrenamiento.length}
+            </p>
+          </div>
+        </header>
+
+        <main style={{ maxWidth: "768px", margin: "0 auto", padding: "1.5rem 1rem" }}>
+          <div style={{ width: "100%", background: "#FED7AA", borderRadius: "9999px", height: "8px", marginBottom: "1rem" }}>
+            <div style={{ background: "#EA580C", height: "8px", borderRadius: "9999px", width: `${((indiceEntrenamiento + 1) / rondasEntrenamiento.length) * 100}%`, transition: "width 0.3s" }} />
+          </div>
+
+          <div style={{ background: "white", border: "2px solid #FED7AA", borderRadius: "1rem", padding: "1.25rem", marginBottom: "1rem", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
+            <span style={{ display: "inline-block", fontSize: "0.7rem", fontWeight: "bold", color: "#9A3412", background: "#FED7AA", padding: "0.25rem 0.75rem", borderRadius: "9999px", marginBottom: "0.75rem" }}>
+              FINALIDAD LITERAL · PLAN 2022
+            </span>
+            <p style={{ color: "#1E293B", lineHeight: "1.6", fontSize: "1rem", fontStyle: "italic", margin: 0 }}>
+              "{ronda.finalidad.texto}"
+            </p>
+          </div>
+
+          <p style={{ fontSize: "0.875rem", fontWeight: "500", color: "#475569", marginBottom: "0.75rem" }}>
+            ¿A qué campo formativo corresponde?
+          </p>
+
+          <div style={{ display: "grid", gap: "0.75rem", gridTemplateColumns: "1fr 1fr", marginBottom: "1rem" }}>
+            {ronda.opciones.map((campo) => {
+              const info = CAMPOS_INFO[campo];
+              const esSeleccion = respuesta === campo;
+              const esCorrecta = campo === ronda.finalidad.campo;
+              let estilo = { background: "white", border: "2px solid #FED7AA" };
+              if (mostrandoFeedback) {
+                if (esCorrecta) estilo = { background: "#D1FAE5", border: "2px solid #10B981" };
+                else if (esSeleccion) estilo = { background: "#FEE2E2", border: "2px solid #EF4444" };
+                else estilo = { background: "#F1F5F9", border: "2px solid #CBD5E1", opacity: 0.5 };
+              } else if (esSeleccion) {
+                estilo = { background: "#FED7AA", border: "2px solid #EA580C" };
+              }
+              return (
+                <button
+                  key={campo}
+                  onClick={() => responderEntrenamiento(campo)}
+                  disabled={mostrandoFeedback}
+                  style={{ ...estilo, borderRadius: "0.75rem", padding: "1rem", cursor: mostrandoFeedback ? "default" : "pointer", textAlign: "left", transition: "all 0.2s" }}
+                >
+                  <div style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>{info.emoji}</div>
+                  <p style={{ fontSize: "0.875rem", fontWeight: "bold", color: "#1E293B", margin: 0, lineHeight: "1.3" }}>
+                    {info.nombre}
+                  </p>
+                </button>
+              );
+            })}
+          </div>
+
+          {mostrandoFeedback && (
+            <div style={{ background: acerto ? "#ECFDF5" : "#FFF7ED", border: `2px solid ${acerto ? "#10B981" : "#EA580C"}`, borderRadius: "0.75rem", padding: "1rem", marginBottom: "1rem" }}>
+              <p style={{ fontWeight: "bold", fontSize: "0.875rem", marginBottom: "0.5rem", margin: "0 0 0.5rem" }}>
+                {acerto ? "✅ ¡Correcto!" : `💡 La respuesta correcta es: ${CAMPOS_INFO[ronda.finalidad.campo].emoji} ${CAMPOS_INFO[ronda.finalidad.campo].nombre}`}
+              </p>
+              <p style={{ fontSize: "0.8rem", color: "#475569", lineHeight: "1.5", margin: "0 0 0.5rem" }}>
+                <strong>✍️ Firma única:</strong> {ronda.finalidad.firma}
+              </p>
+              <p style={{ fontSize: "0.8rem", color: "#475569", lineHeight: "1.5", margin: 0 }}>
+                <strong>🪤 Trampa común:</strong> {ronda.finalidad.trampa_comun}
+              </p>
+              <button
+                onClick={siguienteEntrenamiento}
+                style={{ marginTop: "0.75rem", padding: "0.5rem 1rem", background: "#EA580C", color: "white", fontWeight: "500", border: "none", borderRadius: "0.5rem", cursor: "pointer" }}
+              >
+                {indiceEntrenamiento < rondasEntrenamiento.length - 1 ? "Siguiente →" : "Ver resultados"}
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // RESULTADOS ENTRENAMIENTO
+  if (fase === "resultados_entrenamiento") {
+    const total = rondasEntrenamiento.length;
+    const aciertos = rondasEntrenamiento.filter(r => respuestasEntrenamiento[r.finalidad.id] === r.finalidad.campo).length;
+    const errores = total - aciertos;
+    const porcentaje = Math.round((aciertos / total) * 100);
+
+    const aciertosPorCampo = { LENGUAJES: 0, SABERES: 0, ETICA: 0, HUMANO: 0 };
+    const totalPorCampo = { LENGUAJES: 0, SABERES: 0, ETICA: 0, HUMANO: 0 };
+    rondasEntrenamiento.forEach(r => {
+      totalPorCampo[r.finalidad.campo]++;
+      if (respuestasEntrenamiento[r.finalidad.id] === r.finalidad.campo) {
+        aciertosPorCampo[r.finalidad.campo]++;
+      }
+    });
+
+    return (
+      <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 50%, #FFEDD5 100%)" }}>
+        <header style={{ background: "linear-gradient(90deg, #F97316 0%, #EA580C 100%)", color: "white", padding: "1.5rem 1rem", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+          <div style={{ maxWidth: "768px", margin: "0 auto", textAlign: "center" }}>
+            <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", margin: 0 }}>
+              🏆 Resultados del entrenamiento
+            </h1>
+          </div>
+        </header>
+
+        <main style={{ maxWidth: "768px", margin: "0 auto", padding: "1.5rem 1rem" }}>
+          <div style={{ background: "white", border: "2px solid #FED7AA", borderRadius: "1rem", padding: "2rem", marginBottom: "1rem", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
+            <div style={{ fontSize: "4rem", marginBottom: "0.75rem" }}>
+              {porcentaje >= 85 ? "🏆" : porcentaje >= 60 ? "🎉" : "📚"}
+            </div>
+            <h2 style={{ fontSize: "2rem", fontWeight: "bold", color: "#1E293B", marginBottom: "0.25rem", margin: "0 0 0.25rem" }}>
+              {aciertos} / {total}
+            </h2>
+            <p style={{ fontSize: "1.125rem", color: "#EA580C", fontWeight: "500", marginBottom: "1.5rem", margin: "0 0 1.5rem" }}>
+              {porcentaje}% de aciertos
+            </p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1rem" }}>
+              <div style={{ background: "#ECFDF5", border: "2px solid #10B981", borderRadius: "0.75rem", padding: "1rem" }}>
+                <div style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>✅</div>
+                <p style={{ fontSize: "0.75rem", color: "#065F46", margin: 0 }}>Aciertos</p>
+                <p style={{ fontSize: "1.75rem", fontWeight: "bold", color: "#065F46", margin: 0 }}>{aciertos}</p>
+              </div>
+              <div style={{ background: "#FEF2F2", border: "2px solid #EF4444", borderRadius: "0.75rem", padding: "1rem" }}>
+                <div style={{ fontSize: "1.5rem", marginBottom: "0.25rem" }}>❌</div>
+                <p style={{ fontSize: "0.75rem", color: "#991B1B", margin: 0 }}>Errores</p>
+                <p style={{ fontSize: "1.75rem", fontWeight: "bold", color: "#991B1B", margin: 0 }}>{errores}</p>
+              </div>
+            </div>
+
+            <p style={{ fontSize: "0.875rem", color: "#475569", margin: "0.5rem 0 0" }}>
+              {porcentaje >= 85 ? "¡Excelente! Dominas las finalidades del Plan 2022." : porcentaje >= 60 ? "Buen resultado. Repasa tus errores para mejorar." : "Sigue practicando. Repasa lo que fallaste."}
+            </p>
+          </div>
+
+          <div style={{ background: "white", border: "2px solid #FED7AA", borderRadius: "1rem", padding: "1.25rem", marginBottom: "1.5rem" }}>
+            <h3 style={{ fontSize: "1rem", fontWeight: "bold", color: "#9A3412", marginBottom: "0.75rem", margin: "0 0 0.75rem" }}>
+              Diagnóstico por campo formativo
+            </h3>
+            {Object.keys(CAMPOS_INFO).map((campo) => {
+              const info = CAMPOS_INFO[campo];
+              const ac = aciertosPorCampo[campo];
+              const t = totalPorCampo[campo];
+              if (t === 0) return null;
+              const pct = Math.round((ac / t) * 100);
+              return (
+                <div key={campo} style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.5rem 0", borderBottom: "1px solid #F1F5F9" }}>
+                  <span style={{ fontSize: "1.25rem" }}>{info.emoji}</span>
+                  <span style={{ flex: 1, fontSize: "0.875rem", color: "#1E293B" }}>{info.nombre}</span>
+                  <span style={{ fontSize: "0.875rem", fontWeight: "bold", color: pct >= 75 ? "#10B981" : pct >= 50 ? "#EA580C" : "#EF4444" }}>
+                    {ac} / {t}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{ display: "grid", gap: "0.75rem" }}>
+            {errores > 0 && (
+              <button
+                onClick={iniciarEntrenamientoRepaso}
+                style={{ padding: "1rem", background: "#EA580C", color: "white", fontWeight: "bold", border: "none", borderRadius: "0.75rem", cursor: "pointer", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}
+              >
+                <span>🔄</span>
+                <span>Repasar solo los {errores} {errores === 1 ? "error" : "errores"}</span>
+              </button>
+            )}
+            <button
+              onClick={iniciarEntrenamientoCompleto}
+              style={{ padding: "1rem", background: "white", border: "2px solid #FED7AA", color: "#9A3412", fontWeight: "bold", borderRadius: "0.75rem", cursor: "pointer", fontSize: "1rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}
+            >
+              <span>🔁</span>
+              <span>Repetir las 23 de nuevo</span>
+            </button>
+            <button
+              onClick={() => setFase("menu")}
+              style={{ padding: "0.75rem", background: "#F1F5F9", color: "#475569", fontWeight: "500", border: "none", borderRadius: "0.75rem", cursor: "pointer", fontSize: "0.875rem" }}
+            >
+              ← Volver al menú
+            </button>
+          </div>
+
+          <div style={{ textAlign: "center", fontSize: "0.75rem", color: "#64748B", padding: "1.5rem 0" }}>
+            🎯 SNTE Sección 21 Nuevo León · Por la educación al servicio del pueblo
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // EXAMEN
+  if (fase === "examen") {
+    const ronda = rondasExamen[indiceExamen];
+    const respuesta = respuestasExamen[indiceExamen];
+    const acerto = respuesta === ronda.impostora_idx;
+    const info = CAMPOS_INFO[ronda.campo];
+
+    return (
+      <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 50%, #FFEDD5 100%)" }}>
+        <header style={{ background: "linear-gradient(90deg, #F97316 0%, #EA580C 100%)", color: "white", padding: "1rem", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+          <div style={{ maxWidth: "768px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <button onClick={() => setFase("menu")} style={{ background: "transparent", color: "white", border: "none", fontSize: "0.875rem", cursor: "pointer" }}>
+              ← Menú
+            </button>
+            <p style={{ fontSize: "0.875rem", fontWeight: "500", margin: 0 }}>
+              🕵️ Caza al Impostor · {indiceExamen + 1} / {rondasExamen.length}
+            </p>
+          </div>
+        </header>
+
+        <main style={{ maxWidth: "768px", margin: "0 auto", padding: "1.5rem 1rem" }}>
+          <div style={{ width: "100%", background: "#FED7AA", borderRadius: "9999px", height: "8px", marginBottom: "1rem" }}>
+            <div style={{ background: "#EA580C", height: "8px", borderRadius: "9999px", width: `${((indiceExamen + 1) / rondasExamen.length) * 100}%`, transition: "width 0.3s" }} />
+          </div>
+
+          <div style={{ background: "#FED7AA", border: "2px solid #EA580C", borderRadius: "1rem", padding: "1rem", textAlign: "center", marginBottom: "1rem" }}>
+            <p style={{ fontSize: "0.875rem", color: "#9A3412", fontWeight: "500", margin: "0 0 0.25rem" }}>
+              Las siguientes finalidades dicen ser del campo:
+            </p>
+            <p style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#7C2D12", margin: 0 }}>
+              {info.emoji} {info.nombre}
+            </p>
+            <p style={{ fontSize: "0.75rem", color: "#9A3412", marginTop: "0.5rem", margin: "0.5rem 0 0" }}>
+              Pero UNA es <strong>IMPOSTORA</strong>. ¡Encuéntrala!
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gap: "0.75rem", marginBottom: "1rem" }}>
+            {ronda.opciones.map((finalidad, idx) => {
+              const esSeleccion = respuesta === idx;
+              const esImpostora = idx === ronda.impostora_idx;
+              let estilo = { background: "white", border: "2px solid #FED7AA" };
+              if (mostrandoFeedbackExamen) {
+                if (esImpostora) estilo = { background: "#FEE2E2", border: "2px solid #EF4444" };
+                else estilo = { background: "#ECFDF5", border: "2px solid #10B981", opacity: 0.7 };
+              }
+              return (
+                <button
+                  key={finalidad.id}
+                  onClick={() => responderExamen(idx)}
+                  disabled={mostrandoFeedbackExamen}
+                  style={{ ...estilo, borderRadius: "0.75rem", padding: "1rem", cursor: mostrandoFeedbackExamen ? "default" : "pointer", textAlign: "left", transition: "all 0.2s" }}
+                >
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
+                    <span style={{ fontSize: "1.5rem", flexShrink: 0 }}>
+                      {mostrandoFeedbackExamen ? (esImpostora ? "🚨" : "✓") : "❓"}
+                    </span>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: "0.85rem", color: "#1E293B", lineHeight: "1.5", fontStyle: "italic", margin: 0 }}>
+                        "{finalidad.texto}"
+                      </p>
+                      {mostrandoFeedbackExamen && esImpostora && (
+                        <p style={{ fontSize: "0.8rem", fontWeight: "bold", color: "#991B1B", marginTop: "0.5rem", margin: "0.5rem 0 0" }}>
+                          🚨 IMPOSTORA: pertenece a {CAMPOS_INFO[finalidad.campo].nombre}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {mostrandoFeedbackExamen && (
+            <div style={{ background: acerto ? "#ECFDF5" : "#FEE2E2", border: `2px solid ${acerto ? "#10B981" : "#EF4444"}`, borderRadius: "0.75rem", padding: "1rem", marginBottom: "1rem" }}>
+              <p style={{ fontWeight: "bold", fontSize: "0.875rem", marginBottom: "0.5rem", margin: "0 0 0.5rem" }}>
+                {acerto ? "✅ ¡Atrapaste al impostor!" : "❌ No era esa..."}
+              </p>
+              <p style={{ fontSize: "0.8rem", color: "#475569", lineHeight: "1.5", margin: 0 }}>
+                <strong>🪤 Por qué confunde:</strong> {ronda.opciones[ronda.impostora_idx].trampa_comun}
+              </p>
+              <button
+                onClick={siguienteExamen}
+                style={{ marginTop: "0.75rem", padding: "0.5rem 1rem", background: "#EA580C", color: "white", fontWeight: "500", border: "none", borderRadius: "0.5rem", cursor: "pointer" }}
+              >
+                {indiceExamen < rondasExamen.length - 1 ? "Siguiente →" : "Ver resultados"}
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // RESULTADOS EXAMEN
+  if (fase === "resultados_examen") {
+    const aciertos = rondasExamen.filter((r, i) => respuestasExamen[i] === r.impostora_idx).length;
+    const total = rondasExamen.length;
+    const errores = total - aciertos;
+    const porcentaje = Math.round((aciertos / total) * 100);
+
+    return (
+      <div style={{ minHeight: "100vh", background: "linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 50%, #FFEDD5 100%)" }}>
+        <header style={{ background: "linear-gradient(90deg, #F97316 0%, #EA580C 100%)", color: "white", padding: "1.5rem 1rem", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+          <div style={{ maxWidth: "768px", margin: "0 auto", textAlign: "center" }}>
+            <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", margin: 0 }}>🏆 Resultados</h1>
+          </div>
+        </header>
+
+        <main style={{ maxWidth: "768px", margin: "0 auto", padding: "1.5rem 1rem" }}>
+          <div style={{ background: "white", border: "2px solid #FED7AA", borderRadius: "1rem", padding: "2rem", marginBottom: "1rem", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
+            <div style={{ fontSize: "4rem", marginBottom: "0.75rem" }}>
+              {porcentaje >= 80 ? "🏆" : porcentaje >= 60 ? "🎉" : "📚"}
+            </div>
+            <h2 style={{ fontSize: "2rem", fontWeight: "bold", color: "#1E293B", marginBottom: "0.25rem", margin: "0 0 0.25rem" }}>
+              {aciertos} / {total}
+            </h2>
+            <p style={{ fontSize: "1.125rem", color: "#EA580C", fontWeight: "500", marginBottom: "1.5rem", margin: "0 0 1.5rem" }}>
+              {porcentaje}% de aciertos
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+              <div style={{ background: "#ECFDF5", border: "2px solid #10B981", borderRadius: "0.75rem", padding: "1rem" }}>
+                <div style={{ fontSize: "1.5rem" }}>✅</div>
+                <p style={{ fontSize: "0.75rem", color: "#065F46", margin: 0 }}>Aciertos</p>
+                <p style={{ fontSize: "1.75rem", fontWeight: "bold", color: "#065F46", margin: 0 }}>{aciertos}</p>
+              </div>
+              <div style={{ background: "#FEF2F2", border: "2px solid #EF4444", borderRadius: "0.75rem", padding: "1rem" }}>
+                <div style={{ fontSize: "1.5rem" }}>❌</div>
+                <p style={{ fontSize: "0.75rem", color: "#991B1B", margin: 0 }}>Errores</p>
+                <p style={{ fontSize: "1.75rem", fontWeight: "bold", color: "#991B1B", margin: 0 }}>{errores}</p>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gap: "0.75rem" }}>
+            <button
+              onClick={iniciarExamen}
+              style={{ padding: "1rem", background: "#EA580C", color: "white", fontWeight: "bold", border: "none", borderRadius: "0.75rem", cursor: "pointer", fontSize: "1rem" }}
+            >
+              🔄 Nueva partida
+            </button>
+            <button
+              onClick={() => setFase("menu")}
+              style={{ padding: "0.75rem", background: "#F1F5F9", color: "#475569", fontWeight: "500", border: "none", borderRadius: "0.75rem", cursor: "pointer", fontSize: "0.875rem" }}
+            >
+              ← Volver al menú
+            </button>
+          </div>
+
+          <div style={{ textAlign: "center", fontSize: "0.75rem", color: "#64748B", padding: "1.5rem 0" }}>
+            🎯 SNTE Sección 21 Nuevo León
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return null;
+}
