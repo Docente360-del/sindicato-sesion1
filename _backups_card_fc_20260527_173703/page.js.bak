@@ -1,0 +1,533 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import {
+  ArrowRight, Layers, GraduationCap, ImageIcon, ZoomIn, X, Gamepad2, Lock
+} from "lucide-react";
+
+const MAZOS = [
+  {
+    id: "art7-interes",
+    titulo: "Art. 7° + Interés Superior",
+    subtitulo: "Características de la educación + LGDNNA",
+    tarjetas: 8,
+    formatos: "4 Anclas + 4 Casos",
+  },
+  {
+    id: "dhi-nem",
+    titulo: "DHI Art. 12 + NEM Art. 11",
+    subtitulo: "Desarrollo Humano Integral + Nueva Escuela Mexicana",
+    tarjetas: 10,
+    formatos: "5 Anclas + 5 Casos",
+  },
+  {
+    id: "fines-criterios",
+    titulo: "Fines Art. 15 + Criterios Art. 16",
+    subtitulo: "Fines y criterios de la educación (LGE)",
+    tarjetas: 12,
+    formatos: "6 Anclas + 6 Casos",
+  },
+];
+
+const EXAMENES = [
+  
+    {
+      id: "preguntas-sesion-4",
+      titulo: "Preguntas Sesion 4",
+      descripcion: "14 reactivos sobre Fines y Criterios LGE, Planos del Programa Analitico y Campo De lo Humano y lo Comunitario.",
+      ruta: "/examen/preguntas-sesion-4",
+      icono: "📝",
+      preguntas: 14,
+    },
+    {
+    id: "art7-interes",
+    titulo: "Examen: Art. 7° + Interés Superior",
+    subtitulo: "Características + LGDNNA",
+    reactivos: 4,
+  },
+  {
+    id: "dhi-nem",
+    titulo: "Examen: DHI Art. 12 + NEM Art. 11",
+    subtitulo: "Desarrollo Humano Integral + NEM",
+    reactivos: 5,
+  },
+  {
+    id: "fines-criterios",
+    titulo: "Examen: Fines Art. 15 + Criterios Art. 16",
+    subtitulo: "Fines y criterios de la educación",
+    reactivos: 6,
+  },
+  {
+    id: "examen-fines-criterios-sesion-4",
+    titulo: "Examen Fines y Criterios",
+    subtitulo: "Sesion 4 · Fines y criterios LGE (clave 7777)",
+    reactivos: 10,
+  }
+];
+
+const IMAGENES = [
+  {
+    id: "articulo-7",
+    titulo: "Art. 7° — Características",
+    subtitulo: "Naturaleza de la educación",
+    src: "/imagenes/articulo-7.jpg",
+  },
+  {
+    id: "interes",
+    titulo: "Interés Superior de la Niñez",
+    subtitulo: "LGDNNA Art. 2° y 71 / LGE Art. 14",
+    src: "/imagenes/interes.png",
+  },
+  {
+    id: "objetivos",
+    titulo: "Objetivos NEM",
+    subtitulo: "Art. 11 LGE",
+    src: "/imagenes/objetivos.jpg",
+  },
+  {
+    id: "articulo-12",
+    titulo: "Art. 12 — DHI",
+    subtitulo: "Desarrollo Humano Integral",
+    src: "/imagenes/articulo-12.jpg",
+  },
+  {
+    id: "fines",
+    titulo: "Los 9 Fines de la Educación",
+    subtitulo: "Art. 15 LGE — Toca para ver los 9 Fines",
+    src: "/imagenes/fines/fin-1-marcador.jpeg",
+    navega: "/fines",
+    destacado: true,
+  },
+  {
+    id: "criterios",
+    titulo: "Criterios de la Educación",
+    subtitulo: "Art. 16 LGE — Nacional · Integral · Excelencia · Intercultural",
+    src: "/imagenes/criterios.jpeg",
+  },
+  {
+    id: "derechos-caja",
+    titulo: "Derechos Padres I-IV",
+    subtitulo: "Art. 128 LGE - Inscripcion - Participar - Colaborar - Formar parte",
+    src: "/imagenes/derechos/derechos-1-caja.png",
+  },
+  {
+    id: "derechos-megafono",
+    titulo: "Derechos Padres V y XI",
+    subtitulo: "Art. 128 LGE - Opinar contraprestaciones - Manifestar inconformidad",
+    src: "/imagenes/derechos/derechos-2-megafono.png",
+  },
+  {
+    id: "derechos-mano",
+    titulo: "Derechos Padres VI-X",
+    subtitulo: "Art. 128 LGE - Personal - Evaluacion - Planes - Presupuesto - Hijo",
+    src: "/imagenes/derechos/derechos-3-mano.png",
+  },
+  {
+    id: "obligaciones-padres",
+    titulo: "Obligaciones Padres",
+    subtitulo: "Art. 129 LGE - Obligaciones de Madres, Padres y Tutores",
+    src: "/imagenes/derechos/obligaciones-padres.jpg",
+  },
+];
+
+const JUEGOS = [
+  {
+    id: "fines-y-criterios",
+    titulo: "Domina Fines y Criterios",
+    subtitulo: "Art. 15 y 16 LGE · 16 frases LITERALES",
+    descripcion: "Detecta trampas USICAMM entre Fines y Criterios. 2 modos: Entrenamiento + Caza al Impostor.",
+    emoji: "🎯",
+    ruta: "/fines-y-criterios",
+    badge: "NUEVO",
+    requiere_clave: true,
+  },
+  {
+    id: "domina-finalidades",
+    titulo: "Domina las Finalidades",
+    subtitulo: "Plan 2022 NEM · 23 finalidades LITERALES",
+    descripcion: "Identifica a qué campo formativo pertenece cada finalidad: Lenguajes, Saberes, Ética o Humano.",
+    emoji: "🧭",
+    ruta: "/domina-finalidades",
+    badge: "NUEVO",
+    requiere_clave: true,
+  },
+];
+
+export default function LandingPage() {
+  const router = useRouter();
+  const [tab, setTab] = useState("flashcards");
+  const [imagenAmpliada, setImagenAmpliada] = useState(null);
+
+  return (
+    <main className="min-h-screen bg-white">
+      {/* Header con franja naranja SNTE */}
+      <div className="bg-gradient-to-r from-[#F47216] to-[#D85A0A] text-white">
+        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between text-xs font-medium tracking-wider">
+          <span className="hidden sm:inline">"POR LA EDUCACIÓN AL SERVICIO DEL PUEBLO"</span>
+          <span className="font-bold">SNTE · SECCIÓN 21 · NUEVO LEÓN</span>
+        </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-6 py-10">
+        {/* Logo + Título */}
+        <div className="text-center mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-6"
+          >
+            <div className="bg-white rounded-2xl p-4 shadow-lg shadow-[#F47216]/15 border-2 border-[#FDD9B5]">
+              <img
+                src="/logo-snte21.png"
+                alt="SNTE Sección 21"
+                className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                  e.currentTarget.nextElementSibling.style.display = "flex";
+                }}
+              />
+              <div
+                style={{ display: "none" }}
+                className="w-28 h-28 sm:w-32 sm:h-32 items-center justify-center text-[#F47216] font-black text-3xl"
+              >
+                SNTE 21
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <p className="text-xs font-bold tracking-widest uppercase text-[#F47216] mb-3">
+              Curso · Sesión 1
+            </p>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4 text-slate-900"
+          >
+            Promoción <span className="text-[#F47216]">Horizontal</span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="inline-flex items-center gap-2 bg-[#FFF4EB] border-2 border-[#FDD9B5] px-5 py-2.5 rounded-xl mb-5"
+          >
+            <span className="text-lg">🎓</span>
+            <span className="text-sm sm:text-base font-bold text-[#D85A0A]">
+              Imparte: Dr. Juan Carlos
+            </span>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
+          >
+            Material de estudio para el examen USICAMM. Flashcards, exámenes
+            e imágenes con vocabulario LITERAL de la Ley General de Educación.
+          </motion.p>
+        </div>
+
+        {/* Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="flex gap-2 mb-8 justify-center flex-wrap"
+        >
+          <button
+            onClick={() => setTab("flashcards")}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              tab === "flashcards"
+                ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
+                : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <Layers className="w-4 h-4" /> Flashcards
+            </span>
+          </button>
+          <button
+            onClick={() => setTab("examen")}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              tab === "examen"
+                ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
+                : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <GraduationCap className="w-4 h-4" /> Exámenes
+            </span>
+          </button>
+          <button
+            onClick={() => setTab("imagenes")}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              tab === "imagenes"
+                ? "bg-[#F47216] text-white shadow-md shadow-[#F47216]/30"
+                : "bg-[#FFF4EB] text-[#D85A0A] hover:bg-[#FDD9B5]"
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <ImageIcon className="w-4 h-4" /> Aprende con Imágenes
+            </span>
+          </button>
+        </motion.div>
+
+        {/* Contenido */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="space-y-4"
+        >
+          {tab === "flashcards" && (
+            <>
+              <h2 className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-4 text-center">
+                Elige un mazo
+              </h2>
+              {MAZOS.map((mazo) => (
+                <button
+                  key={mazo.id}
+                  onClick={() => router.push(`/estudio/${mazo.id}`)}
+                  className="w-full group bg-white border-2 border-slate-200 hover:border-[#F47216] rounded-2xl p-6 text-left transition-all hover:shadow-lg hover:shadow-[#F47216]/10"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="p-3 bg-[#FFF4EB] rounded-xl flex-shrink-0">
+                        <Layers className="w-6 h-6 text-[#F47216]" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
+                          {mazo.titulo}
+                        </h3>
+                        <p className="text-sm text-[#D85A0A] font-medium">
+                          {mazo.subtitulo}
+                        </p>
+                        <p className="text-xs text-slate-500 mt-1">
+                          {mazo.tarjetas} tarjetas — {mazo.formatos}
+                        </p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-[#F47216] group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  </div>
+                </button>
+              ))}
+            </>
+          )}
+
+          {tab === "examen" && (
+            <>
+              <h2 className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-4 text-center">
+                Elige un examen
+              </h2>
+              {EXAMENES.map((examen) => (
+                <button
+                  key={examen.id}
+                  onClick={() => router.push(`/examen/${examen.id}`)}
+                  className="w-full group bg-white border-2 border-slate-200 hover:border-[#F47216] rounded-2xl p-6 text-left transition-all hover:shadow-lg hover:shadow-[#F47216]/10"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="p-3 bg-[#FFF4EB] rounded-xl flex-shrink-0">
+                        <GraduationCap className="w-6 h-6 text-[#F47216]" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
+                          {examen.titulo}
+                        </h3>
+                        <p className="text-sm text-[#D85A0A] font-medium">
+                          {examen.subtitulo}
+                        </p>
+                        <p className="text-xs text-slate-500 mt-1">
+                          {examen.reactivos} reactivos — Tipo USICAMM
+                        </p>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-[#F47216] group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  </div>
+                </button>
+              ))}
+            </>
+          )}
+
+          {tab === "imagenes" && (
+            <>
+              <h2 className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-2 text-center">
+                Aprende con Imágenes
+              </h2>
+              <p className="text-center text-sm text-slate-500 mb-6">
+                Toca cualquier imagen para ampliarla y estudiarla a detalle
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {IMAGENES.map((img) => (
+                  <button
+                    key={img.id}
+                    onClick={() => {
+                      if (img.navega) {
+                        router.push(img.navega);
+                      } else {
+                        setImagenAmpliada(img);
+                      }
+                    }}
+                    className={`group bg-white border-2 rounded-2xl overflow-hidden transition-all hover:shadow-lg hover:shadow-[#F47216]/10 text-left ${
+                      img.destacado
+                        ? "border-[#F47216] ring-2 ring-[#F47216]/20"
+                        : "border-slate-200 hover:border-[#F47216]"
+                    }`}
+                  >
+                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-50">
+                      <img
+                        src={img.src}
+                        alt={img.titulo}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute bottom-3 right-3 bg-[#F47216] text-white p-2 rounded-lg shadow-lg">
+                        {img.navega ? (
+                          <ArrowRight className="w-4 h-4" />
+                        ) : (
+                          <ZoomIn className="w-4 h-4" />
+                        )}
+                      </div>
+                      {img.destacado && (
+                        <div className="absolute top-3 left-3 bg-[#F47216] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                          ★ NUEVO
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-slate-900 font-bold mb-0.5">
+                        {img.titulo}
+                      </h3>
+                      <p className="text-xs text-[#D85A0A] font-medium">{img.subtitulo}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </motion.div>
+
+        {/* SECCIÓN JUEGOS - visible siempre debajo de los tabs */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="mt-16"
+        >
+          <div className="text-center mb-8">
+            <p className="text-xs font-bold tracking-widest uppercase text-[#F47216] mb-2">
+              Sección interactiva
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-2 flex items-center justify-center gap-3">
+              <Gamepad2 className="w-8 h-8 text-[#F47216]" />
+              Juegos
+            </h2>
+            <p className="text-sm text-slate-600 max-w-xl mx-auto">
+              Pon a prueba lo que aprendiste con dinámicas interactivas tipo USICAMM
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {JUEGOS.map((juego) => (
+              <button
+                key={juego.id}
+                onClick={() => router.push(juego.ruta)}
+                className="group relative bg-white border-2 border-[#F47216] rounded-2xl p-6 text-left transition-all hover:shadow-xl hover:shadow-[#F47216]/20 hover:-translate-y-1"
+              >
+                {juego.badge && (
+                  <div className="absolute top-3 right-3 bg-[#F47216] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                    ★ {juego.badge}
+                  </div>
+                )}
+
+                <div className="text-5xl mb-3">{juego.emoji}</div>
+
+                <h3 className="text-xl font-black text-[#9A3412] mb-1">
+                  {juego.titulo}
+                </h3>
+
+                <p className="text-xs font-bold uppercase tracking-wider text-[#D85A0A] mb-3">
+                  {juego.subtitulo}
+                </p>
+
+                <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                  {juego.descripcion}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  {juego.requiere_clave && (
+                    <span className="flex items-center gap-1.5 bg-[#FEF3C7] text-[#92400E] text-xs font-medium px-2.5 py-1 rounded-md">
+                      <Lock className="w-3 h-3" /> Clave requerida
+                    </span>
+                  )}
+                  <span className="ml-auto flex items-center gap-1 text-[#F47216] font-bold text-sm group-hover:translate-x-1 transition-transform">
+                    Jugar <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </motion.section>
+
+        <p className="text-center text-xs text-slate-400 mt-12">
+          Material basado en la Ley General de Educación (DOF 30-09-2019)
+        </p>
+      </div>
+
+      {/* Footer SNTE */}
+      <footer className="bg-slate-50 border-t border-slate-200 mt-12 py-6">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-xs text-slate-500">
+            <span className="font-bold text-[#F47216]">SNTE · Sección 21</span> · Nuevo León
+          </p>
+          <p className="text-xs text-slate-400 mt-1">
+            "Por la educación al servicio del pueblo"
+          </p>
+        </div>
+      </footer>
+
+      {/* Modal imagen ampliada */}
+      {imagenAmpliada && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4"
+          onClick={() => setImagenAmpliada(null)}
+        >
+          <div
+            className="relative w-full max-w-5xl max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setImagenAmpliada(null)}
+              className="absolute -top-12 right-0 text-white hover:text-[#F47216] transition-colors flex items-center gap-2 text-sm font-medium"
+            >
+              <X className="w-5 h-5" /> Cerrar
+            </button>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl flex-1 min-h-0">
+              <img
+                src={imagenAmpliada.src}
+                alt={imagenAmpliada.titulo}
+                className="w-full h-full object-contain max-h-[80vh]"
+              />
+            </div>
+            <div className="text-center mt-4">
+              <p className="text-white font-bold">{imagenAmpliada.titulo}</p>
+              <p className="text-[#FDD9B5] text-sm">{imagenAmpliada.subtitulo}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}
