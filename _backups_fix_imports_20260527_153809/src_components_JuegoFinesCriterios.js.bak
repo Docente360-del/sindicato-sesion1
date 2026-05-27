@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Trophy, BookOpen, Search, RefreshCw, Check, X, AlertTriangle } from "lucide-react";
-import { ITEMS_LGE, TIPOS_INFO } from "../data/juego-fines-criterios";
+import { ITEMS_LGE, TIPOS_INFO } from "@/data/juego-fines-criterios";
 
 const CONTRASENA = "1111";
 

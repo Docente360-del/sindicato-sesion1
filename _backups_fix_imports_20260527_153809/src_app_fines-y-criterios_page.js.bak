@@ -1,4 +1,4 @@
-import JuegoFinesCriterios from "../../components/JuegoFinesCriterios";
+import JuegoFinesCriterios from "@/components/JuegoFinesCriterios";
 
 export const metadata = {
   title: "Domina Fines y Criterios · SNTE Sección 21 Nuevo León",
