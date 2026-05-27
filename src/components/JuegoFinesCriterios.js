@@ -1,0 +1,575 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Trophy, BookOpen, Search, RefreshCw, Check, X, AlertTriangle } from "lucide-react";
+import { ITEMS_LGE, TIPOS_INFO } from "@/data/juego-fines-criterios";
+
+const CONTRASENA = "1111";
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function generarRondasExamen() {
+  const rondas = [];
+  const tipos = ["FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO"];
+
+  for (const tipo of shuffle(tipos)) {
+    const propios = ITEMS_LGE.filter(i => i.tipo === tipo);
+    const ajenos = ITEMS_LGE.filter(i => i.tipo !== tipo);
+
+    const tres_propios = shuffle(propios).slice(0, 3);
+    const una_impostora = shuffle(ajenos)[0];
+
+    const cuatro = shuffle([...tres_propios, una_impostora]);
+    const impostora_idx = cuatro.findIndex(item => item.id === una_impostora.id);
+
+    rondas.push({ tipo, opciones: cuatro, impostora_idx });
+  }
+  return rondas;
+}
+
+export default function JuegoFinesCriterios() {
+  const router = useRouter();
+  const [fase, setFase] = useState("candado");
+  const [contrasenaInput, setContrasenaInput] = useState("");
+  const [errorCandado, setErrorCandado] = useState(false);
+
+  // ENTRENAMIENTO
+  const rondas_entrenamiento = useMemo(() =>
+    shuffle(ITEMS_LGE).map(item => {
+      const ajenos = ITEMS_LGE.filter(i => i.id !== item.id);
+      const tres_ajenos = shuffle(ajenos).slice(0, 3);
+      return {
+        item,
+        opciones: shuffle([item, ...tres_ajenos]),
+      };
+    }), []);
+
+  const [respuestasEntrenamiento, setRespuestasEntrenamiento] = useState({});
+  const [indiceEntrenamiento, setIndiceEntrenamiento] = useState(0);
+  const [mostrandoFeedback, setMostrandoFeedback] = useState(false);
+
+  // EXAMEN
+  const [rondasExamen, setRondasExamen] = useState([]);
+  const [respuestasExamen, setRespuestasExamen] = useState({});
+  const [indiceExamen, setIndiceExamen] = useState(0);
+  const [mostrandoFeedbackExamen, setMostrandoFeedbackExamen] = useState(false);
+  const [mejorPuntaje, setMejorPuntaje] = useState(
+    typeof window !== "undefined" ? parseInt(localStorage.getItem("snte_fines_criterios_best") || "0") : 0
+  );
+
+  function verificarCandado() {
+    if (contrasenaInput === CONTRASENA) {
+      setFase("menu");
+      setErrorCandado(false);
+    } else {
+      setErrorCandado(true);
+    }
+  }
+
+  function iniciarEntrenamiento() {
+    setIndiceEntrenamiento(0);
+    setRespuestasEntrenamiento({});
+    setMostrandoFeedback(false);
+    setFase("entrenamiento");
+  }
+
+  function iniciarExamen() {
+    setRondasExamen(generarRondasExamen());
+    setIndiceExamen(0);
+    setRespuestasExamen({});
+    setMostrandoFeedbackExamen(false);
+    setFase("examen");
+  }
+
+  function responderEntrenamiento(opcion_id) {
+    if (mostrandoFeedback) return;
+    const ronda_actual = rondas_entrenamiento[indiceEntrenamiento];
+    setRespuestasEntrenamiento({ ...respuestasEntrenamiento, [ronda_actual.item.id]: opcion_id });
+    setMostrandoFeedback(true);
+  }
+
+  function siguienteEntrenamiento() {
+    setMostrandoFeedback(false);
+    if (indiceEntrenamiento < rondas_entrenamiento.length - 1) {
+      setIndiceEntrenamiento(indiceEntrenamiento + 1);
+    } else {
+      setFase("menu");
+    }
+  }
+
+  function responderExamen(idx_opcion) {
+    if (mostrandoFeedbackExamen) return;
+    setRespuestasExamen({ ...respuestasExamen, [indiceExamen]: idx_opcion });
+    setMostrandoFeedbackExamen(true);
+  }
+
+  function siguienteExamen() {
+    setMostrandoFeedbackExamen(false);
+    if (indiceExamen < rondasExamen.length - 1) {
+      setIndiceExamen(indiceExamen + 1);
+    } else {
+      let puntaje = 0;
+      rondasExamen.forEach((ronda, idx) => {
+        if (respuestasExamen[idx] === ronda.impostora_idx) puntaje++;
+      });
+      if (puntaje > mejorPuntaje) {
+        setMejorPuntaje(puntaje);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("snte_fines_criterios_best", puntaje.toString());
+        }
+      }
+      setFase("resultados_examen");
+    }
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // CANDADO
+  // ════════════════════════════════════════════════════════════
+  if (fase === "candado") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 border-2 border-orange-300">
+          <div className="text-center mb-6">
+            <div className="text-6xl mb-3">🔒</div>
+            <h1 className="text-2xl font-bold text-orange-700 mb-2">
+              Domina Fines y Criterios
+            </h1>
+            <p className="text-sm text-slate-600">
+              SNTE Sección 21 Nuevo León
+            </p>
+            <p className="text-xs italic text-slate-500 mt-1">
+              "Por la educación al servicio del pueblo"
+            </p>
+            <p className="text-xs text-orange-600 mt-3 font-medium">
+              🎓 Imparte: Dr. Juan Carlos
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <input
+              type="password"
+              value={contrasenaInput}
+              onChange={(e) => setContrasenaInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && verificarCandado()}
+              placeholder="Clave de acceso"
+              className="w-full px-4 py-3 border-2 border-orange-300 rounded-lg focus:border-orange-500 focus:outline-none text-center text-lg"
+              autoFocus
+            />
+            {errorCandado && (
+              <p className="text-red-600 text-sm text-center">
+                ❌ Clave incorrecta. Inténtalo de nuevo.
+              </p>
+            )}
+            <button
+              onClick={verificarCandado}
+              className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition"
+            >
+              Entrar al juego
+            </button>
+            <button
+              onClick={() => router.push("/")}
+              className="w-full py-2 text-slate-500 hover:text-orange-600 text-sm transition"
+            >
+              ← Volver al inicio
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // MENU
+  // ════════════════════════════════════════════════════════════
+  if (fase === "menu") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
+        <header className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white py-8 px-4 shadow-lg">
+          <div className="max-w-3xl mx-auto text-center">
+            <button
+              onClick={() => router.push("/")}
+              className="text-sm hover:underline mb-3 inline-flex items-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Volver al inicio
+            </button>
+            <div className="text-5xl mb-3">🎯</div>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-2 drop-shadow-md">
+              Domina Fines y Criterios
+            </h1>
+            <p className="text-orange-100 text-sm sm:text-base">
+              SNTE Sección 21 Nuevo León · 16 frases LITERALES de la LGE
+            </p>
+            <p className="text-orange-200 text-xs italic mt-1">
+              "Por la educación al servicio del pueblo"
+            </p>
+          </div>
+        </header>
+
+        <main className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+          {mejorPuntaje > 0 && (
+            <div className="bg-white border-2 border-orange-300 rounded-xl p-4 text-center shadow-md">
+              <p className="text-sm text-slate-600 flex items-center justify-center gap-2">
+                <Trophy className="w-4 h-4 text-orange-600" /> Tu mejor puntaje en Caza al Impostor
+              </p>
+              <p className="text-3xl font-bold text-orange-700">{mejorPuntaje} / 8</p>
+            </div>
+          )}
+
+          <button
+            onClick={iniciarEntrenamiento}
+            className="w-full bg-white border-2 border-orange-300 hover:border-orange-500 rounded-2xl p-6 shadow-md hover:shadow-lg transition text-left"
+          >
+            <div className="flex items-start gap-4">
+              <BookOpen className="w-10 h-10 text-orange-600 flex-shrink-0" />
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-orange-800 mb-2">
+                  Modo Entrenamiento
+                </h2>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Lee la frase LITERAL de la LGE y elige a qué fin o criterio
+                  pertenece. Aprende las 16 finalidades con feedback inmediato.
+                </p>
+                <p className="text-xs text-orange-600 mt-2 font-medium">
+                  16 rondas · Sin tiempo límite
+                </p>
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={iniciarExamen}
+            className="w-full bg-white border-2 border-orange-300 hover:border-orange-500 rounded-2xl p-6 shadow-md hover:shadow-lg transition text-left"
+          >
+            <div className="flex items-start gap-4">
+              <Search className="w-10 h-10 text-orange-600 flex-shrink-0" />
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-orange-800 mb-2">
+                  Caza al Impostor
+                </h2>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Aparecen 4 frases que supuestamente son del mismo tipo
+                  (todas Fines o todas Criterios), pero UNA es impostora.
+                  ¡Encuéntrala!
+                </p>
+                <p className="text-xs text-orange-600 mt-2 font-medium">
+                  8 rondas · Evaluación BRUTAL
+                </p>
+              </div>
+            </div>
+          </button>
+
+          <div className="text-center text-xs text-slate-500 py-4">
+            🎯 SNTE Sección 21 Nuevo León · Domina Fines y Criterios
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // ENTRENAMIENTO
+  // ════════════════════════════════════════════════════════════
+  if (fase === "entrenamiento") {
+    const ronda = rondas_entrenamiento[indiceEntrenamiento];
+    const respuesta_id = respuestasEntrenamiento[ronda.item.id];
+    const acerto = respuesta_id === ronda.item.id;
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
+        <header className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white py-4 px-4 shadow-md">
+          <div className="max-w-3xl mx-auto flex justify-between items-center">
+            <button onClick={() => setFase("menu")} className="text-sm hover:underline">
+              ← Volver al menú
+            </button>
+            <p className="text-sm font-medium">
+              📚 Entrenamiento · {indiceEntrenamiento + 1} / {rondas_entrenamiento.length}
+            </p>
+          </div>
+        </header>
+
+        <main className="max-w-3xl mx-auto px-4 py-6 space-y-4">
+          <div className="w-full bg-orange-100 rounded-full h-2">
+            <div
+              className="bg-orange-500 h-2 rounded-full transition-all"
+              style={{ width: `${((indiceEntrenamiento + 1) / rondas_entrenamiento.length) * 100}%` }}
+            />
+          </div>
+
+          <div className="bg-white border-2 border-orange-300 rounded-2xl p-5 shadow-md">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs font-bold text-orange-700 bg-orange-100 px-3 py-1 rounded-full">
+                FRASE LITERAL · LGE
+              </span>
+            </div>
+            <p className="text-slate-800 leading-relaxed text-lg italic">
+              "{ronda.item.frase}"
+            </p>
+          </div>
+
+          <p className="text-sm font-medium text-slate-700 mt-4">
+            ¿A cuál fin o criterio corresponde esta frase?
+          </p>
+
+          <div className="space-y-3">
+            {ronda.opciones.map((opcion) => {
+              const esSeleccionado = respuesta_id === opcion.id;
+              const esCorrecta = opcion.id === ronda.item.id;
+              let clase = "bg-white border-orange-200 hover:border-orange-500 hover:bg-orange-50";
+
+              if (mostrandoFeedback) {
+                if (esCorrecta) clase = "bg-green-100 border-green-500";
+                else if (esSeleccionado) clase = "bg-red-100 border-red-500";
+                else clase = "bg-slate-50 border-slate-200 opacity-50";
+              }
+
+              return (
+                <button
+                  key={opcion.id}
+                  onClick={() => responderEntrenamiento(opcion.id)}
+                  disabled={mostrandoFeedback}
+                  className={`w-full text-left border-2 rounded-xl p-4 transition ${clase}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span
+                      className="text-xs font-bold px-2 py-1 rounded flex-shrink-0"
+                      style={{
+                        backgroundColor: opcion.tipo === "FIN" ? "#F47216" : "#D85A0A",
+                        color: "white",
+                      }}
+                    >
+                      {opcion.tipo}
+                    </span>
+                    <div className="flex-1">
+                      <p className="font-bold text-slate-800 text-sm mb-1">
+                        {opcion.nombre}
+                      </p>
+                      <p className="text-xs text-slate-600 leading-snug">
+                        {opcion.definicion}
+                      </p>
+                    </div>
+                    {mostrandoFeedback && esCorrecta && (
+                      <Check className="text-green-700 w-6 h-6 flex-shrink-0" />
+                    )}
+                    {mostrandoFeedback && esSeleccionado && !esCorrecta && (
+                      <X className="text-red-700 w-6 h-6 flex-shrink-0" />
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {mostrandoFeedback && (
+            <div className={`rounded-xl p-4 border-2 ${acerto ? "bg-green-50 border-green-300" : "bg-orange-50 border-orange-300"}`}>
+              <p className="font-bold text-sm mb-1">
+                {acerto ? "✅ ¡Correcto!" : "💡 La respuesta correcta es:"}
+              </p>
+              <p className="text-sm text-slate-700 leading-relaxed mb-2">
+                <strong>{ronda.item.tipo}: {ronda.item.nombre}</strong>
+              </p>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong>🪤 Trampa común:</strong> {ronda.item.trampa_comun}
+              </p>
+              <button
+                onClick={siguienteEntrenamiento}
+                className="mt-3 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition"
+              >
+                {indiceEntrenamiento < rondas_entrenamiento.length - 1 ? "Siguiente →" : "Terminar"}
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // EXAMEN (Caza al Impostor)
+  // ════════════════════════════════════════════════════════════
+  if (fase === "examen") {
+    const ronda = rondasExamen[indiceExamen];
+    const respuesta = respuestasExamen[indiceExamen];
+    const acerto = respuesta === ronda.impostora_idx;
+    const tipoInfo = TIPOS_INFO[ronda.tipo];
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
+        <header className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white py-4 px-4 shadow-md">
+          <div className="max-w-3xl mx-auto flex justify-between items-center">
+            <button onClick={() => setFase("menu")} className="text-sm hover:underline">
+              ← Volver al menú
+            </button>
+            <p className="text-sm font-medium">
+              🕵️ Caza al Impostor · {indiceExamen + 1} / {rondasExamen.length}
+            </p>
+          </div>
+        </header>
+
+        <main className="max-w-3xl mx-auto px-4 py-6 space-y-4">
+          <div className="w-full bg-orange-100 rounded-full h-2">
+            <div
+              className="bg-orange-500 h-2 rounded-full transition-all"
+              style={{ width: `${((indiceExamen + 1) / rondasExamen.length) * 100}%` }}
+            />
+          </div>
+
+          <div className="bg-orange-100 border-2 border-orange-500 rounded-2xl p-5 text-center">
+            <p className="text-sm text-orange-800 font-medium mb-1">
+              Las siguientes frases dicen ser:
+            </p>
+            <p className="text-2xl font-bold text-orange-900">
+              {tipoInfo.emoji} {tipoInfo.nombre}
+            </p>
+            <p className="text-xs text-orange-700 mt-2">
+              Pero UNA de las 4 es <strong>IMPOSTORA</strong>. ¡Encuéntrala!
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {ronda.opciones.map((opcion, idx) => {
+              const esSeleccionado = respuesta === idx;
+              const esImpostora = idx === ronda.impostora_idx;
+              let clase = "bg-white border-orange-200 hover:border-orange-500 hover:bg-orange-50";
+
+              if (mostrandoFeedbackExamen) {
+                if (esImpostora) clase = "bg-red-100 border-red-500";
+                else clase = "bg-green-50 border-green-300 opacity-70";
+              }
+
+              return (
+                <button
+                  key={opcion.id}
+                  onClick={() => responderExamen(idx)}
+                  disabled={mostrandoFeedbackExamen}
+                  className={`w-full text-left border-2 rounded-xl p-4 transition ${clase}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">
+                      {mostrandoFeedbackExamen ? (esImpostora ? "🚨" : "✓") : "❓"}
+                    </span>
+                    <div className="flex-1">
+                      <p className="text-sm text-slate-800 leading-relaxed italic">
+                        "{opcion.frase}"
+                      </p>
+                      {mostrandoFeedbackExamen && (
+                        <p className="text-xs font-bold mt-2 text-slate-700">
+                          {esImpostora ? "🚨 IMPOSTORA: " : "Es correctamente "}
+                          {opcion.tipo}: {opcion.nombre}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {mostrandoFeedbackExamen && (
+            <div className={`rounded-xl p-4 border-2 ${acerto ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300"}`}>
+              <p className="font-bold text-sm mb-2">
+                {acerto ? "✅ ¡Atrapaste al impostor!" : "❌ No era esa..."}
+              </p>
+              <p className="text-xs text-slate-700 leading-relaxed">
+                <strong>La impostora era:</strong> {ronda.opciones[ronda.impostora_idx].tipo}: {ronda.opciones[ronda.impostora_idx].nombre}
+              </p>
+              <p className="text-xs text-slate-600 leading-relaxed mt-2">
+                <strong>🪤 Por qué confunde:</strong> {ronda.opciones[ronda.impostora_idx].trampa_comun}
+              </p>
+              <button
+                onClick={siguienteExamen}
+                className="mt-3 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition"
+              >
+                {indiceExamen < rondasExamen.length - 1 ? "Siguiente →" : "Ver resultados"}
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // RESULTADOS
+  // ════════════════════════════════════════════════════════════
+  if (fase === "resultados_examen") {
+    const aciertos = rondasExamen.filter((r, i) => respuestasExamen[i] === r.impostora_idx).length;
+    const total = rondasExamen.length;
+    const porcentaje = Math.round((aciertos / total) * 100);
+
+    const aciertosFin = rondasExamen.filter((r, i) => r.tipo === "FIN" && respuestasExamen[i] === r.impostora_idx).length;
+    const totalFin = rondasExamen.filter(r => r.tipo === "FIN").length;
+    const aciertosCriterio = rondasExamen.filter((r, i) => r.tipo === "CRITERIO" && respuestasExamen[i] === r.impostora_idx).length;
+    const totalCriterio = rondasExamen.filter(r => r.tipo === "CRITERIO").length;
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
+        <header className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white py-6 px-4 shadow-md">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-2xl font-bold">🏆 Resultados</h1>
+          </div>
+        </header>
+
+        <main className="max-w-3xl mx-auto px-4 py-6 space-y-4">
+          <div className="bg-white border-2 border-orange-300 rounded-2xl p-6 shadow-lg text-center">
+            <div className="text-6xl mb-3">
+              {aciertos >= 7 ? "🏆" : aciertos >= 5 ? "🎉" : "📚"}
+            </div>
+            <h2 className="text-3xl font-bold text-slate-800 mb-1">
+              {aciertos} / {total}
+            </h2>
+            <p className="text-lg text-orange-700 font-medium">{porcentaje}% de aciertos</p>
+            <p className="text-sm text-slate-600 mt-2">
+              {aciertos >= 7
+                ? "¡Excelente! Dominas los fines y criterios de la LGE."
+                : aciertos >= 5
+                ? "Buen resultado. Sigue practicando."
+                : "Repasa el modo Entrenamiento para reforzar."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-white border-2 border-orange-200 rounded-xl p-4 text-center">
+              <p className="text-2xl mb-1">🎯</p>
+              <p className="text-xs text-slate-600 mb-1">Fines (Art. 15)</p>
+              <p className="text-xl font-bold text-orange-700">{aciertosFin} / {totalFin}</p>
+            </div>
+            <div className="bg-white border-2 border-orange-200 rounded-xl p-4 text-center">
+              <p className="text-2xl mb-1">🛡️</p>
+              <p className="text-xs text-slate-600 mb-1">Criterios (Art. 16)</p>
+              <p className="text-xl font-bold text-orange-700">{aciertosCriterio} / {totalCriterio}</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 pt-4">
+            <button
+              onClick={iniciarExamen}
+              className="py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition flex items-center justify-center gap-2"
+            >
+              <RefreshCw className="w-4 h-4" /> Nueva partida
+            </button>
+            <button
+              onClick={() => setFase("menu")}
+              className="py-3 bg-white border-2 border-orange-300 hover:border-orange-500 text-orange-700 font-bold rounded-lg transition"
+            >
+              ← Menú
+            </button>
+          </div>
+
+          <div className="text-center text-xs text-slate-500 py-4">
+            🎯 SNTE Sección 21 Nuevo León · Por la educación al servicio del pueblo
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return null;
+}
