@@ -128,16 +128,6 @@ const JUEGOS = [
     badge: "NUEVO",
     requiere_clave: true,
   },
-  {
-    id: "domina-finalidades",
-    titulo: "Domina las Finalidades",
-    subtitulo: "Plan 2022 NEM · 23 finalidades LITERALES",
-    descripcion: "Identifica a qué campo formativo pertenece cada finalidad: Lenguajes, Saberes, Ética o Humano.",
-    emoji: "🧭",
-    ruta: "/domina-finalidades",
-    badge: "NUEVO",
-    requiere_clave: true,
-  },
 ];
 
 export default function LandingPage() {
