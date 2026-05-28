@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Trophy, BookOpen, Search, RefreshCw, Check, X } from "lucide-react";
 import { ITEMS_LGE, TIPOS_INFO } from "../data/juego-fines-criterios";
+import { DISTRACTORES_BRUTALES } from "../data/distractores-brutales";
 
 const CONTRASENA = "1111";
 
@@ -16,27 +17,37 @@ function shuffle(arr) {
   return a;
 }
 
-// Generar 3 opciones del MISMO tipo (1 correcta + 2 distractores)
-function generarOpcionesMismoTipo(item_correcto) {
-  const hermanos = ITEMS_LGE.filter(
-    (i) => i.tipo === item_correcto.tipo && i.id !== item_correcto.id
-  );
-  const dos_distractores = shuffle(hermanos).slice(0, 2);
-  return shuffle([item_correcto, ...dos_distractores]);
-}
-
-// Generar rondas del modo CAZA AL IMPOSTOR (4 opciones todas del mismo tipo, 1 impostora)
 function generarRondasExamen() {
   const rondas = [];
-  // Mezclamos tipos
-  const tipos = shuffle(["FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO"]);
+  const tipos = ["FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO"];
 
-  for (const tipo of tipos) {
-    const propios = shuffle(ITEMS_LGE.filter((i) => i.tipo === tipo)).slice(0, 3);
-    const ajenos = shuffle(ITEMS_LGE.filter((i) => i.tipo !== tipo));
-    const una_impostora = ajenos[0];
+  for (const tipo of shuffle(tipos)) {
+    const propios = shuffle(ITEMS_LGE.filter(i => i.tipo === tipo)).slice(0, 3);
+
+    const candidatos_impostora = new Set();
+    for (const propio of propios) {
+      const ids_dist = DISTRACTORES_BRUTALES[propio.id] || [];
+      for (const id_dist of ids_dist) {
+        const item_dist = ITEMS_LGE.find(i => i.id === id_dist);
+        if (item_dist && item_dist.tipo !== tipo) {
+          candidatos_impostora.add(item_dist.id);
+        }
+      }
+    }
+
+    let una_impostora;
+    if (candidatos_impostora.size > 0) {
+      const ids_arr = [...candidatos_impostora];
+      const id_elegida = shuffle(ids_arr)[0];
+      una_impostora = ITEMS_LGE.find(i => i.id === id_elegida);
+    } else {
+      const ajenos = ITEMS_LGE.filter(i => i.tipo !== tipo);
+      una_impostora = shuffle(ajenos)[0];
+    }
+
     const cuatro = shuffle([...propios, una_impostora]);
-    const impostora_idx = cuatro.findIndex((item) => item.id === una_impostora.id);
+    const impostora_idx = cuatro.findIndex(item => item.id === una_impostora.id);
+
     rondas.push({ tipo, opciones: cuatro, impostora_idx });
   }
   return rondas;
@@ -48,29 +59,36 @@ export default function JuegoFinesCriterios() {
   const [contrasenaInput, setContrasenaInput] = useState("");
   const [errorCandado, setErrorCandado] = useState(false);
 
-  // ENTRENAMIENTO HIBRIDO
-  const rondas_entrenamiento = useMemo(
-    () =>
-      shuffle(ITEMS_LGE).map((item) => ({
+  const rondas_entrenamiento = useMemo(() =>
+    shuffle(ITEMS_LGE).map(item => {
+      const ids_distractores = DISTRACTORES_BRUTALES[item.id] || [];
+      const distractores = ids_distractores
+        .map(id => ITEMS_LGE.find(i => i.id === id))
+        .filter(Boolean);
+
+      while (distractores.length < 2) {
+        const ajenos = ITEMS_LGE.filter(i =>
+          i.id !== item.id && !distractores.some(d => d.id === i.id)
+        );
+        distractores.push(shuffle(ajenos)[0]);
+      }
+
+      return {
         item,
-        opciones: generarOpcionesMismoTipo(item),
-      })),
-    []
-  );
+        opciones: shuffle([item, ...distractores.slice(0, 2)]),
+      };
+    }), []);
 
   const [respuestasEntrenamiento, setRespuestasEntrenamiento] = useState({});
   const [indiceEntrenamiento, setIndiceEntrenamiento] = useState(0);
   const [mostrandoFeedback, setMostrandoFeedback] = useState(false);
 
-  // EXAMEN (Caza al Impostor - se mantiene)
   const [rondasExamen, setRondasExamen] = useState([]);
   const [respuestasExamen, setRespuestasExamen] = useState({});
   const [indiceExamen, setIndiceExamen] = useState(0);
   const [mostrandoFeedbackExamen, setMostrandoFeedbackExamen] = useState(false);
   const [mejorPuntaje, setMejorPuntaje] = useState(
-    typeof window !== "undefined"
-      ? parseInt(localStorage.getItem("snte_fines_criterios_best") || "0")
-      : 0
+    typeof window !== "undefined" ? parseInt(localStorage.getItem("snte_fines_criterios_best") || "0") : 0
   );
 
   function verificarCandado() {
@@ -100,10 +118,7 @@ export default function JuegoFinesCriterios() {
   function responderEntrenamiento(opcion_id) {
     if (mostrandoFeedback) return;
     const ronda_actual = rondas_entrenamiento[indiceEntrenamiento];
-    setRespuestasEntrenamiento({
-      ...respuestasEntrenamiento,
-      [ronda_actual.item.id]: opcion_id,
-    });
+    setRespuestasEntrenamiento({ ...respuestasEntrenamiento, [ronda_actual.item.id]: opcion_id });
     setMostrandoFeedback(true);
   }
 
@@ -141,7 +156,6 @@ export default function JuegoFinesCriterios() {
     }
   }
 
-  // CANDADO
   if (fase === "candado") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex items-center justify-center p-4">
@@ -193,7 +207,6 @@ export default function JuegoFinesCriterios() {
     );
   }
 
-  // MENU
   if (fase === "menu") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
@@ -211,6 +224,9 @@ export default function JuegoFinesCriterios() {
             </h1>
             <p className="text-orange-100 text-sm sm:text-base">
               SNTE Sección 21 Nuevo León · 9 Fines (Art. 15) + 8 Criterios (Art. 16) LGE
+            </p>
+            <p className="text-orange-200 text-xs italic mt-1">
+              "Por la educación al servicio del pueblo"
             </p>
           </div>
         </header>
@@ -232,10 +248,12 @@ export default function JuegoFinesCriterios() {
             <div className="flex items-start gap-4">
               <BookOpen className="w-10 h-10 text-orange-600 flex-shrink-0" />
               <div className="flex-1">
-                <h2 className="text-xl font-bold text-orange-800 mb-2">Modo Entrenamiento</h2>
+                <h2 className="text-xl font-bold text-orange-800 mb-2">
+                  Modo Entrenamiento
+                </h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Lee un fragmento del DOF y elige cuál de las 3 opciones le corresponde.
-                  Las 3 opciones son del mismo tipo (todas fines o todas criterios).
+                  Lee un fragmento del DOF y elige la frase LITERAL completa
+                  que le corresponde, entre 3 frases hermanas. Sin pistas regaladas.
                 </p>
                 <p className="text-xs text-orange-600 mt-2 font-medium">
                   17 rondas · Sin tiempo límite
@@ -251,10 +269,12 @@ export default function JuegoFinesCriterios() {
             <div className="flex items-start gap-4">
               <Search className="w-10 h-10 text-orange-600 flex-shrink-0" />
               <div className="flex-1">
-                <h2 className="text-xl font-bold text-orange-800 mb-2">Caza al Impostor</h2>
+                <h2 className="text-xl font-bold text-orange-800 mb-2">
+                  Caza al Impostor
+                </h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Aparecen 4 disposiciones que supuestamente son del mismo tipo, pero
-                  UNA es impostora. ¡Encuéntrala!
+                  Aparecen 4 frases LITERALES que supuestamente son del mismo tipo
+                  (todas Fines o todas Criterios), pero UNA es impostora. ¡Encuéntrala!
                 </p>
                 <p className="text-xs text-orange-600 mt-2 font-medium">
                   8 rondas · Evaluación BRUTAL
@@ -262,19 +282,20 @@ export default function JuegoFinesCriterios() {
               </div>
             </div>
           </button>
+
+          <div className="text-center text-xs text-slate-500 py-4">
+            🎯 SNTE Sección 21 Nuevo León · Domina Fines y Criterios
+          </div>
         </main>
       </div>
     );
   }
 
-  // ════════════════════════════════════════════════════════════
-  // ENTRENAMIENTO HIBRIDO
-  // ════════════════════════════════════════════════════════════
+  // ENTRENAMIENTO: fragmento + 3 frases literales
   if (fase === "entrenamiento") {
     const ronda = rondas_entrenamiento[indiceEntrenamiento];
     const respuesta_id = respuestasEntrenamiento[ronda.item.id];
     const acerto = respuesta_id === ronda.item.id;
-    const tipoInfo = TIPOS_INFO[ronda.item.tipo];
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
@@ -293,33 +314,25 @@ export default function JuegoFinesCriterios() {
           <div className="w-full bg-orange-100 rounded-full h-2">
             <div
               className="bg-orange-500 h-2 rounded-full transition-all"
-              style={{
-                width: `${((indiceEntrenamiento + 1) / rondas_entrenamiento.length) * 100}%`,
-              }}
+              style={{ width: `${((indiceEntrenamiento + 1) / rondas_entrenamiento.length) * 100}%` }}
             />
           </div>
 
-          {/* FRAGMENTO arriba */}
+          {/* FRAGMENTO (pregunta) */}
           <div className="bg-white border-2 border-orange-400 rounded-2xl p-5 shadow-md">
             <p className="text-xs font-bold text-orange-700 uppercase tracking-wide mb-2">
-              Identifica este fragmento del DOF:
+              Identifica a qué disposición pertenece este fragmento del DOF:
             </p>
             <p className="text-slate-800 leading-relaxed text-base italic">
-              "...{ronda.item.fragmento}..."
+              "{ronda.item.fragmento}"
             </p>
-            <div className="mt-3 inline-flex items-center gap-2 bg-orange-100 px-3 py-1 rounded-full border border-orange-300">
-              <span className="text-lg">{tipoInfo.emoji}</span>
-              <span className="text-xs font-bold text-orange-800">
-                Es un {ronda.item.tipo === "FIN" ? "FIN" : "CRITERIO"} de la educación
-              </span>
-            </div>
           </div>
 
-          <p className="text-sm font-medium text-slate-700">
-            Elige el {ronda.item.tipo === "FIN" ? "fin" : "criterio"} correcto:
+          <p className="text-sm font-medium text-slate-700 mt-2">
+            Elige la frase LITERAL completa correcta:
           </p>
 
-          {/* OPCIONES - ambas del mismo tipo */}
+          {/* OPCIONES: 3 frases LITERALES */}
           <div className="space-y-3">
             {ronda.opciones.map((opcion) => {
               const esSeleccionado = respuesta_id === opcion.id;
@@ -341,12 +354,11 @@ export default function JuegoFinesCriterios() {
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex-1">
-                      <p
-                        className={`text-slate-800 leading-relaxed ${
-                          opcion.tipo === "CRITERIO" ? "text-lg font-bold" : "text-sm"
-                        }`}
-                      >
-                        {opcion.tipo === "CRITERIO" ? opcion.nombre_corto : `"${opcion.nombre_corto}"`}
+                      <p className="text-slate-800 text-sm leading-relaxed">
+                        "{opcion.frase}"
+                      </p>
+                      <p className="text-xs text-slate-500 italic mt-2">
+                        ({opcion.tipo === "FIN" ? "Fin" : "Criterio"})
                       </p>
                     </div>
                     {mostrandoFeedback && esCorrecta && (
@@ -362,20 +374,12 @@ export default function JuegoFinesCriterios() {
           </div>
 
           {mostrandoFeedback && (
-            <div
-              className={`rounded-xl p-4 border-2 ${
-                acerto ? "bg-green-50 border-green-300" : "bg-orange-50 border-orange-300"
-              }`}
-            >
+            <div className={`rounded-xl p-4 border-2 ${acerto ? "bg-green-50 border-green-300" : "bg-orange-50 border-orange-300"}`}>
               <p className="font-bold text-sm mb-2">
                 {acerto ? "✅ ¡Correcto!" : "💡 La respuesta correcta era:"}
               </p>
               <p className="text-sm text-slate-700 leading-relaxed mb-2">
-                <strong>{ronda.item.tipo === "FIN" ? "🎯 FIN" : "🛡️ CRITERIO"}:</strong>{" "}
-                {ronda.item.tipo === "CRITERIO" ? ronda.item.nombre_corto : ""}
-              </p>
-              <p className="text-xs text-slate-600 italic leading-relaxed mb-2">
-                📜 Texto completo: "{ronda.item.frase_completa}"
+                <strong>{ronda.item.etiqueta}</strong> ({ronda.item.tipo === "FIN" ? "Art. 15 LGE" : "Art. 16 LGE"})
               </p>
               <p className="text-xs text-slate-600 leading-relaxed">
                 <strong>🪤 Por qué confunde:</strong> {ronda.item.trampa_comun}
@@ -384,9 +388,7 @@ export default function JuegoFinesCriterios() {
                 onClick={siguienteEntrenamiento}
                 className="mt-3 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition"
               >
-                {indiceEntrenamiento < rondas_entrenamiento.length - 1
-                  ? "Siguiente →"
-                  : "Terminar"}
+                {indiceEntrenamiento < rondas_entrenamiento.length - 1 ? "Siguiente →" : "Terminar"}
               </button>
             </div>
           )}
@@ -395,9 +397,7 @@ export default function JuegoFinesCriterios() {
     );
   }
 
-  // ════════════════════════════════════════════════════════════
-  // EXAMEN (Caza al Impostor - frases completas como antes)
-  // ════════════════════════════════════════════════════════════
+  // EXAMEN
   if (fase === "examen") {
     const ronda = rondasExamen[indiceExamen];
     const respuesta = respuestasExamen[indiceExamen];
@@ -427,7 +427,7 @@ export default function JuegoFinesCriterios() {
 
           <div className="bg-orange-100 border-2 border-orange-500 rounded-2xl p-5 text-center">
             <p className="text-sm text-orange-800 font-medium mb-1">
-              Las siguientes opciones dicen ser:
+              Las siguientes frases dicen ser:
             </p>
             <p className="text-2xl font-bold text-orange-900">
               {tipoInfo.emoji} {tipoInfo.nombre}
@@ -460,17 +460,16 @@ export default function JuegoFinesCriterios() {
                       {mostrandoFeedbackExamen ? (esImpostora ? "🚨" : "✓") : "❓"}
                     </span>
                     <div className="flex-1">
-                      <p
-                        className={`text-slate-800 leading-relaxed ${
-                          opcion.tipo === "CRITERIO" ? "text-lg font-bold" : "text-sm"
-                        }`}
-                      >
-                        {opcion.tipo === "CRITERIO" ? opcion.nombre_corto : `"${opcion.nombre_corto}"`}
+                      <p className="text-sm text-slate-800 leading-relaxed italic">
+                        "{opcion.frase}"
                       </p>
-                      {mostrandoFeedbackExamen && esImpostora && (
-                        <p className="text-xs font-bold mt-2 text-red-900">
-                          🚨 IMPOSTORA · es realmente un{" "}
-                          {opcion.tipo === "FIN" ? "FIN" : "CRITERIO"}
+                      <p className="text-xs text-slate-500 italic mt-2">
+                        ({opcion.tipo === "FIN" ? "Fin" : "Criterio"})
+                      </p>
+                      {mostrandoFeedbackExamen && (
+                        <p className="text-xs font-bold mt-2 text-slate-700">
+                          {esImpostora ? "🚨 IMPOSTORA · " : "✓ Es correctamente "}
+                          {opcion.etiqueta}
                         </p>
                       )}
                     </div>
@@ -481,17 +480,15 @@ export default function JuegoFinesCriterios() {
           </div>
 
           {mostrandoFeedbackExamen && (
-            <div
-              className={`rounded-xl p-4 border-2 ${
-                acerto ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300"
-              }`}
-            >
+            <div className={`rounded-xl p-4 border-2 ${acerto ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300"}`}>
               <p className="font-bold text-sm mb-2">
                 {acerto ? "✅ ¡Atrapaste al impostor!" : "❌ No era esa..."}
               </p>
               <p className="text-xs text-slate-700 leading-relaxed">
-                <strong>🪤 Por qué confunde:</strong>{" "}
-                {ronda.opciones[ronda.impostora_idx].trampa_comun}
+                <strong>La impostora era:</strong> {ronda.opciones[ronda.impostora_idx].etiqueta}
+              </p>
+              <p className="text-xs text-slate-600 leading-relaxed mt-2">
+                <strong>🪤 Por qué confunde:</strong> {ronda.opciones[ronda.impostora_idx].trampa_comun}
               </p>
               <button
                 onClick={siguienteExamen}
@@ -506,13 +503,16 @@ export default function JuegoFinesCriterios() {
     );
   }
 
-  // RESULTADOS EXAMEN
+  // RESULTADOS
   if (fase === "resultados_examen") {
-    const aciertos = rondasExamen.filter(
-      (r, i) => respuestasExamen[i] === r.impostora_idx
-    ).length;
+    const aciertos = rondasExamen.filter((r, i) => respuestasExamen[i] === r.impostora_idx).length;
     const total = rondasExamen.length;
     const porcentaje = Math.round((aciertos / total) * 100);
+
+    const aciertosFin = rondasExamen.filter((r, i) => r.tipo === "FIN" && respuestasExamen[i] === r.impostora_idx).length;
+    const totalFin = rondasExamen.filter(r => r.tipo === "FIN").length;
+    const aciertosCriterio = rondasExamen.filter((r, i) => r.tipo === "CRITERIO" && respuestasExamen[i] === r.impostora_idx).length;
+    const totalCriterio = rondasExamen.filter(r => r.tipo === "CRITERIO").length;
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
@@ -531,6 +531,26 @@ export default function JuegoFinesCriterios() {
               {aciertos} / {total}
             </h2>
             <p className="text-lg text-orange-700 font-medium">{porcentaje}% de aciertos</p>
+            <p className="text-sm text-slate-600 mt-2">
+              {aciertos >= 7
+                ? "¡Excelente! Dominas los fines y criterios de la LGE."
+                : aciertos >= 5
+                ? "Buen resultado. Sigue practicando."
+                : "Repasa el modo Entrenamiento para reforzar."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-white border-2 border-orange-200 rounded-xl p-4 text-center">
+              <p className="text-2xl mb-1">🎯</p>
+              <p className="text-xs text-slate-600 mb-1">Fines (Art. 15)</p>
+              <p className="text-xl font-bold text-orange-700">{aciertosFin} / {totalFin}</p>
+            </div>
+            <div className="bg-white border-2 border-orange-200 rounded-xl p-4 text-center">
+              <p className="text-2xl mb-1">🛡️</p>
+              <p className="text-xs text-slate-600 mb-1">Criterios (Art. 16)</p>
+              <p className="text-xl font-bold text-orange-700">{aciertosCriterio} / {totalCriterio}</p>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4">
@@ -546,6 +566,10 @@ export default function JuegoFinesCriterios() {
             >
               ← Menú
             </button>
+          </div>
+
+          <div className="text-center text-xs text-slate-500 py-4">
+            🎯 SNTE Sección 21 Nuevo León · Por la educación al servicio del pueblo
           </div>
         </main>
       </div>
