@@ -1,0 +1,311 @@
+// ============================================================
+// EXAMEN BANCO USICAMM - CAMPOS FORMATIVOS Y EJES ARTICULADORES
+// Plan de Estudio 2022 (NEM) + LGE (Art. 15 Fines, Art. 16 Criterios, Art. 18 Orientacion integral)
+// 22 reactivos | clave 2222 | timer 90s por pregunta | resultado al final
+// SNTE Seccion 21 - Promocion Horizontal USICAMM
+// correcta: indice 0 = opcion a, 1 = opcion b, 2 = opcion c
+// ============================================================
+
+export const CLAVE_EXAMEN = "2222";
+export const TIEMPO_POR_PREGUNTA = 90; // segundos por reactivo
+
+export const REACTIVOS = [
+  {
+    id: 1,
+    tipo: "Completar",
+    enunciado: `En una clase, la maestra nota que algunos estudiantes excluyen a una compañera originaria de una comunidad indígena, pues suponen, de manera prejuiciosa, que carece de habilidades técnicas avanzadas. Para atenderlo desde el eje articulador de inclusión, la maestra dialoga con el grupo. Conforme a la perspectiva decolonial de la inclusión del currículo vigente, su decisión se sustenta en que deben promoverse relaciones que permitan cuestionar críticamente las ________ que operan en la escuela y en el mundo, propiciando que la identidad y la decisión del sujeto se construyan en ________ con su entorno y su comunidad.`,
+    opciones: [
+      `barreras de aprendizaje / adaptación funcional`,
+      `etiquetas personales / convivencia pacífica`,
+      `jerarquías sociales / pertenencia mutua`,
+    ],
+    correcta: 2,
+    explicacion: `La perspectiva decolonial de la inclusión busca cuestionar las jerarquías sociales que operan en la escuela y propiciar que la identidad se construya en pertenencia mutua con la comunidad. "Barreras de aprendizaje" pertenece al enfoque de educación especial; "etiquetas/convivencia pacífica" suaviza el planteamiento sin nombrar el componente crítico-estructural.`,
+    fuente: `Plan 2022 · Inclusión`,
+  },
+  {
+    id: 2,
+    tipo: "Caso",
+    enunciado: `Al comenzar el ciclo escolar, las y los maestros del campo formativo De lo Humano y lo Comunitario revisan los programas sintéticos y advierten que plantean contenidos de carácter nacional y obligatorio. No obstante, su secundaria atiende a una proporción amplia de alumnos migrantes con marcado rezago escolar, lo que complica aplicar los temas tal como están redactados oficialmente. Según el Plan de Estudio 2022, ¿cómo debe proceder el colectivo docente ante esta tensión?`,
+    opciones: [
+      `Ejercer su autonomía profesional para contextualizar los contenidos nacionales mediante el codiseño, sumando saberes locales y las necesidades de las y los estudiantes migrantes.`,
+      `Aplicar los contenidos nacionales con adecuaciones homogéneas que conserven referentes comunes para el aprendizaje de las y los estudiantes migrantes.`,
+      `Flexibilizar de manera parcial los contenidos, priorizando aprendizajes de integración comunitaria y acompañamiento escolar para responder al contexto migratorio.`,
+    ],
+    correcta: 0,
+    explicacion: `El Plan 2022 reconoce la autonomía profesional del magisterio para contextualizar los contenidos nacionales mediante el codiseño. Las adecuaciones homogéneas (b) niegan la pertinencia contextual y la flexibilización parcial (c) no nombra el mecanismo curricular oficial.`,
+    fuente: `Plan 2022 · Programa Analítico`,
+  },
+  {
+    id: 3,
+    tipo: "Caso",
+    enunciado: `Una maestra de Lenguajes detecta que la variante lingüística de su comunidad no aparece en el Programa Sintético. Al construir el Programa Analítico decide incorporar ese contenido pero, antes de hacerlo, dedica tres sesiones a entrevistar a hablantes mayores y registrar los rasgos fonéticos en una bitácora colectiva con su grupo. Identifique el plano que está ejerciendo en esas tres sesiones.`,
+    opciones: [
+      `Codiseño, porque incorpora un contenido local nuevo no previsto en el Programa Sintético nacional.`,
+      `Contextualización, porque resignifica los contenidos nacionales con referencias culturales de la comunidad escolar.`,
+      `Lectura de la realidad, porque indaga las condiciones culturales y lingüísticas del entorno antes de tomar decisiones curriculares.`,
+    ],
+    correcta: 2,
+    explicacion: `La maestra está INDAGANDO el entorno (entrevistas, bitácora) ANTES de tomar decisiones curriculares: eso es Lectura de la realidad (Plano 1). El codiseño sería CREAR contenidos nuevos; la contextualización sería TOMAR contenidos existentes y llevarlos a la realidad.`,
+    fuente: `Plan 2022 · Programa Analítico`,
+  },
+  {
+    id: 4,
+    tipo: "Caso",
+    enunciado: `Una maestra organiza un proyecto donde el alumnado indaga, experimenta y construye modelos para explicar por qué se contamina el río de su zona y cómo afecta la salud, contrastando distintas formas de conocer el fenómeno. ¿A qué campo formativo corresponde principalmente?`,
+    opciones: [
+      `Ética, Naturaleza y Sociedades.`,
+      `Saberes y Pensamiento Científico.`,
+      `De lo Humano y lo Comunitario.`,
+    ],
+    correcta: 1,
+    explicacion: `Comprensión y explicación de fenómenos naturales (salud, medio ambiente) desde diversos saberes = Saberes y Pensamiento Científico. Ética jala por "naturaleza", pero ese campo aborda la postura ética ciudadana, no la explicación científica.`,
+    fuente: `Plan 2022 · Campos`,
+  },
+  {
+    id: 5,
+    tipo: "Caso",
+    enunciado: `En un proyecto, el alumnado analiza de forma crítica por qué ciertos grupos de su comunidad han sido históricamente discriminados, asume una postura frente a esa injusticia y propone acuerdos para una convivencia más democrática y respetuosa de los derechos. ¿A qué campo formativo corresponde principalmente?`,
+    opciones: [
+      `De lo Humano y lo Comunitario.`,
+      `Saberes y Pensamiento Científico.`,
+      `Ética, Naturaleza y Sociedades.`,
+    ],
+    correcta: 2,
+    explicacion: `Comprensión crítica de procesos para construir postura ética y ciudadanía participativa = Ética, Naturaleza y Sociedades. De lo Humano jala por "comunidad", pero su objeto son las experiencias socioafectivas.`,
+    fuente: `Plan 2022 · Campos`,
+  },
+  {
+    id: 6,
+    tipo: "Concepto",
+    enunciado: `El objeto de aprendizaje de un campo formativo son las experiencias cognitivas, motrices, socioafectivas y creativas que favorecen la construcción de la identidad, el sentido de pertenencia y el compromiso ético del estudiante. Identifique la situación que corresponde a este campo.`,
+    opciones: [
+      `El grupo investiga las transformaciones históricas y geográficas de su localidad para comprender el presente y exigir el respeto de los derechos.`,
+      `El grupo experimenta con modelos para explicar un fenómeno natural y toma decisiones fundamentadas sobre un problema de su entorno.`,
+      `El grupo realiza actividades donde reconoce y regula sus emociones, fortalece sus vínculos con los demás y reflexiona sobre su proyecto de vida.`,
+    ],
+    correcta: 2,
+    explicacion: `Manejo emocional, vínculos y proyecto de vida = De lo Humano y lo Comunitario. La opción a) corresponde a Ética (conciencia histórica) y la b) a Saberes (explicación de fenómenos).`,
+    fuente: `Plan 2022 · Campos`,
+  },
+  {
+    id: 7,
+    tipo: "Completar",
+    enunciado: `El Plan parte de que la realidad no es una totalidad universal; por ello, estructurar el currículo en campos formativos permite la __________ del conocimiento y enriquece la mirada del mundo mediante la diversidad de __________.`,
+    opciones: [
+      `acumulación / contenidos disciplinares`,
+      `integración / verdades epistémicas`,
+      `transmisión / competencias básicas`,
+    ],
+    correcta: 1,
+    explicacion: `Los campos permiten la integración del conocimiento y la diversidad de verdades epistémicas. Las opciones a) y c) responden a una visión sumativa/transmisora que el Plan rechaza.`,
+    fuente: `Plan 2022 · Campos`,
+  },
+  {
+    id: 8,
+    tipo: "Completar",
+    enunciado: `Cuando, mediante la problematización de la realidad, confluyen los contenidos de un campo formativo con uno o más ejes articuladores, se conforma un __________ del trabajo didáctico que crea temas de reflexión situados.`,
+    opciones: [
+      `eje transversal`,
+      `núcleo integrador`,
+      `marco curricular`,
+    ],
+    correcta: 1,
+    explicacion: `La confluencia de ejes + campos = núcleo integrador. "Eje transversal" es terminología de planes anteriores; "marco curricular" es otro nivel de la estructura.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 9,
+    tipo: "Caso",
+    enunciado: `Una escuela forma a sus estudiantes para que comprendan que, si una compañera o compañero queda fuera por motivos de clase, lengua, etnia o capacidad, entonces el proceso no es para todas y todos; por ello impulsa acciones colectivas con las familias y el trabajo colegiado del Consejo Técnico. ¿A qué eje articulador corresponde?`,
+    opciones: [
+      `Interculturalidad crítica.`,
+      `Igualdad de género.`,
+      `Inclusión.`,
+    ],
+    correcta: 2,
+    explicacion: `Inclusión decolonial: nadie está incluido si falta uno. La interculturalidad se centra en el diálogo de saberes entre culturas.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 10,
+    tipo: "Concepto",
+    enunciado: `El eje de pensamiento crítico busca que el estudiante desarrolle un juicio propio y la autonomía para interrogar al mundo y oponerse a la injusticia. Identifique la acción docente que lo promueve.`,
+    opciones: [
+      `Pide a las y los estudiantes que analicen las causas históricas y estructurales de una desigualdad de su comunidad, argumenten una postura y propongan cómo transformarla.`,
+      `Pide que dialoguen con personas de otras culturas para reconocer y valorar sus saberes y formas de vida en un plano de respeto.`,
+      `Pide que reconozcan y regulen sus emociones ante un conflicto y acuerden una solución pacífica con sus compañeros.`,
+    ],
+    correcta: 0,
+    explicacion: `Analizar causas estructurales + argumentar + transformar = pensamiento crítico. La opción b) es interculturalidad y la c) es socioemocional.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 11,
+    tipo: "Caso",
+    enunciado: `Una maestra quiere que la enseñanza de las ciencias y la historia deje de transmitirse solo desde la visión occidental e incorpore de verdad a los pueblos indígenas y afromexicanos. ¿Qué acción es congruente con la interculturalidad crítica y no con el enfoque multicultural?`,
+    opciones: [
+      `Dedicar una semana cultural a exponer trajes, danzas y comidas de los pueblos originarios para que el grupo los conozca y respete.`,
+      `Reflexionar los contenidos de química, matemáticas e historia desde las perspectivas de los pueblos indígenas y afromexicanos, en un diálogo de saberes horizontal.`,
+      `Reservar en el mapa curricular un espacio para la enseñanza de la lengua originaria de la región a cargo de un especialista.`,
+    ],
+    correcta: 1,
+    explicacion: `Interculturalidad crítica = diálogo de saberes en horizontalidad. Las opciones a) y c) son enfoque multicultural funcional: reconocen diferencias pero no integran los saberes.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 12,
+    tipo: "Completar",
+    enunciado: `El eje de igualdad de género plantea que niñas, niños y adolescentes comprendan que la igualdad entre mujeres y hombres es una condición __________, y no un rasgo __________ de la sociedad ni una consecuencia de diferencias biológicas.`,
+    opciones: [
+      `jurídica / económico`,
+      `histórica / cultural`,
+      `natural / político`,
+    ],
+    correcta: 1,
+    explicacion: `Igualdad de género = condición histórica, no rasgo cultural. Las opciones a) y c) naturalizan la desigualdad.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 13,
+    tipo: "Caso",
+    enunciado: `En una comunidad con altos índices de enfermedad y poco acceso a servicios, la escuela quiere abordar la salud sin reducirla a hábitos individuales. ¿Qué acción corresponde al eje de vida saludable?`,
+    opciones: [
+      `Establecer un reglamento que sancione a quien lleve alimentos no saludables y vigilar su cumplimiento en cada receso.`,
+      `Calcular el índice de masa corporal de cada estudiante y entregar a las familias una dieta estandarizada para corregirlo.`,
+      `Acercar a distintos sectores de la comunidad a la escuela para contrarrestar juntos los condicionantes sociales de la salud y promover el bienestar integral.`,
+    ],
+    correcta: 2,
+    explicacion: `Vida saludable atiende los condicionantes sociales con proximidad comunitaria. La opción a) es control/vigilancia y la b) reduce la salud a lo individual.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 14,
+    tipo: "Caso",
+    enunciado: `Una escuela en una región con escaso acceso a libros quiere hacer efectivo el derecho a la lectura de su alumnado. Conforme al eje de apropiación de las culturas a través de la lectura y la escritura, ¿qué acción debe priorizar?`,
+    opciones: [
+      `Aplicar exámenes de velocidad y comprensión lectora para clasificar a los estudiantes por su nivel y formar grupos homogéneos.`,
+      `Acercar al alumnado a diversas fuentes y prácticas sociales de lectura que lo pongan en relación con otras culturas, y revitalizar el uso de las lenguas maternas.`,
+      `Asignar a diario la copia y la lectura en voz alta de un texto del libro oficial para mejorar la dicción y la ortografía.`,
+    ],
+    correcta: 1,
+    explicacion: `Lectura como derecho democratizado y en relación con otras culturas. La opción a) es clasificatoria y la c) reduce la lectura a decodificación/copia.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 15,
+    tipo: "Concepto",
+    enunciado: `El eje de artes y experiencias estéticas reconoce a las artes como un sistema cultural que es también una forma de conocer. Identifique la acción que lo aprovecha en el sentido que propone el Plan.`,
+    opciones: [
+      `Emplear manifestaciones artísticas para explorar y representar contenidos de las ciencias y las humanidades, abriendo el diálogo sobre problemas de interés común.`,
+      `Destinar las clases de arte a ensayar el festival escolar para presentar bailables y cuadros bien ejecutados ante las familias.`,
+      `Enseñar la biografía de los grandes artistas y las técnicas correctas para que el alumnado reproduzca obras reconocidas con fidelidad.`,
+    ],
+    correcta: 0,
+    explicacion: `Artes para explorar y representar contenidos de otros campos. La opción b) entiende el arte como espectáculo y la c) como técnica/reproducción.`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 16,
+    tipo: "Relacionar",
+    enunciado: `Relacione cada eje articulador con la acción pedagógica que lo concreta en el aula según el Plan 2022.`,
+    columnaA: [
+      `1. Igualdad de género`,
+      `2. Inclusión`,
+      `3. Pensamiento crítico`,
+    ],
+    columnaB: [
+      `a) Promover que la identidad sea una decisión del sujeto en pertenencia mutua con su mundo y cuestionar las jerarquías sociales de la escuela.`,
+      `b) Guiar al grupo a elaborar hipótesis, distinguir causas y efectos de un fenómeno y formular argumentos lógicos y fundamentados.`,
+      `c) Impulsar el liderazgo de las niñas en áreas asignadas tradicionalmente a los hombres y dar lugar a los saberes de las mujeres como fuente de conocimiento.`,
+    ],
+    opciones: [
+      `1a, 2b, 3c`,
+      `1c, 2a, 3b`,
+      `1b, 2c, 3a`,
+    ],
+    correcta: 1,
+    explicacion: `Igualdad de género = liderazgo de las niñas + saberes de las mujeres (1→c); Inclusión = identidad + pertenencia mutua (2→a); Pensamiento crítico = hipótesis + argumentos (3→b).`,
+    fuente: `Plan 2022 · Ejes`,
+  },
+  {
+    id: 17,
+    tipo: "Caso",
+    enunciado: `Un colectivo impulsa un proyecto donde el alumnado aprende a cuidar el agua y los árboles de su comunidad, a reducir los desechos que genera y a prepararse ante las sequías e inundaciones que se han vuelto más frecuentes. ¿A qué fin de la educación de la LGE corresponde?`,
+    opciones: [
+      `Inculcar el respeto por la naturaleza mediante capacidades que aseguren el manejo integral, la conservación y el desarrollo sostenible.`,
+      `Promover la comprensión y el aprecio de la pluralidad étnica, cultural y lingüística de la nación.`,
+      `Inculcar el enfoque de derechos humanos y de igualdad sustantiva con el mismo trato y oportunidades para todas las personas.`,
+    ],
+    correcta: 0,
+    explicacion: `Manejo integral, conservación de recursos y resiliencia ante el cambio climático = fin de respeto a la naturaleza (LGE Art. 15, fr. VIII). Las otras opciones son fines distintos (pluralidad y derechos humanos).`,
+    fuente: `LGE · Art. 15 fr. VIII`,
+  },
+  {
+    id: 18,
+    tipo: "Concepto",
+    enunciado: `El criterio que concibe a la democracia no solo como una estructura jurídica y un régimen político, sino como un sistema de vida orientado al mejoramiento del pueblo, busca llevarse a la práctica escolar. Identifique la situación que lo refleja.`,
+    opciones: [
+      `El grupo organiza asambleas donde delibera, toma decisiones de forma colectiva y construye de manera permanente una convivencia y una vida escolar más justas.`,
+      `El grupo conoce la estructura de los poderes de la Unión y el proceso electoral para emitir un voto razonado en su momento.`,
+      `El grupo analiza las normas del reglamento escolar y elabora un decálogo de obligaciones para mantener el orden en el aula.`,
+    ],
+    correcta: 0,
+    explicacion: `Asambleas deliberativas = democracia como sistema de vida (LGE Art. 16, fr. I). La opción b) reduce la democracia a estructura jurídica y la c) la confunde con orden normativo.`,
+    fuente: `LGE · Art. 16 fr. I`,
+  },
+  {
+    id: 19,
+    tipo: "Concepto",
+    enunciado: `Dentro de la orientación integral, la LGE incluye la capacidad de identificar, analizar, cuestionar y valorar fenómenos e ideas, y de tomar una posición frente a los hechos para solucionar problemas de la realidad. Identifique la situación que la desarrolla.`,
+    opciones: [
+      `El alumnado trabaja en equipo, regula sus emociones y muestra empatía y responsabilidad al colaborar con sus compañeros.`,
+      `El alumnado reflexiona sobre el sentido de la existencia y el devenir histórico de las ideas a lo largo del tiempo.`,
+      `El alumnado examina una noticia, distingue los hechos de las opiniones, sopesa las pruebas y toma partido de forma argumentada sobre el problema.`,
+    ],
+    correcta: 2,
+    explicacion: `Identificar, analizar, cuestionar, valorar y tomar posición = pensamiento crítico (LGE Art. 18, fr. VII). La opción a) son habilidades socioemocionales y la b) es pensamiento filosófico.`,
+    fuente: `LGE · Art. 18 fr. VII`,
+  },
+  {
+    id: 20,
+    tipo: "Concepto",
+    enunciado: `Una finalidad del campo de Saberes y Pensamiento Científico es que el alumnado reconozca y use diversos métodos para construir conocimiento. Identifique la acción docente congruente con ella.`,
+    opciones: [
+      `Conducir al grupo a comparar distintas formas de explicar un mismo fenómeno y a decidir cuál es más adecuada según el problema y el contexto.`,
+      `Enseñar y exigir los pasos del método científico en un orden único para garantizar resultados válidos y comparables.`,
+      `Solicitar la memorización de las clasificaciones y definiciones científicas para asegurar el dominio de los contenidos del campo.`,
+    ],
+    correcta: 0,
+    explicacion: `Reconocer y usar diversos métodos (no un método único). La opción b) es un caballo de Troya: el "método único" es justo lo que el campo rechaza; la c) reduce el campo a memorización.`,
+    fuente: `Plan 2022 · Saberes`,
+  },
+  {
+    id: 21,
+    tipo: "Caso",
+    enunciado: `Un proyecto busca que el alumnado comprenda los problemas del país, valore el aprovechamiento responsable de los recursos nacionales y aprecie la defensa de la soberanía y la continuidad de la cultura mexicana. ¿A qué criterio de la educación corresponde?`,
+    opciones: [
+      `Criterio nacional.`,
+      `Criterio humanista.`,
+      `Criterio intercultural.`,
+    ],
+    correcta: 0,
+    explicacion: `Comprensión de nuestros problemas + recursos + soberanía + cultura = criterio nacional (LGE Art. 16, fr. II). El humanista alude a dignidad y fraternidad; el intercultural, a la convivencia entre culturas.`,
+    fuente: `LGE · Art. 16 fr. II`,
+  },
+  {
+    id: 22,
+    tipo: "Caso",
+    enunciado: `Una maestra diseña un proyecto cuyo propósito es que el alumnado exprese y comunique sus formas de ser y estar en el mundo para conformar su identidad, al tiempo que reconoce y valora la diversidad y entabla un diálogo intercultural e inclusivo. ¿A qué campo formativo corresponde principalmente?`,
+    opciones: [
+      `De lo Humano y lo Comunitario.`,
+      `Ética, Naturaleza y Sociedades.`,
+      `Lenguajes.`,
+    ],
+    correcta: 2,
+    explicacion: `Expresión y comunicación de las formas de ser y estar en el mundo para conformar la identidad y el diálogo intercultural = finalidad de Lenguajes. De lo Humano jala por "identidad", pero su objeto son las experiencias socioafectivas; Ética jala por "diálogo intercultural", pero se ocupa de la postura ética.`,
+    fuente: `Plan 2022 · Lenguajes`,
+  },
+];
+
+export default REACTIVOS;

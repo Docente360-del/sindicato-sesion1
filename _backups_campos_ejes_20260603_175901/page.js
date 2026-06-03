@@ -64,16 +64,6 @@ const EXAMENES = [
     titulo: "Examen Fines y Criterios",
     subtitulo: "Sesion 4 · Fines y criterios LGE (clave 7777)",
     reactivos: 10,
-  },
-  {
-    id: "campos-y-ejes",
-    titulo: "Examen Campos y Ejes",
-    subtitulo: "Banco USICAMM · Plan 2022 + LGE",
-    descripcion: "22 reactivos de campos formativos y ejes articuladores",
-    ruta: "/examen/campos-y-ejes",
-    icono: "📝",
-    reactivos: 22,
-    preguntas: 22,
   }
 ];
 
