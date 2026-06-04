@@ -40,7 +40,7 @@ export const REACTIVOS = [
   {
     id: 3,
     tipo: "Caso",
-    enunciado: `El colectivo se asegura de que todas las acciones educativas pongan al centro el bienestar de sus estudiantes, buscando que cada uno se forme como persona capaz de participar activamente en la vida colectiva de su entorno. ¿Qué PROPÓSITO del CTE sustenta esta orientación?`,
+    enunciado: `Un colectivo orienta todos sus procesos educativos a poner por delante el bienestar de niñas, niños, adolescentes y jóvenes, para que se formen como personas que participan de manera solidaria en una sociedad democrática con justicia social. ¿Qué PROPÓSITO del CTE sustenta esta orientación?`,
     opciones: [
       `Hacer efectivo el derecho humano a la educación de las y los estudiantes de Educación Básica.`,
       `Contribuir al desarrollo del pensamiento crítico y al fortalecimiento de los lazos de la Escuela con la comunidad.`,
@@ -66,7 +66,7 @@ export const REACTIVOS = [
   {
     id: 5,
     tipo: "Caso",
-    enunciado: `El Colectivo docente revisa lo que plantea el currículo nacional y lo ajusta para que responda a las circunstancias concretas del entorno donde viven sus estudiantes. ¿Qué PROPÓSITO del CTE corresponde?`,
+    enunciado: `El Colectivo docente toma los contenidos de los programas sintéticos y los adapta a la realidad social, territorial, cultural, ambiental, económica y educativa de su Escuela para atender las necesidades formativas de su alumnado. ¿Qué PROPÓSITO del CTE corresponde?`,
     opciones: [
       `Deliberar sobre el currículo considerando lo pertinente y necesario, tomando como insumo principal sus saberes y experiencia pedagógica.`,
       `Analizar de forma permanente el logro de los aprendizajes y capacidades del alumnado.`,
@@ -79,7 +79,7 @@ export const REACTIVOS = [
   {
     id: 6,
     tipo: "Caso",
-    enunciado: `Una directora destina tiempo dentro del CTE para que el equipo docente participe en actividades de desarrollo profesional colaborativo que fortalezcan su capacidad de tomar decisiones sobre su propia práctica. ¿Cuál PROPÓSITO del CTE sustenta su decisión?`,
+    enunciado: `Una directora abre, dentro del CTE, oportunidades para que las maestras y los maestros se formen entre pares y así puedan ejercer plenamente su autonomía profesional. ¿Cuál PROPÓSITO del CTE sustenta su decisión?`,
     opciones: [
       `Favorecer el trabajo pedagógico colegiado y fomentar espacios de intercambio y de reflexión entre los integrantes del Colectivo docente.`,
       `Propiciar espacios de formación entre las maestras y los maestros que les permitan ejercer plenamente su autonomía profesional.`,
@@ -92,7 +92,7 @@ export const REACTIVOS = [
   {
     id: 7,
     tipo: "Caso",
-    enunciado: `El colectivo diseña un plan para atender las dificultades más urgentes de la Escuela, lo ejecuta y revisa periódicamente sus avances, estrechando al mismo tiempo su vínculo con las familias y la localidad. ¿Qué PROPÓSITO del CTE corresponde?`,
+    enunciado: `El colectivo planea, pone en marcha y da seguimiento a sus procesos de mejora continua, priorizando la solución de problemas específicos de la Escuela y fortaleciendo sus lazos con la comunidad. ¿Qué PROPÓSITO del CTE corresponde?`,
     opciones: [
       `Planear, implementar y dar seguimiento a los procesos de mejora continua, priorizando la solución de problemas específicos de la Escuela y el fortalecimiento de los lazos de la Escuela con la comunidad.`,
       `Impulsar el Proceso de Mejora Continua como una práctica permanente en las Escuelas en estrecha vinculación con la comunidad.`,
@@ -105,7 +105,7 @@ export const REACTIVOS = [
   {
     id: 8,
     tipo: "Caso",
-    enunciado: `Cada bimestre, el colectivo examina cómo van avanzando las y los estudiantes y señala los obstáculos que la Escuela aún no ha resuelto para garantizar que nadie quede fuera por motivos de género, origen étnico o condición. ¿Qué PROPÓSITO del CTE corresponde?`,
+    enunciado: `De manera permanente, el colectivo revisa el logro de aprendizajes y capacidades de su alumnado e identifica los retos que la Escuela debe superar para ofrecer oportunidades con inclusión, equidad, igualdad de género e interculturalidad. ¿Qué PROPÓSITO del CTE corresponde?`,
     opciones: [
       `Tomar decisiones de carácter pedagógico que contribuyan a una educación de excelencia priorizando el máximo logro de los aprendizajes.`,
       `Analizar de forma permanente el logro de los aprendizajes y capacidades del alumnado e identificar los retos que debe superar la Escuela para brindar oportunidades de aprendizaje con inclusión, equidad, igualdad de género e interculturalidad.`,
@@ -118,7 +118,7 @@ export const REACTIVOS = [
   {
     id: 9,
     tipo: "Caso",
-    enunciado: `En una sesión ordinaria, el CTE acuerda dedicar tiempo a un asunto no previsto en la agenda porque lo considera urgente para el avance de sus estudiantes y el fortalecimiento de la Escuela. ¿Qué PROPÓSITO del CTE lo respalda?`,
+    enunciado: `El CTE decide trabajar un tema que no estaba previsto porque lo considera necesario, cuidando que contribuya a la mejora continua de la Escuela y al máximo logro de aprendizajes de los educandos. ¿Qué PROPÓSITO del CTE lo respalda?`,
     opciones: [
       `Decidir las formas de organización de las sesiones de CTE que mejor atiendan a las características del Colectivo docente.`,
       `Tomar decisiones de carácter pedagógico que contribuyan a una educación de excelencia.`,
@@ -131,7 +131,7 @@ export const REACTIVOS = [
   {
     id: 10,
     tipo: "Caso",
-    enunciado: `Una Escuela diseña su propuesta formativa reconociendo que su alumnado vive en condiciones dispares, con la finalidad de que cada estudiante pueda ejercer plenamente su acceso a una educación de calidad. ¿Qué PROPÓSITO del CTE corresponde?`,
+    enunciado: `Una Escuela elabora su proyecto educativo tomando en cuenta las condiciones de desigualdad y los contextos diferenciados de su alumnado, con la finalidad de hacer efectivo el derecho humano a la educación. ¿Qué PROPÓSITO del CTE corresponde?`,
     opciones: [
       `Contextualizar los contenidos de los programas sintéticos de acuerdo con la realidad de cada Escuela.`,
       `Priorizar el interés superior de las niñas, niños, adolescentes y jóvenes en todos los procesos educativos.`,
@@ -170,7 +170,7 @@ export const REACTIVOS = [
   {
     id: 13,
     tipo: "Caso",
-    enunciado: `Después de reconocer sus principales desafíos, el Colectivo docente y la Comunidad escolar acuerdan qué quieren lograr, cómo lo medirán y qué pasos darán para resolverlos. ¿Qué FUNCIÓN del CTE corresponde?`,
+    enunciado: `Tras identificar sus prioridades y problemas educativos, el Colectivo docente y la Comunidad escolar establecen los objetivos, las metas y las acciones para atenderlos. ¿Qué FUNCIÓN del CTE corresponde?`,
     opciones: [
       `Planear, implementar y dar seguimiento a los procesos de mejora continua, priorizando la solución de problemas específicos de la Escuela.`,
       `Definir los objetivos, las metas y las acciones para la atención de las prioridades y los problemas educativos identificados por el Colectivo docente y la Comunidad escolar.`,
@@ -196,7 +196,7 @@ export const REACTIVOS = [
   {
     id: 15,
     tipo: "Caso",
-    enunciado: `El CTE busca que el proceso de mejorar la Escuela no sea algo que ocurra solo en ciertas fechas, sino que forme parte de la cultura cotidiana del plantel, involucrando también a las familias y vecinos. ¿Qué FUNCIÓN del CTE corresponde?`,
+    enunciado: `El CTE busca que la mejora continua deje de ser un evento aislado y se vuelva una práctica permanente en la Escuela, en estrecha vinculación con la comunidad. ¿Qué FUNCIÓN del CTE corresponde?`,
     opciones: [
       `Planear, implementar y dar seguimiento a los procesos de mejora continua.`,
       `Abordar cualquier tema que esté en función de la mejora continua de las Escuelas.`,
@@ -209,7 +209,7 @@ export const REACTIVOS = [
   {
     id: 16,
     tipo: "Caso",
-    enunciado: `En sesión, el Colectivo docente llega a acuerdos sobre la enseñanza y el aprendizaje para elevar la calidad del servicio educativo y obtener los mejores resultados posibles con su alumnado. ¿Qué FUNCIÓN del CTE corresponde?`,
+    enunciado: `Durante una sesión, el Colectivo docente acuerda decisiones de carácter pedagógico orientadas a una educación de excelencia, priorizando el máximo logro de los aprendizajes de niñas, niños y adolescentes. ¿Qué FUNCIÓN del CTE corresponde?`,
     opciones: [
       `Tomar decisiones de carácter pedagógico que contribuyan a una educación de excelencia priorizando el máximo logro de los aprendizajes de niñas, niños y adolescentes.`,
       `Tomar acuerdos para realizar y concretar el Diagnóstico socioeducativo de la escuela.`,
