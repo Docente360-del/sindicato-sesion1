@@ -74,16 +74,6 @@ const EXAMENES = [
     icono: "📝",
     reactivos: 22,
     preguntas: 22,
-  },
-  {
-    id: "funciones-propositos",
-    titulo: "Examen Funciones y Propósitos",
-    subtitulo: "CTE · Artículos 7 y 8 del Acuerdo",
-    descripcion: "20 reactivos: propósitos y funciones del CTE",
-    ruta: "/examen/funciones-propositos",
-    icono: "📝",
-    reactivos: 20,
-    preguntas: 20,
   }
 ];
 
