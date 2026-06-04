@@ -150,18 +150,6 @@ const IMAGENES = [
     subtitulo: "Art. 129 LGE - Obligaciones de Madres, Padres y Tutores",
     src: "/imagenes/derechos/obligaciones-padres.jpg",
   },
-  {
-    id: "propositos-cte",
-    titulo: "Propósitos",
-    subtitulo: "Art. 7 — Propósitos del CTE",
-    src: "/imagenes/mochila-propositos-cte.jpg",
-  },
-  {
-    id: "funciones-cte",
-    titulo: "Funciones",
-    subtitulo: "Art. 8 — Funciones del CTE",
-    src: "/imagenes/circo-funciones-cte.jpg",
-  }
 ];
 
 const JUEGOS = [
