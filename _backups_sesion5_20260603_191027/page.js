@@ -84,15 +84,6 @@ const EXAMENES = [
     icono: "📝",
     reactivos: 20,
     preguntas: 20,
-  },
-  {
-    id: "preguntas-sesion-5",
-    titulo: "Preguntas Sesión 5",
-    subtitulo: "Sesión 5 · 7 reactivos",
-    ruta: "/examen/preguntas-sesion-5",
-    icono: "📝",
-    reactivos: 7,
-    preguntas: 7,
   }
 ];
 
