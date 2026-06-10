@@ -93,12 +93,6 @@ const EXAMENES = [
     icono: "📝",
     reactivos: 7,
     preguntas: 7,
-  },
-  {
-    id: "programa-analitico",
-    titulo: "Examen Programa Analitico",
-    subtitulo: "CTE 2025-2026 · Programa Analitico",
-    reactivos: 10,
   }
 ];
 
