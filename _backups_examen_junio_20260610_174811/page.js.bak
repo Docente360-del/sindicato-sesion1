@@ -99,12 +99,6 @@ const EXAMENES = [
     titulo: "Examen Programa Analitico",
     subtitulo: "CTE 2025-2026 · Programa Analitico",
     reactivos: 10,
-  },
-  {
-    id: "clase-10-junio",
-    titulo: "Clase 10 de Junio",
-    subtitulo: "Educación Especial e Inclusión",
-    reactivos: 22,
   }
 ];
 
