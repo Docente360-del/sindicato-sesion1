@@ -35,7 +35,7 @@ const EXAMENES = [
   {
     id: "primer-parcial",
     titulo: "Primer Examen Parcial",
-    subtitulo: "Educación Especial + Horas Adicionales · clave 1306",
+    subtitulo: "Educación Especial + Horas Adicionales",
     descripcion: "30 reactivos · 1:30 por pregunta · resultados al final",
     ruta: "/examen/primer-parcial",
     icono: "📝",
