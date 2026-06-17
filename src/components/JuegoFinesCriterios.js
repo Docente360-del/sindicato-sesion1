@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Trophy, BookOpen, Search, RefreshCw, Check, X } from "lucide-react";
-import { ITEMS_LGE, TIPOS_INFO } from "../data/juego-fines-criterios";
+import { ArrowLeft, Trophy, BookOpen, Search, RefreshCw, Check, X, Scale } from "lucide-react";
+import { ITEMS_LGE, TIPOS_INFO, DERECHOS_OBLIGACIONES, CLASES_INFO } from "../data/juego-fines-criterios";
 
 const CONTRASENA = "1111";
 
@@ -28,10 +28,15 @@ function generarOpcionesMismoTipo(item_correcto) {
 // Generar rondas del modo CAZA AL IMPOSTOR (4 opciones todas del mismo tipo, 1 impostora)
 function generarRondasExamen() {
   const rondas = [];
-  // Mezclamos tipos
-  const tipos = shuffle(["FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO", "FIN", "CRITERIO"]);
+  // Tipos con al menos 3 disposiciones (para 3 propias + 1 impostora)
+  const tiposDisponibles = [...new Set(ITEMS_LGE.map((i) => i.tipo))].filter(
+    (t) => ITEMS_LGE.filter((i) => i.tipo === t).length >= 3
+  );
+  const secuencia = shuffle(
+    Array.from({ length: 8 }, (_, k) => tiposDisponibles[k % tiposDisponibles.length])
+  );
 
-  for (const tipo of tipos) {
+  for (const tipo of secuencia) {
     const propios = shuffle(ITEMS_LGE.filter((i) => i.tipo === tipo)).slice(0, 3);
     const ajenos = shuffle(ITEMS_LGE.filter((i) => i.tipo !== tipo));
     const una_impostora = ajenos[0];
@@ -70,6 +75,17 @@ export default function JuegoFinesCriterios() {
   const [mejorPuntaje, setMejorPuntaje] = useState(
     typeof window !== "undefined"
       ? parseInt(localStorage.getItem("snte_fines_criterios_best") || "0")
+      : 0
+  );
+
+  // CLASIFICAR (Derechos vs Obligaciones - Art. 128 y 129)
+  const rondas_clasificar = useMemo(() => shuffle(DERECHOS_OBLIGACIONES), []);
+  const [indiceClasificar, setIndiceClasificar] = useState(0);
+  const [respuestasClasificar, setRespuestasClasificar] = useState({});
+  const [mostrandoFeedbackClasificar, setMostrandoFeedbackClasificar] = useState(false);
+  const [mejorClasificar, setMejorClasificar] = useState(
+    typeof window !== "undefined"
+      ? parseInt(localStorage.getItem("snte_derechos_obligaciones_best") || "0")
       : 0
   );
 
@@ -138,6 +154,38 @@ export default function JuegoFinesCriterios() {
         }
       }
       setFase("resultados_examen");
+    }
+  }
+
+  function iniciarClasificar() {
+    setIndiceClasificar(0);
+    setRespuestasClasificar({});
+    setMostrandoFeedbackClasificar(false);
+    setFase("clasificar");
+  }
+
+  function responderClasificar(clase) {
+    if (mostrandoFeedbackClasificar) return;
+    setRespuestasClasificar({ ...respuestasClasificar, [indiceClasificar]: clase });
+    setMostrandoFeedbackClasificar(true);
+  }
+
+  function siguienteClasificar() {
+    setMostrandoFeedbackClasificar(false);
+    if (indiceClasificar < rondas_clasificar.length - 1) {
+      setIndiceClasificar(indiceClasificar + 1);
+    } else {
+      let puntaje = 0;
+      rondas_clasificar.forEach((item, idx) => {
+        if (respuestasClasificar[idx] === item.clase) puntaje++;
+      });
+      if (puntaje > mejorClasificar) {
+        setMejorClasificar(puntaje);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("snte_derechos_obligaciones_best", puntaje.toString());
+        }
+      }
+      setFase("resultados_clasificar");
     }
   }
 
@@ -210,7 +258,7 @@ export default function JuegoFinesCriterios() {
               Domina Fines y Criterios
             </h1>
             <p className="text-orange-100 text-sm sm:text-base">
-              SNTE Sección 21 Nuevo León · 9 Fines (Art. 15) + 8 Criterios (Art. 16) LGE
+              SNTE Sección 21 · Fines · Criterios · Objetivos NEM · DHI · Derechos y Obligaciones (LGE)
             </p>
           </div>
         </header>
@@ -235,10 +283,10 @@ export default function JuegoFinesCriterios() {
                 <h2 className="text-xl font-bold text-orange-800 mb-2">Modo Entrenamiento</h2>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Lee un fragmento del DOF y elige cuál de las 3 opciones le corresponde.
-                  Las 3 opciones son del mismo tipo (todas fines o todas criterios).
+                  Las 3 opciones son del mismo tipo (fines, criterios, objetivos o DHI).
                 </p>
                 <p className="text-xs text-orange-600 mt-2 font-medium">
-                  17 rondas · Sin tiempo límite
+                  {ITEMS_LGE.length} rondas · Sin tiempo límite
                 </p>
               </div>
             </div>
@@ -258,6 +306,25 @@ export default function JuegoFinesCriterios() {
                 </p>
                 <p className="text-xs text-orange-600 mt-2 font-medium">
                   8 rondas · Evaluación BRUTAL
+                </p>
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={iniciarClasificar}
+            className="w-full bg-white border-2 border-orange-300 hover:border-orange-500 rounded-2xl p-6 shadow-md hover:shadow-lg transition text-left"
+          >
+            <div className="flex items-start gap-4">
+              <Scale className="w-10 h-10 text-orange-600 flex-shrink-0" />
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-orange-800 mb-2">Derechos y Obligaciones</h2>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Lee la palabra clave y decide si es un <strong>Derecho</strong> (Art. 128) o una{" "}
+                  <strong>Obligación</strong> (Art. 129) de madres, padres o tutores.
+                </p>
+                <p className="text-xs text-orange-600 mt-2 font-medium">
+                  15 tarjetas · Clasificación rápida
                 </p>
               </div>
             </div>
@@ -310,13 +377,13 @@ export default function JuegoFinesCriterios() {
             <div className="mt-3 inline-flex items-center gap-2 bg-orange-100 px-3 py-1 rounded-full border border-orange-300">
               <span className="text-lg">{tipoInfo.emoji}</span>
               <span className="text-xs font-bold text-orange-800">
-                Es un {ronda.item.tipo === "FIN" ? "FIN" : "CRITERIO"} de la educación
+                Es un {tipoInfo.nombre}
               </span>
             </div>
           </div>
 
           <p className="text-sm font-medium text-slate-700">
-            Elige el {ronda.item.tipo === "FIN" ? "fin" : "criterio"} correcto:
+            Elige el {tipoInfo.singular} correcto:
           </p>
 
           {/* OPCIONES - ambas del mismo tipo */}
@@ -343,10 +410,10 @@ export default function JuegoFinesCriterios() {
                     <div className="flex-1">
                       <p
                         className={`text-slate-800 leading-relaxed ${
-                          opcion.tipo === "CRITERIO" ? "text-lg font-bold" : "text-sm"
+                          TIPOS_INFO[opcion.tipo].display === "corto" ? "text-lg font-bold" : "text-sm"
                         }`}
                       >
-                        {opcion.tipo === "CRITERIO" ? opcion.nombre_corto : `"${opcion.nombre_corto}"`}
+                        {TIPOS_INFO[opcion.tipo].display === "corto" ? opcion.nombre_corto : `"${opcion.nombre_corto}"`}
                       </p>
                     </div>
                     {mostrandoFeedback && esCorrecta && (
@@ -371,8 +438,8 @@ export default function JuegoFinesCriterios() {
                 {acerto ? "✅ ¡Correcto!" : "💡 La respuesta correcta era:"}
               </p>
               <p className="text-sm text-slate-700 leading-relaxed mb-2">
-                <strong>{ronda.item.tipo === "FIN" ? "🎯 FIN" : "🛡️ CRITERIO"}:</strong>{" "}
-                {ronda.item.tipo === "CRITERIO" ? ronda.item.nombre_corto : ""}
+                <strong>{tipoInfo.emoji} {tipoInfo.nombre}:</strong>{" "}
+                {tipoInfo.display === "corto" ? ronda.item.nombre_corto : ""}
               </p>
               <p className="text-xs text-slate-600 italic leading-relaxed mb-2">
                 📜 Texto completo: "{ronda.item.frase_completa}"
@@ -462,15 +529,15 @@ export default function JuegoFinesCriterios() {
                     <div className="flex-1">
                       <p
                         className={`text-slate-800 leading-relaxed ${
-                          opcion.tipo === "CRITERIO" ? "text-lg font-bold" : "text-sm"
+                          TIPOS_INFO[opcion.tipo].display === "corto" ? "text-lg font-bold" : "text-sm"
                         }`}
                       >
-                        {opcion.tipo === "CRITERIO" ? opcion.nombre_corto : `"${opcion.nombre_corto}"`}
+                        {TIPOS_INFO[opcion.tipo].display === "corto" ? opcion.nombre_corto : `"${opcion.nombre_corto}"`}
                       </p>
                       {mostrandoFeedbackExamen && esImpostora && (
                         <p className="text-xs font-bold mt-2 text-red-900">
                           🚨 IMPOSTORA · es realmente un{" "}
-                          {opcion.tipo === "FIN" ? "FIN" : "CRITERIO"}
+                          {TIPOS_INFO[opcion.tipo].nombre}
                         </p>
                       )}
                     </div>
@@ -539,6 +606,143 @@ export default function JuegoFinesCriterios() {
               className="py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition flex items-center justify-center gap-2"
             >
               <RefreshCw className="w-4 h-4" /> Nueva partida
+            </button>
+            <button
+              onClick={() => setFase("menu")}
+              className="py-3 bg-white border-2 border-orange-300 hover:border-orange-500 text-orange-700 font-bold rounded-lg transition"
+            >
+              ← Menú
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // CLASIFICAR: DERECHOS vs OBLIGACIONES (Art. 128 y 129)
+  // ════════════════════════════════════════════════════════════
+  if (fase === "clasificar") {
+    const item = rondas_clasificar[indiceClasificar];
+    const respuesta = respuestasClasificar[indiceClasificar];
+    const acerto = respuesta === item.clase;
+    const infoCorrecta = CLASES_INFO[item.clase];
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
+        <header className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white py-4 px-4 shadow-md">
+          <div className="max-w-3xl mx-auto flex justify-between items-center">
+            <button onClick={() => setFase("menu")} className="text-sm hover:underline">
+              ← Volver al menú
+            </button>
+            <p className="text-sm font-medium">
+              ⚖️ Derechos y Obligaciones · {indiceClasificar + 1} / {rondas_clasificar.length}
+            </p>
+          </div>
+        </header>
+
+        <main className="max-w-3xl mx-auto px-4 py-6 space-y-5">
+          <div className="w-full bg-orange-100 rounded-full h-2">
+            <div
+              className="bg-orange-500 h-2 rounded-full transition-all"
+              style={{ width: `${((indiceClasificar + 1) / rondas_clasificar.length) * 100}%` }}
+            />
+          </div>
+
+          {/* PALABRA CLAVE arriba */}
+          <div className="bg-white border-2 border-orange-400 rounded-2xl p-6 shadow-md text-center">
+            <p className="text-xs font-bold text-orange-700 uppercase tracking-wide mb-3">
+              ¿Esto es un DERECHO o una OBLIGACIÓN de madres y padres?
+            </p>
+            <p className="text-slate-800 leading-relaxed text-lg font-semibold">
+              {item.palabra_clave}
+            </p>
+          </div>
+
+          {/* BOTONES abajo: Derecho / Obligación */}
+          <div className="grid grid-cols-2 gap-3">
+            {["DERECHO", "OBLIGACION"].map((clase) => {
+              const info = CLASES_INFO[clase];
+              const esSeleccion = respuesta === clase;
+              const esCorrectaOpcion = item.clase === clase;
+              let estilo = "bg-white border-orange-200 hover:border-orange-500 hover:bg-orange-50 text-slate-800";
+              if (mostrandoFeedbackClasificar) {
+                if (esCorrectaOpcion) estilo = "bg-green-100 border-green-500 text-green-900";
+                else if (esSeleccion) estilo = "bg-red-100 border-red-500 text-red-900";
+                else estilo = "bg-slate-50 border-slate-200 opacity-60 text-slate-500";
+              }
+              return (
+                <button
+                  key={clase}
+                  onClick={() => responderClasificar(clase)}
+                  disabled={mostrandoFeedbackClasificar}
+                  className={`border-2 rounded-2xl py-6 font-bold text-lg transition flex flex-col items-center gap-1 ${estilo}`}
+                >
+                  <span className="text-3xl">{info.emoji}</span>
+                  {info.nombre}
+                </button>
+              );
+            })}
+          </div>
+
+          {mostrandoFeedbackClasificar && (
+            <div className={`rounded-xl p-4 border-2 ${acerto ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300"}`}>
+              <p className="font-bold text-sm mb-2">
+                {acerto ? "✅ ¡Correcto!" : `❌ Era ${infoCorrecta.nombre.toUpperCase()}`}
+              </p>
+              <p className="text-xs font-semibold text-orange-800 mb-1">
+                {infoCorrecta.emoji} {infoCorrecta.nombre} · {item.articulo}
+              </p>
+              <p className="text-xs text-slate-600 italic leading-relaxed mb-2">
+                📜 "{item.texto}"
+              </p>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong>🪤 Tip:</strong> {item.trampa}
+              </p>
+              <button
+                onClick={siguienteClasificar}
+                className="mt-3 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition"
+              >
+                {indiceClasificar < rondas_clasificar.length - 1 ? "Siguiente →" : "Ver resultados"}
+              </button>
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // RESULTADOS CLASIFICAR
+  if (fase === "resultados_clasificar") {
+    const aciertos = rondas_clasificar.filter((item, i) => respuestasClasificar[i] === item.clase).length;
+    const total = rondas_clasificar.length;
+    const porcentaje = Math.round((aciertos / total) * 100);
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100">
+        <header className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white py-6 px-4 shadow-md">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-2xl font-bold">⚖️ Derechos y Obligaciones</h1>
+          </div>
+        </header>
+
+        <main className="max-w-3xl mx-auto px-4 py-6 space-y-4">
+          <div className="bg-white border-2 border-orange-300 rounded-2xl p-6 shadow-lg text-center">
+            <div className="text-6xl mb-3">
+              {porcentaje >= 85 ? "🏆" : porcentaje >= 60 ? "🎉" : "📚"}
+            </div>
+            <h2 className="text-3xl font-bold text-slate-800 mb-1">
+              {aciertos} / {total}
+            </h2>
+            <p className="text-lg text-orange-700 font-medium">{porcentaje}% de aciertos</p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 pt-4">
+            <button
+              onClick={iniciarClasificar}
+              className="py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition flex items-center justify-center gap-2"
+            >
+              <RefreshCw className="w-4 h-4" /> Repetir
             </button>
             <button
               onClick={() => setFase("menu")}

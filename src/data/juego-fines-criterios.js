@@ -153,17 +153,142 @@ export const ITEMS_LGE = [
     "fragmento": "los valores necesarios para transformar la vida pública del país",
     "trampa_comun": "Suena al criterio Humanista (valores) y al Democrático. La firma de F9 es 'HONESTIDAD + CIVISMO + TRANSFORMAR LA VIDA PÚBLICA DEL PAÍS'."
   }
+,
+  // ═══════════════════════════════════════════════════════════
+  // OBJETIVOS DE LA NEM (Art. 11 LGE) - 4 objetivos
+  // ═══════════════════════════════════════════════════════════
+  {
+    "id": "O1",
+    "tipo": "OBJETIVO",
+    "nombre_corto": "Desarrollo humano integral del educando",
+    "frase_completa": "(Art. 11) El Estado, a través de la nueva escuela mexicana, buscará la equidad, la excelencia y la mejora continua... Tendrá como objetivos el desarrollo humano integral del educando, reorientar el Sistema Educativo Nacional, incidir en la cultura educativa mediante la corresponsabilidad e impulsar transformaciones sociales dentro de la escuela y en la comunidad.",
+    "fragmento": "que el educando se forme de manera plena en todas sus dimensiones; es el primer objetivo que persigue la Nueva Escuela Mexicana",
+    "trampa_comun": "OJO: el Art. 11 lo enuncia como OBJETIVO; el Art. 12 lo DESARROLLA en 5 propósitos. Aquí se pregunta por el objetivo, no por el propósito del DHI."
+  },
+  {
+    "id": "O2",
+    "tipo": "OBJETIVO",
+    "nombre_corto": "Reorientar el Sistema Educativo Nacional",
+    "frase_completa": "(Art. 11) ...Tendrá como objetivos... reorientar el Sistema Educativo Nacional...",
+    "fragmento": "cambiar el rumbo de todo el SEN para colocar al centro el máximo logro de aprendizaje de niñas, niños, adolescentes y jóvenes",
+    "trampa_comun": "Es objetivo del Art. 11. No lo confundas con la 'mejora continua' ni con los fines del Art. 15."
+  },
+  {
+    "id": "O3",
+    "tipo": "OBJETIVO",
+    "nombre_corto": "Incidir en la cultura educativa mediante la corresponsabilidad",
+    "frase_completa": "(Art. 11) ...Tendrá como objetivos... incidir en la cultura educativa mediante la corresponsabilidad...",
+    "fragmento": "transformar la manera de entender la educación haciendo que toda la comunidad asuma su parte",
+    "trampa_comun": "Palabra firma: CORRESPONSABILIDAD. Se confunde con la participación de madres y padres (Art. 128-129)."
+  },
+  {
+    "id": "O4",
+    "tipo": "OBJETIVO",
+    "nombre_corto": "Impulsar transformaciones sociales en la escuela y la comunidad",
+    "frase_completa": "(Art. 11) ...Tendrá como objetivos... impulsar transformaciones sociales dentro de la escuela y en la comunidad.",
+    "fragmento": "lograr que la educación genere cambios sociales que trasciendan el aula hacia la comunidad",
+    "trampa_comun": "Firma: TRANSFORMACIONES SOCIALES + ESCUELA Y COMUNIDAD. Es objetivo (Art. 11), no fin (Art. 15)."
+  },
+  // ═══════════════════════════════════════════════════════════
+  // DESARROLLO HUMANO INTEGRAL - DHI (Art. 12 LGE) - 5 propósitos
+  // ═══════════════════════════════════════════════════════════
+  {
+    "id": "D1",
+    "tipo": "DHI",
+    "nombre_corto": "Contribuir a la formación del pensamiento crítico, a la transformación y al crecimiento solidario de la sociedad, enfatizando el trabajo en equipo y el aprendizaje colaborativo.",
+    "frase_completa": "(Art. 12, fr. I) En la prestación de los servicios educativos se impulsará el desarrollo humano integral para: contribuir a la formación del pensamiento crítico, a la transformación y al crecimiento solidario de la sociedad, enfatizando el trabajo en equipo y el aprendizaje colaborativo.",
+    "fragmento": "enfatizando el trabajo en equipo y el aprendizaje colaborativo",
+    "trampa_comun": "Firma: TRABAJO EN EQUIPO + APRENDIZAJE COLABORATIVO. Es propósito del DHI (Art. 12), no fin ni criterio."
+  },
+  {
+    "id": "D2",
+    "tipo": "DHI",
+    "nombre_corto": "Propiciar un diálogo continuo entre las humanidades, las artes, la ciencia, la tecnología y la innovación como factores del bienestar y la transformación social.",
+    "frase_completa": "(Art. 12, fr. II) ...se impulsará el desarrollo humano integral para: propiciar un diálogo continuo entre las humanidades, las artes, la ciencia, la tecnología y la innovación como factores del bienestar y la transformación social.",
+    "fragmento": "diálogo continuo entre las humanidades, las artes, la ciencia, la tecnología y la innovación",
+    "trampa_comun": "Firma: HUMANIDADES + ARTES + CIENCIA + TECNOLOGÍA + INNOVACIÓN como factores de bienestar."
+  },
+  {
+    "id": "D3",
+    "tipo": "DHI",
+    "nombre_corto": "Fortalecer el tejido social para evitar la corrupción, mediante la honestidad y la integridad, y favorecer una justa distribución del ingreso.",
+    "frase_completa": "(Art. 12, fr. III) ...para: fortalecer el tejido social para evitar la corrupción, a través del fomento de la honestidad y la integridad, además de proteger la naturaleza, impulsar el desarrollo en lo social, ambiental, económico, así como favorecer la generación de capacidades productivas y fomentar una justa distribución del ingreso.",
+    "fragmento": "fortalecer el tejido social para evitar la corrupción... fomentar una justa distribución del ingreso",
+    "trampa_comun": "Firma: TEJIDO SOCIAL + EVITAR LA CORRUPCIÓN + JUSTA DISTRIBUCIÓN DEL INGRESO."
+  },
+  {
+    "id": "D4",
+    "tipo": "DHI",
+    "nombre_corto": "Combatir las causas de discriminación y violencias, especialmente las que se ejercen contra niñas, niños, adolescentes y mujeres.",
+    "frase_completa": "(Art. 12, fr. IV, reformada DOF 15-ene-2026) ...para: combatir las causas de discriminación y violencias en las diferentes regiones del país, especialmente las que se ejercen contra las niñas, niños, adolescentes y las mujeres, de conformidad con los deberes reforzados del Estado de protección de este sector de la población.",
+    "fragmento": "combatir las causas de discriminación y violencias... especialmente las que se ejercen contra las niñas, niños, adolescentes y las mujeres",
+    "trampa_comun": "Firma: COMBATIR DISCRIMINACIÓN Y VIOLENCIAS + MUJERES. Fracción reformada el 15-ene-2026."
+  },
+  {
+    "id": "D5",
+    "tipo": "DHI",
+    "nombre_corto": "Alentar la construcción de relaciones sociales, económicas y culturales con base en el respeto de los derechos humanos.",
+    "frase_completa": "(Art. 12, fr. V) ...para: alentar la construcción de relaciones sociales, económicas y culturales con base en el respeto de los derechos humanos.",
+    "fragmento": "construcción de relaciones sociales, económicas y culturales con base en el respeto de los derechos humanos",
+    "trampa_comun": "Firma: RELACIONES SOCIALES, ECONÓMICAS Y CULTURALES + DERECHOS HUMANOS."
+  }
 ];
 
 export const TIPOS_INFO = {
   FIN: {
     nombre: "Fin de la educación",
+    singular: "fin",
     descripcion: "Art. 15 LGE",
     emoji: "🎯",
+    display: "frase",
   },
   CRITERIO: {
     nombre: "Criterio de la educación",
+    singular: "criterio",
     descripcion: "Art. 16 LGE",
     emoji: "🛡️",
+    display: "corto",
   },
+  OBJETIVO: {
+    nombre: "Objetivo de la NEM",
+    singular: "objetivo",
+    descripcion: "Art. 11 LGE",
+    emoji: "🧭",
+    display: "corto",
+  },
+  DHI: {
+    nombre: "Propósito del DHI",
+    singular: "propósito",
+    descripcion: "Art. 12 LGE",
+    emoji: "🌱",
+    display: "frase",
+  },
+};
+
+// ═══════════════════════════════════════════════════════════
+// DERECHOS Y OBLIGACIONES DE MADRES, PADRES O TUTORES
+// Art. 128 (derechos) y Art. 129 (obligaciones) LGE
+// Modo CLASIFICAR: arriba la palabra clave, abajo Derecho / Obligación
+// ═══════════════════════════════════════════════════════════
+export const DERECHOS_OBLIGACIONES = [
+  { "id": "DR1", "clase": "DERECHO", "articulo": "Art. 128 · I", "palabra_clave": "Obtener inscripción en escuelas públicas para sus hijas, hijos o pupilos", "texto": "Obtener inscripción en escuelas públicas para que sus hijas, hijos o pupilos menores de dieciocho años reciban la educación preescolar, primaria, secundaria, media superior y, en su caso, inicial.", "trampa": "Es DERECHO: el padre tiene derecho a que le inscriban al hijo. No confundir con la OBLIGACIÓN de hacer que reciba educación (Art. 129 I)." },
+  { "id": "DR2", "clase": "DERECHO", "articulo": "Art. 128 · II", "palabra_clave": "Participar con las autoridades de la escuela ante cualquier problema de la educación de sus hijos", "texto": "Participar activamente con las autoridades de la escuela en cualquier problema relacionado con la educación de sus hijas, hijos o pupilos, a fin de abocarse a su solución.", "trampa": "DERECHO a participar ANTE UN PROBLEMA. Cuidado: 'participar en el proceso educativo revisando progreso' es OBLIGACIÓN (Art. 129 II)." },
+  { "id": "DR3", "clase": "DERECHO", "articulo": "Art. 128 · III", "palabra_clave": "Colaborar con las autoridades escolares al menos una vez al mes", "texto": "Colaborar con las autoridades escolares, al menos una vez al mes, para la superación de los educandos y en el mejoramiento de los establecimientos educativos.", "trampa": "TRAMPA BRUTAL: 'colaborar al menos una vez al mes' es DERECHO (Art. 128 III). 'Colaborar en las actividades que realice la institución' es OBLIGACIÓN (Art. 129 III)." },
+  { "id": "DR4", "clase": "DERECHO", "articulo": "Art. 128 · IV", "palabra_clave": "Formar parte de las asociaciones de madres y padres de familia", "texto": "Formar parte de las asociaciones de madres y padres de familia y de los consejos de participación escolar o su equivalente.", "trampa": "DERECHO de asociación y participación escolar." },
+  { "id": "DR5", "clase": "DERECHO", "articulo": "Art. 128 · V", "palabra_clave": "Opinar sobre las contraprestaciones (colegiaturas) en escuelas particulares", "texto": "Opinar, en los casos de la educación que impartan los particulares, en relación con las contraprestaciones que las escuelas fijen.", "trampa": "DERECHO exclusivo frente a escuelas particulares: opinar sobre colegiaturas." },
+  { "id": "DR6", "clase": "DERECHO", "articulo": "Art. 128 · VI", "palabra_clave": "Conocer el nombre del personal docente de la escuela", "texto": "Conocer el nombre del personal docente y empleados adscritos en la escuela en la que estén inscritos sus hijas, hijos o pupilos.", "trampa": "DERECHO a la información: conocer quién atiende a sus hijos." },
+  { "id": "DR7", "clase": "DERECHO", "articulo": "Art. 128 · VII", "palabra_clave": "Conocer los criterios y resultados de las evaluaciones de la escuela", "texto": "Conocer los criterios y resultados de las evaluaciones de la escuela a la que asistan sus hijas, hijos o pupilos.", "trampa": "DERECHO a conocer evaluaciones. Cuidado: INFORMAR cambios de conducta es OBLIGACIÓN (Art. 129 IV)." },
+  { "id": "DR8", "clase": "DERECHO", "articulo": "Art. 128 · VIII", "palabra_clave": "Conocer los planes y programas de estudio y opinar sobre ellos", "texto": "Conocer de los planes y programas de estudio proporcionados por el plantel educativo, sobre los cuales podrán emitir su opinión.", "trampa": "DERECHO a conocer planes y programas y emitir opinión." },
+  { "id": "DR9", "clase": "DERECHO", "articulo": "Art. 128 · XI", "palabra_clave": "Manifestar inconformidad por irregularidades o condiciones físicas de la escuela", "texto": "Manifestar su inconformidad ante las autoridades educativas sobre cualquier irregularidad del plantel y sobre las condiciones físicas de las escuelas.", "trampa": "DERECHO a inconformarse por irregularidades y condiciones físicas del plantel." },
+  { "id": "OB1", "clase": "OBLIGACION", "articulo": "Art. 129 · I", "palabra_clave": "Hacer que sus hijos reciban la educación obligatoria", "texto": "Hacer que sus hijas, hijos o pupilos menores de dieciocho años reciban la educación preescolar, primaria, secundaria, media superior y, en su caso, inicial.", "trampa": "OBLIGACIÓN base. No confundir con el DERECHO a obtener inscripción (Art. 128 I)." },
+  { "id": "OB2", "clase": "OBLIGACION", "articulo": "Art. 129 · II", "palabra_clave": "Participar en el proceso educativo revisando progreso, desempeño y conducta", "texto": "Participar en el proceso educativo de sus hijas, hijos o pupilos, al revisar su progreso, desempeño y conducta, velando siempre por su bienestar y desarrollo.", "trampa": "OBLIGACIÓN: revisar progreso, desempeño y conducta. Distinto del DERECHO a participar ante un problema (Art. 128 II)." },
+  { "id": "OB3", "clase": "OBLIGACION", "articulo": "Art. 129 · III", "palabra_clave": "Colaborar con las instituciones en las actividades que realicen", "texto": "Colaborar con las instituciones educativas en las que estén inscritos sus hijas, hijos o pupilos, en las actividades que dichas instituciones realicen.", "trampa": "TRAMPA: colaborar EN LAS ACTIVIDADES es OBLIGACIÓN (Art. 129 III); colaborar 'al menos una vez al mes' es DERECHO (Art. 128 III)." },
+  { "id": "OB4", "clase": "OBLIGACION", "articulo": "Art. 129 · IV", "palabra_clave": "Informar a las autoridades los cambios en la conducta y actitud del educando", "texto": "Informar a las autoridades educativas los cambios que se presenten en la conducta y actitud de los educandos, para que se apliquen los estudios correspondientes.", "trampa": "OBLIGACIÓN de informar cambios de conducta. Cuidado: CONOCER evaluaciones es DERECHO (Art. 128 VII)." },
+  { "id": "OB5", "clase": "OBLIGACION", "articulo": "Art. 129 · V", "palabra_clave": "Acudir a los llamados de las autoridades sobre progreso, desempeño y conducta", "texto": "Acudir a los llamados de las autoridades educativas y escolares relacionados con la revisión del progreso, desempeño y conducta de sus hijas, hijos o pupilos.", "trampa": "OBLIGACIÓN: acudir cuando la escuela cita a revisión." },
+  { "id": "OB6", "clase": "OBLIGACION", "articulo": "Art. 129 · VI", "palabra_clave": "Promover que sus hijos practiquen actividades físicas, deportivas y recreativas", "texto": "Promover la participación de sus hijas, hijos o pupilos en la práctica de actividades físicas, de recreación, deportivas y de educación física, como medio de cohesión familiar y comunitaria.", "trampa": "OBLIGACIÓN: promover actividad física, deporte y recreación." }
+];
+
+export const CLASES_INFO = {
+  DERECHO: { nombre: "Derecho", articulo: "Art. 128 LGE", emoji: "✅", color: "#16a34a" },
+  OBLIGACION: { nombre: "Obligación", articulo: "Art. 129 LGE", emoji: "📋", color: "#D85A0A" },
 };
