@@ -33,6 +33,16 @@ const MAZOS = [
 
 const EXAMENES = [
   {
+    id: "17-junio",
+    titulo: "Examen \u00b7 17 de Junio",
+    subtitulo: "Banco USICAMM \u00b7 LGE, LGDNNA y Plan 2022",
+    descripcion: "10 reactivos: caracter\u00edsticas, fines, LGDNNA, objetivos NEM y programa anal\u00edtico",
+    ruta: "/examen/17-junio",
+    icono: "\U0001F4DD",
+    reactivos: 10,
+    preguntas: 10,
+  },
+  {
     id: "primer-parcial",
     titulo: "Primer Examen Parcial",
     subtitulo: "Educación Especial + Horas Adicionales",
