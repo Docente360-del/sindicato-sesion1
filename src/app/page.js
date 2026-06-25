@@ -33,6 +33,16 @@ const MAZOS = [
 
 const EXAMENES = [
   {
+    id: "repaso-integral-nem",
+    titulo: "Repaso Integral NEM",
+    subtitulo: "Repaso Integral NEM",
+    descripcion: "16 reactivos NEM: campos, ejes, DUA, programa analitico y PEMC.",
+    ruta: "/examen/repaso-integral-nem",
+    icono: "\U0001F4DD",
+    reactivos: 16,
+    preguntas: 16,
+  },
+  {
     id: "examen-parcial",
     titulo: "Examen Parcial",
     subtitulo: "50 reactivos - Plan 2022 / NEM",
